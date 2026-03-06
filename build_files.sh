@@ -1,4 +1,4 @@
-#!/bin/bash
+#\!/bin/bash
 
 echo "Installing dependencies..."
 pip install --break-system-packages -r requirements.txt
