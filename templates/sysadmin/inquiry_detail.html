@@ -1,0 +1,86 @@
+{% extends "sysadmin/base_sysadmin.html" %}
+
+{% block title %}{{ inquiry.subject }} - 問い合わせ{% endblock %}
+{% block page_title %}問い合わせ詳細{% endblock %}
+
+{% block content %}
+<!-- 戻るリンク -->
+<div class="mb-6">
+    <a href="{% url 'sysadmin:inquiry_list' %}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        問い合わせ一覧に戻る
+    </a>
+</div>
+
+<!-- 問い合わせ情報 -->
+<div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex items-start justify-between">
+        <div>
+            <h2 class="text-xl font-bold text-gray-900">{{ inquiry.subject }}</h2>
+            <div class="mt-3 grid grid-cols-2 gap-x-8 gap-y-2">
+                <p class="text-sm text-gray-500">送信者: <span class="text-gray-700">{{ inquiry.contact.name|default:"-" }}</span></p>
+                <p class="text-sm text-gray-500">メール: <span class="text-gray-700">{{ inquiry.contact.email }}</span></p>
+                <p class="text-sm text-gray-500">サイト: <span class="text-gray-700">{{ inquiry.site.name }}</span></p>
+                <p class="text-sm text-gray-500">送信日: <span class="text-gray-700">{{ inquiry.created_at|date:"Y年m月d日 H:i" }}</span></p>
+            </div>
+        </div>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+            {% if inquiry.status == 'open' %}bg-red-100 text-red-700
+            {% elif inquiry.status == 'replied' %}bg-green-100 text-green-700
+            {% else %}bg-gray-100 text-gray-700{% endif %}">
+            {{ inquiry.get_status_display }}
+        </span>
+    </div>
+</div>
+
+<!-- 問い合わせ本文 -->
+<div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <h3 class="text-base font-semibold text-gray-900 mb-3">問い合わせ内容</h3>
+    <div class="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-lg p-4">
+        {{ inquiry.body|linebreaksbr }}
+    </div>
+</div>
+
+<!-- 管理者返信セクション -->
+<div class="bg-white rounded-xl border border-gray-200 p-6">
+    <h3 class="text-base font-semibold text-gray-900 mb-4">管理者返信</h3>
+
+    {% if inquiry.status == 'replied' and inquiry.admin_reply %}
+    <!-- 返信済み -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium text-blue-600">返信済み</span>
+            {% if inquiry.replied_at %}
+            <span class="text-xs text-gray-400">{{ inquiry.replied_at|date:"Y/m/d H:i" }}</span>
+            {% endif %}
+        </div>
+        <div class="text-sm text-gray-700 leading-relaxed">
+            {{ inquiry.admin_reply|linebreaksbr }}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if inquiry.status != 'closed' %}
+    <!-- 返信フォーム -->
+    <form method="post" action="{% url 'sysadmin:inquiry_reply' inquiry.pk %}">
+        {% csrf_token %}
+        <div class="mb-4">
+            <textarea name="admin_reply" rows="4" required
+                      placeholder="返信を入力..."
+                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none">{% if inquiry.admin_reply %}{{ inquiry.admin_reply }}{% endif %}</textarea>
+        </div>
+        <div class="flex justify-end">
+            <button type="submit"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                </svg>
+                {% if inquiry.admin_reply %}返信を更新{% else %}返信を送信{% endif %}
+            </button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

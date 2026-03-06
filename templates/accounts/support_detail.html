@@ -1,0 +1,59 @@
+{% extends "base_admin.html" %}
+
+{% block page_title %}サポート: {{ thread.subject }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl">
+    <a href="{% url 'accounts:support_list' %}" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        サポート一覧に戻る
+    </a>
+
+    <!-- スレッド情報 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="flex items-start justify-between">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900">{{ thread.subject }}</h2>
+                <p class="text-sm text-gray-500 mt-1">作成者: {{ thread.created_by.username }} / {{ thread.created_at|date:"Y/m/d H:i" }}</p>
+            </div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                {% if thread.status == 'open' %}bg-red-100 text-red-800
+                {% elif thread.status == 'pending' %}bg-yellow-100 text-yellow-800
+                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                {{ thread.get_status_display }}
+            </span>
+        </div>
+    </div>
+
+    <!-- メッセージ一覧 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div id="message-list" class="space-y-4 max-h-[500px] overflow-y-auto">
+            {% include "accounts/partials/support_message_list.html" %}
+        </div>
+    </div>
+
+    <!-- 返信フォーム -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+        <h3 class="text-sm font-semibold text-gray-900 mb-3">返信</h3>
+        <form hx-post="{% url 'accounts:support_reply' thread.pk %}"
+              hx-target="#message-list"
+              hx-swap="innerHTML"
+              hx-on::after-request="this.reset(); document.getElementById('message-list').scrollTop = document.getElementById('message-list').scrollHeight;"
+              class="space-y-3">
+            {% csrf_token %}
+            <textarea name="body" rows="3" required
+                      class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="メッセージを入力..."></textarea>
+            <button type="submit"
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                </svg>
+                送信
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

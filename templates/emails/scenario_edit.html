@@ -1,0 +1,153 @@
+{% extends "base_admin.html" %}
+
+{% block title %}{% if is_new %}シナリオ作成{% else %}{{ scenario.name }} - シナリオ編集{% endif %}{% endblock %}
+{% block page_title %}{% if is_new %}シナリオ作成{% else %}シナリオ編集{% endif %}{% endblock %}
+
+{% block content %}
+<!-- パンくずリスト -->
+<nav class="mb-6">
+    <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="{% url 'emails:scenario_list' %}" class="hover:text-blue-600 transition-colors">シナリオ一覧</a></li>
+        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+        <li class="text-gray-900 font-medium">{% if is_new %}新規作成{% else %}{{ scenario.name }}{% endif %}</li>
+    </ol>
+</nav>
+
+<!-- シナリオ基本情報フォーム -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+    <div class="px-6 py-4 border-b border-gray-100">
+        <h2 class="text-base font-semibold text-gray-900">基本情報</h2>
+    </div>
+    <div class="px-6 py-6">
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- シナリオ名 -->
+            <div class="mb-5">
+                <label for="id_name" class="block text-sm font-medium text-gray-700 mb-1">
+                    シナリオ名 <span class="text-red-500">*</span>
+                </label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.name.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- 有効/無効 -->
+            <div class="mb-5">
+                <label class="flex items-center gap-2">
+                    {{ form.is_active }}
+                    <span class="text-sm font-medium text-gray-700">有効にする</span>
+                </label>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button type="submit"
+                        class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                    {% if is_new %}作成{% else %}更新{% endif %}
+                </button>
+                <a href="{% url 'emails:scenario_list' %}"
+                   class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                    キャンセル
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if not is_new %}
+<!-- ステップ一覧（タイムライン風） -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+    <div class="px-6 py-4 border-b border-gray-100">
+        <div class="flex items-center justify-between">
+            <h2 class="text-base font-semibold text-gray-900">ステップ一覧</h2>
+            <a href="{% url 'emails:step_create' scenario_id=scenario.pk %}"
+               class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                ステップ追加
+            </a>
+        </div>
+    </div>
+    <div class="px-6 py-6">
+        {% if steps %}
+        <div class="relative">
+            {% for step in steps %}
+            <div class="flex gap-4 {% if not forloop.last %}mb-8{% endif %}">
+                <!-- タイムラインの縦線とドット -->
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold
+                                {% if step.is_active %}bg-blue-600 text-white{% else %}bg-gray-300 text-gray-600{% endif %}">
+                        {{ step.step_number }}
+                    </div>
+                    {% if not forloop.last %}
+                    <div class="w-0.5 flex-1 mt-2 {% if step.is_active %}bg-blue-200{% else %}bg-gray-200{% endif %}"></div>
+                    {% endif %}
+                </div>
+
+                <!-- ステップの内容 -->
+                <div class="flex-1 bg-gray-50 rounded-lg border border-gray-200 p-4 {% if not step.is_active %}opacity-60{% endif %}">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-semibold text-gray-900">{{ step.subject }}</h3>
+                            <div class="flex items-center gap-3 mt-2">
+                                <span class="inline-flex items-center gap-1 text-xs text-gray-500">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    {% if step.delay_days > 0 or step.delay_hours > 0 %}
+                                        {% if step.delay_days > 0 %}{{ step.delay_days }}日{% endif %}{% if step.delay_hours > 0 %}{{ step.delay_hours }}時間{% endif %}後
+                                    {% else %}
+                                        即時
+                                    {% endif %}
+                                </span>
+                                {% if step.is_active %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    有効
+                                </span>
+                                {% else %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                    無効
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 ml-4">
+                            <a href="{% url 'emails:step_edit' scenario_id=scenario.pk pk=step.pk %}"
+                               class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors">
+                                編集
+                            </a>
+                            <a href="{% url 'emails:step_delete' scenario_id=scenario.pk pk=step.pk %}"
+                               class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors">
+                                削除
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- ステップなし -->
+        <div class="text-center py-10">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 mb-3">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+            </div>
+            <h3 class="text-sm font-semibold text-gray-900 mb-1">ステップがありません</h3>
+            <p class="text-xs text-gray-500 mb-3">配信するメールステップを追加してください</p>
+            <a href="{% url 'emails:step_create' scenario_id=scenario.pk %}"
+               class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                最初のステップを追加
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

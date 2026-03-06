@@ -1,0 +1,321 @@
+{% extends 'base_member.html' %}
+
+{% block title %}{{ lesson.title }} - {{ site.name }}{% endblock %}
+{% block site_name %}{{ site.name }}{% endblock %}
+
+{% block extra_head %}
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+<style>
+    .quiz-option input[type="radio"]:checked + label,
+    .quiz-option input[type="checkbox"]:checked + label {
+        border-color: #f97316;
+        background-color: #fff7ed;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- パンくず -->
+<nav class="mb-6 flex items-center gap-2 text-sm text-gray-500">
+    <a href="{% url 'members_public:member_home' site_slug=site.slug %}" class="hover:text-indigo-600 transition-colors">マイコース</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <a href="{% url 'members_public:member_course' site_slug=site.slug course_slug=course.slug %}" class="hover:text-indigo-600 transition-colors">{{ course.title }}</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <span class="text-gray-900 font-medium">{{ lesson.title }}</span>
+</nav>
+
+<!-- テスト情報ヘッダー -->
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
+    <div class="px-6 md:px-8 py-6 md:py-8">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-orange-50 text-orange-700">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+                テスト
+            </span>
+            {% if best_attempt %}
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                合格済み
+            </span>
+            {% endif %}
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">{{ lesson.title }}</h1>
+        {% if quiz.description %}
+        <p class="text-sm text-gray-600 leading-relaxed">{{ quiz.description }}</p>
+        {% endif %}
+
+        <!-- テストルール -->
+        <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+                <p class="text-xs text-gray-500 mb-1">合格ライン</p>
+                <p class="text-lg font-bold text-orange-600">{{ quiz.passing_score }}%</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+                <p class="text-xs text-gray-500 mb-1">問題数</p>
+                <p class="text-lg font-bold text-gray-900">{{ questions|length }}問</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+                <p class="text-xs text-gray-500 mb-1">制限時間</p>
+                <p class="text-lg font-bold text-gray-900">
+                    {% if quiz.time_limit_minutes %}{{ quiz.time_limit_minutes }}分{% else %}なし{% endif %}
+                </p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+                <p class="text-xs text-gray-500 mb-1">受験回数</p>
+                <p class="text-lg font-bold text-gray-900">
+                    {{ attempt_count }}{% if quiz.max_attempts > 0 %}/{{ quiz.max_attempts }}{% else %}回{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if best_attempt %}
+<!-- 合格済み通知 -->
+<div class="bg-green-50 border border-green-200 rounded-2xl p-6 mb-6">
+    <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
+        <div>
+            <h3 class="text-sm font-semibold text-green-800 mb-1">このテストは合格済みです</h3>
+            <p class="text-sm text-green-700">
+                最高スコア: {{ best_attempt.score }}/{{ best_attempt.max_score }}点（{{ best_attempt.percentage }}%）
+            </p>
+            <a href="{% url 'members_public:quiz_result' site_slug=site.slug lesson_slug=lesson.slug attempt_id=best_attempt.id %}"
+               class="inline-flex items-center gap-1 mt-2 text-sm font-medium text-green-700 hover:text-green-900 transition-colors">
+                結果を見る
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if attempts_list %}
+<!-- 受験履歴 -->
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
+    <div class="px-6 py-4 border-b border-gray-100">
+        <h2 class="text-base font-semibold text-gray-900">受験履歴</h2>
+    </div>
+    <div class="divide-y divide-gray-50">
+        {% for att in attempts_list %}
+        <a href="{% url 'members_public:quiz_result' site_slug=site.slug lesson_slug=lesson.slug attempt_id=att.id %}"
+           class="flex items-center gap-4 px-6 py-3 hover:bg-gray-50 transition-colors">
+            <div class="flex-1 min-w-0">
+                <p class="text-sm text-gray-900">
+                    第{{ forloop.revcounter }}回 -
+                    {{ att.score }}/{{ att.max_score }}点（{{ att.percentage }}%）
+                </p>
+                <p class="text-xs text-gray-500">{{ att.started_at|date:"Y/m/d H:i" }}</p>
+            </div>
+            {% if att.passed %}
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">合格</span>
+            {% else %}
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700">不合格</span>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if can_attempt %}
+<!-- テスト問題フォーム -->
+<form method="post" action="{% url 'members_public:quiz_submit' site_slug=site.slug lesson_slug=lesson.slug %}" id="quiz-form">
+    {% csrf_token %}
+
+    <div class="space-y-6">
+        {% for question in questions %}
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="px-6 md:px-8 py-6">
+                <!-- 問題ヘッダー -->
+                <div class="flex items-start gap-3 mb-4">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-100 text-orange-700 text-sm font-bold flex-shrink-0">
+                        {{ forloop.counter }}
+                    </span>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            {% if question.question_type == 'true_false' %}
+                            <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded">&#9711;&#10005;式</span>
+                            {% elif question.question_type == 'single' %}
+                            <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded">択一式</span>
+                            {% elif question.question_type == 'multiple' %}
+                            <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded">複数選択</span>
+                            {% endif %}
+                            <span class="text-xs text-gray-400">{{ question.points }}点</span>
+                        </div>
+                        <p class="text-sm md:text-base font-medium text-gray-900 leading-relaxed">{{ question.text }}</p>
+                    </div>
+                </div>
+
+                <!-- 選択肢 -->
+                <div class="ml-11 space-y-2">
+                    {% if question.question_type == 'true_false' %}
+                        <!-- ○× 式 -->
+                        {% for choice in question.shuffled_choices %}
+                        <div class="quiz-option">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}"
+                                   id="choice_{{ choice.id }}" class="hidden peer">
+                            <label for="choice_{{ choice.id }}"
+                                   class="flex items-center gap-3 p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all peer-checked:border-orange-500 peer-checked:bg-orange-50">
+                                <span class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0 peer-checked:border-orange-500">
+                                    <span class="w-3 h-3 rounded-full bg-orange-500 hidden peer-checked:block"></span>
+                                </span>
+                                <span class="text-sm text-gray-700">{{ choice.text }}</span>
+                            </label>
+                        </div>
+                        {% endfor %}
+
+                    {% elif question.question_type == 'single' %}
+                        <!-- 択一式 -->
+                        {% for choice in question.shuffled_choices %}
+                        <div class="quiz-option">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}"
+                                   id="choice_{{ choice.id }}" class="hidden peer">
+                            <label for="choice_{{ choice.id }}"
+                                   class="flex items-center gap-3 p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all peer-checked:border-orange-500 peer-checked:bg-orange-50">
+                                <span class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0">
+                                </span>
+                                <span class="text-sm text-gray-700">{{ choice.text }}</span>
+                            </label>
+                        </div>
+                        {% endfor %}
+
+                    {% elif question.question_type == 'multiple' %}
+                        <!-- 複数選択式 -->
+                        <p class="text-xs text-gray-400 mb-2">（複数選択可）</p>
+                        {% for choice in question.shuffled_choices %}
+                        <div class="quiz-option">
+                            <input type="checkbox" name="question_{{ question.id }}" value="{{ choice.id }}"
+                                   id="choice_{{ choice.id }}" class="hidden peer">
+                            <label for="choice_{{ choice.id }}"
+                                   class="flex items-center gap-3 p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all peer-checked:border-orange-500 peer-checked:bg-orange-50">
+                                <span class="w-5 h-5 rounded border-2 border-gray-300 flex items-center justify-center flex-shrink-0">
+                                </span>
+                                <span class="text-sm text-gray-700">{{ choice.text }}</span>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 提出ボタン -->
+    <div class="mt-8 text-center">
+        <button type="submit" id="submit-btn"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 text-white text-base font-bold rounded-xl hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors shadow-lg shadow-orange-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            テストを提出する
+        </button>
+        <p class="mt-3 text-xs text-gray-400">提出後は回答を変更できません</p>
+    </div>
+</form>
+
+{% else %}
+<!-- 受験回数上限到達 -->
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="px-6 md:px-8 py-12 text-center">
+        <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">受験回数の上限に達しました</h3>
+        <p class="text-sm text-gray-500 mb-4">
+            このテストの最大受験回数（{{ quiz.max_attempts }}回）に達したため、再受験できません。
+        </p>
+    </div>
+</div>
+{% endif %}
+
+<!-- コース一覧に戻る -->
+<div class="mt-6 text-center">
+    <a href="{% url 'members_public:member_course' site_slug=site.slug course_slug=course.slug %}"
+       class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-indigo-600 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        コースに戻る
+    </a>
+</div>
+
+{% if can_attempt and quiz.time_limit_minutes %}
+<script>
+(function() {
+    const timeLimit = {{ quiz.time_limit_minutes }} * 60;
+    let remaining = timeLimit;
+    const form = document.getElementById('quiz-form');
+    const btn = document.getElementById('submit-btn');
+
+    // タイマー表示を作成
+    const timerDiv = document.createElement('div');
+    timerDiv.className = 'fixed top-20 right-4 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3 z-50';
+    timerDiv.innerHTML = '<p class="text-xs text-gray-500 mb-1">残り時間</p><p class="text-lg font-bold text-gray-900" id="timer-display"></p>';
+    document.body.appendChild(timerDiv);
+
+    function updateTimer() {
+        const min = Math.floor(remaining / 60);
+        const sec = remaining % 60;
+        const display = document.getElementById('timer-display');
+        display.textContent = min + ':' + (sec < 10 ? '0' : '') + sec;
+        if (remaining <= 60) {
+            display.classList.add('text-red-600');
+            display.classList.remove('text-gray-900');
+        }
+        if (remaining <= 0) {
+            form.submit();
+            return;
+        }
+        remaining--;
+        setTimeout(updateTimer, 1000);
+    }
+    updateTimer();
+})();
+</script>
+{% endif %}
+
+<script>
+// 提出確認
+document.getElementById('quiz-form')?.addEventListener('submit', function(e) {
+    if (!confirm('テストを提出しますか？提出後は回答を変更できません。')) {
+        e.preventDefault();
+    }
+});
+
+// 選択肢のビジュアルフィードバック
+document.querySelectorAll('.quiz-option input').forEach(function(input) {
+    input.addEventListener('change', function() {
+        // radio の場合、同じグループの他のラベルをリセット
+        if (this.type === 'radio') {
+            const name = this.name;
+            document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
+                r.closest('.quiz-option').querySelector('label').classList.remove('border-orange-500', 'bg-orange-50');
+                r.closest('.quiz-option').querySelector('label').classList.add('border-gray-200');
+            });
+        }
+        const label = this.closest('.quiz-option').querySelector('label');
+        if (this.checked) {
+            label.classList.add('border-orange-500', 'bg-orange-50');
+            label.classList.remove('border-gray-200');
+        } else {
+            label.classList.remove('border-orange-500', 'bg-orange-50');
+            label.classList.add('border-gray-200');
+        }
+    });
+});
+</script>
+{% endblock %}

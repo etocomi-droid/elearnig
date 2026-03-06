@@ -1,0 +1,371 @@
+<!-- セクション編集フォーム（HTMX 部分テンプレート） -->
+<form method="post"
+      action="{% url 'funnels:section_edit' pk=section.pk %}"
+      hx-post="{% url 'funnels:section_edit' pk=section.pk %}"
+      hx-target="#section-list"
+      hx-swap="innerHTML">
+    {% csrf_token %}
+
+    <div class="mb-4">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+            {{ section.get_section_type_display }}
+        </span>
+    </div>
+
+    <div class="space-y-4">
+
+        {% if section.section_type == 'hero' %}
+        <!-- ヒーローセクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">見出し</label>
+            <input type="text" name="headline"
+                   value="{{ section.content.headline|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="メインの見出しテキスト">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">サブ見出し</label>
+            <input type="text" name="subheadline"
+                   value="{{ section.content.subheadline|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="サブ見出しテキスト">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">背景色</label>
+            <div class="flex items-center gap-3">
+                <input type="color" name="bg_color"
+                       value="{{ section.content.bg_color|default:'#1e40af' }}"
+                       class="h-10 w-14 rounded border border-gray-300 cursor-pointer">
+                <input type="text" value="{{ section.content.bg_color|default:'#1e40af' }}"
+                       class="px-3 py-2 border border-gray-300 rounded-lg text-sm w-28"
+                       oninput="this.previousElementSibling.value=this.value"
+                       disabled>
+            </div>
+        </div>
+
+        {% elif section.section_type == 'text' %}
+        <!-- テキストセクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">本文（HTMLも使用可）</label>
+            <textarea name="body" rows="8"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                      placeholder="テキストを入力...">{{ section.content.body|default:'' }}</textarea>
+        </div>
+
+        {% elif section.section_type == 'image' %}
+        <!-- 画像セクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">画像URL</label>
+            <input type="url" name="image_url"
+                   value="{{ section.content.image_url|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="https://example.com/image.jpg">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">代替テキスト</label>
+            <input type="text" name="alt_text"
+                   value="{{ section.content.alt_text|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="画像の説明">
+        </div>
+
+        {% elif section.section_type == 'video' %}
+        <!-- 動画セクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">動画URL</label>
+            <input type="url" name="video_url"
+                   value="{{ section.content.video_url|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="https://www.youtube.com/watch?v=xxxxx">
+            <p class="mt-1 text-xs text-gray-400">YouTube または Vimeo のURLを入力してください。</p>
+        </div>
+
+        {% elif section.section_type == 'button' %}
+        <!-- CTAボタンセクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ボタンテキスト</label>
+            <input type="text" name="label"
+                   value="{{ section.content.label|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="今すぐ申し込む">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">リンクURL</label>
+            <input type="text" name="url"
+                   value="{{ section.content.url|default:'#' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="https://example.com">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ボタン色</label>
+            <div class="flex items-center gap-3">
+                <input type="color" name="color"
+                       value="{{ section.content.color|default:'#2563eb' }}"
+                       class="h-10 w-14 rounded border border-gray-300 cursor-pointer">
+            </div>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ボタンサイズ</label>
+            <select name="size"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="sm" {% if section.content.size == 'sm' %}selected{% endif %}>小</option>
+                <option value="md" {% if section.content.size == 'md' or not section.content.size %}selected{% endif %}>中</option>
+                <option value="lg" {% if section.content.size == 'lg' %}selected{% endif %}>大</option>
+            </select>
+        </div>
+
+        {% elif section.section_type == 'form' %}
+        <!-- フォームセクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">送信ボタンテキスト</label>
+            <input type="text" name="submit_label"
+                   value="{{ section.content.submit_label|default:'無料で登録する' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="無料で登録する">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">シナリオID（メール配信連携）</label>
+            <input type="text" name="scenario_id"
+                   value="{{ section.content.scenario_id|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="空欄可">
+            <p class="mt-1 text-xs text-gray-400">メール配信シナリオのIDを入力すると、フォーム送信時に自動でシナリオに登録されます。</p>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">リダイレクトURL</label>
+            <input type="text" name="redirect_url"
+                   value="{{ section.content.redirect_url|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="https://example.com/thanks/ （空欄でサンクスページへ）">
+        </div>
+        <div class="bg-gray-50 rounded-lg p-3">
+            <p class="text-xs text-gray-500">フォームフィールド: メールアドレス（固定）</p>
+        </div>
+
+        {% elif section.section_type == 'countdown' %}
+        <!-- カウントダウンセクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ラベル</label>
+            <input type="text" name="label"
+                   value="{{ section.content.label|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="締め切りまで">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">終了日時</label>
+            <input type="datetime-local" name="target_date"
+                   value="{{ section.content.target_date|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        {% elif section.section_type == 'testimonial' %}
+        <!-- お客様の声セクション -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">お客様の名前</label>
+            <input type="text" name="testimonial_name"
+                   value="{{ section.content.name|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="お客様の名前">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">お客様の声</label>
+            <textarea name="testimonial_text" rows="4"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="お客様のコメント...">{{ section.content.text|default:'' }}</textarea>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">画像URL（任意）</label>
+            <input type="url" name="image_url"
+                   value="{{ section.content.image_url|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="https://example.com/photo.jpg">
+        </div>
+
+        {% elif section.section_type == 'faq' %}
+        <!-- FAQセクション（複数項目対応） -->
+        <div id="faq-items-container">
+            {% if section.content.items %}
+                {% for item in section.content.items %}
+                <div class="faq-item-row border border-gray-200 rounded-lg p-4 relative" data-index="{{ forloop.counter0 }}">
+                    <button type="button" onclick="removeFaqItem(this)"
+                            class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors"
+                            title="この項目を削除">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <div class="pr-6">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">質問 {{ forloop.counter }}</label>
+                        <input type="text" name="faq_question"
+                               value="{{ item.question|default:'' }}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                               placeholder="よくある質問">
+                    </div>
+                    <div class="mt-2">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">回答</label>
+                        <textarea name="faq_answer" rows="3"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                  placeholder="回答をここに入力...">{{ item.answer|default:'' }}</textarea>
+                    </div>
+                </div>
+                {% endfor %}
+            {% elif section.content.question %}
+                {# 旧形式（単一Q&A）との後方互換 #}
+                <div class="faq-item-row border border-gray-200 rounded-lg p-4 relative" data-index="0">
+                    <button type="button" onclick="removeFaqItem(this)"
+                            class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors"
+                            title="この項目を削除">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <div class="pr-6">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">質問 1</label>
+                        <input type="text" name="faq_question"
+                               value="{{ section.content.question|default:'' }}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                               placeholder="よくある質問">
+                    </div>
+                    <div class="mt-2">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">回答</label>
+                        <textarea name="faq_answer" rows="3"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                  placeholder="回答をここに入力...">{{ section.content.answer|default:'' }}</textarea>
+                    </div>
+                </div>
+            {% else %}
+                <div class="faq-item-row border border-gray-200 rounded-lg p-4 relative" data-index="0">
+                    <button type="button" onclick="removeFaqItem(this)"
+                            class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors"
+                            title="この項目を削除">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <div class="pr-6">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">質問 1</label>
+                        <input type="text" name="faq_question"
+                               value=""
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                               placeholder="よくある質問">
+                    </div>
+                    <div class="mt-2">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">回答</label>
+                        <textarea name="faq_answer" rows="3"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                  placeholder="回答をここに入力..."></textarea>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="mt-3">
+            <button type="button" onclick="addFaqItem()"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-cyan-700 bg-cyan-50 border border-cyan-200 rounded-lg hover:bg-cyan-100 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                FAQ項目を追加
+            </button>
+        </div>
+        <script>
+        function addFaqItem() {
+            var container = document.getElementById('faq-items-container');
+            var count = container.querySelectorAll('.faq-item-row').length;
+            var div = document.createElement('div');
+            div.className = 'faq-item-row border border-gray-200 rounded-lg p-4 relative';
+            div.dataset.index = count;
+            div.innerHTML = '<button type="button" onclick="removeFaqItem(this)" class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors" title="この項目を削除"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>'
+                + '<div class="pr-6"><label class="block text-xs font-medium text-gray-500 mb-1">質問 ' + (count + 1) + '</label>'
+                + '<input type="text" name="faq_question" value="" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="よくある質問"></div>'
+                + '<div class="mt-2"><label class="block text-xs font-medium text-gray-500 mb-1">回答</label>'
+                + '<textarea name="faq_answer" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="回答をここに入力..."></textarea></div>';
+            container.appendChild(div);
+            renumberFaqItems();
+        }
+        function removeFaqItem(btn) {
+            var container = document.getElementById('faq-items-container');
+            if (container.querySelectorAll('.faq-item-row').length <= 1) {
+                alert('FAQ項目は最低1つ必要です。');
+                return;
+            }
+            btn.closest('.faq-item-row').remove();
+            renumberFaqItems();
+        }
+        function renumberFaqItems() {
+            var rows = document.querySelectorAll('#faq-items-container .faq-item-row');
+            rows.forEach(function(row, i) {
+                var label = row.querySelector('label');
+                if (label) label.textContent = '質問 ' + (i + 1);
+            });
+        }
+        </script>
+
+        {% elif section.section_type == 'schedule' or section.section_type == 'meeting' %}
+        <!-- スケジュール予約 / ミーティング予約 -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">予約タイプ</label>
+            <select name="booking_type_id"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="">-- 選択してください --</option>
+                {% for bt in booking_types %}
+                <option value="{{ bt.pk }}" {% if section.content.booking_type_id|stringformat:"s" == bt.pk|stringformat:"s" %}selected{% endif %}>
+                    {{ bt.name }}（{{ bt.duration_minutes }}分）
+                </option>
+                {% endfor %}
+            </select>
+            {% if not booking_types %}
+            <p class="mt-1 text-xs text-amber-600">予約タイプが未作成です。先に「予約管理」から予約タイプを作成してください。</p>
+            {% endif %}
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">見出し</label>
+            <input type="text" name="heading"
+                   value="{{ section.content.heading|default:'' }}"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="日程をお選びください">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">説明文（任意）</label>
+            <textarea name="description" rows="3"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="ご都合の良い日時をお選びください。">{{ section.content.description|default:'' }}</textarea>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">アクセントカラー</label>
+            <div class="flex items-center gap-3">
+                <input type="color" name="accent_color"
+                       value="{{ section.content.accent_color|default:'#2563eb' }}"
+                       class="h-10 w-14 rounded border border-gray-300 cursor-pointer">
+            </div>
+        </div>
+
+        {% elif section.section_type == 'separator' %}
+        <!-- 区切り線 -->
+        <div class="bg-gray-50 rounded-lg p-4 text-center">
+            <p class="text-sm text-gray-500">区切り線セクションには設定項目はありません。</p>
+        </div>
+
+        {% endif %}
+
+        <!-- 表示/非表示 -->
+        <div class="pt-2 border-t border-gray-200">
+            <div class="flex items-center gap-3">
+                <input type="checkbox" name="is_visible" id="is_visible_{{ section.pk }}"
+                       {% if section.is_visible %}checked{% endif %}
+                       class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                <label for="is_visible_{{ section.pk }}" class="text-sm font-medium text-gray-700">表示する</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6 flex items-center gap-3">
+        <button type="submit"
+                class="px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+            保存
+        </button>
+        <button type="button" onclick="closeSectionModal()"
+                class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+            キャンセル
+        </button>
+    </div>
+</form>

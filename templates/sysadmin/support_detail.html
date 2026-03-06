@@ -1,0 +1,74 @@
+{% extends "sysadmin/base_sysadmin.html" %}
+
+{% block title %}{{ thread.subject }} - サポート{% endblock %}
+{% block page_title %}サポート詳細{% endblock %}
+
+{% block content %}
+<!-- 戻るリンク -->
+<div class="mb-6">
+    <a href="{% url 'sysadmin:support_list' %}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        サポート一覧に戻る
+    </a>
+</div>
+
+<!-- スレッド情報ヘッダー -->
+<div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex items-start justify-between">
+        <div>
+            <h2 class="text-xl font-bold text-gray-900">{{ thread.subject }}</h2>
+            <div class="mt-2 flex items-center gap-4">
+                <span class="text-sm text-gray-500">プロジェクト: <span class="text-gray-700">{{ thread.project.name }}</span></span>
+                <span class="text-sm text-gray-500">作成者: <span class="text-gray-700">{{ thread.created_by.username|default:"不明" }}</span></span>
+                <span class="text-sm text-gray-500">作成日: {{ thread.created_at|date:"Y/m/d H:i" }}</span>
+            </div>
+        </div>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+            {% if thread.status == 'open' %}bg-green-100 text-green-700
+            {% elif thread.status == 'pending' %}bg-yellow-100 text-yellow-700
+            {% else %}bg-gray-100 text-gray-700{% endif %}">
+            {{ thread.get_status_display }}
+        </span>
+    </div>
+</div>
+
+<!-- メッセージリスト -->
+<div class="bg-white rounded-xl border border-gray-200 mb-6">
+    <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-base font-semibold text-gray-900">メッセージ</h3>
+    </div>
+    <div id="message-list" class="p-6 space-y-4 max-h-[600px] overflow-y-auto">
+        {% include "sysadmin/partials/message_list.html" %}
+    </div>
+</div>
+
+<!-- 返信フォーム -->
+{% if thread.status != 'closed' %}
+<div class="bg-white rounded-xl border border-gray-200 p-6">
+    <h3 class="text-base font-semibold text-gray-900 mb-4">返信</h3>
+    <form method="post"
+          action="{% url 'sysadmin:support_reply' thread.pk %}"
+          hx-post="{% url 'sysadmin:support_reply' thread.pk %}"
+          hx-target="#message-list"
+          hx-swap="innerHTML"
+          hx-on::after-request="this.reset(); document.getElementById('message-list').scrollTop = document.getElementById('message-list').scrollHeight;">
+        {% csrf_token %}
+        <div class="mb-4">
+            <textarea name="body" rows="3" required placeholder="返信を入力..."
+                      class="block w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+        </div>
+        <div class="flex justify-end">
+            <button type="submit"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                </svg>
+                送信
+            </button>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

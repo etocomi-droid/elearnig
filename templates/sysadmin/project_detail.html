@@ -1,0 +1,102 @@
+{% extends "sysadmin/base_sysadmin.html" %}
+
+{% block title %}{{ project.name }} - プロジェクト詳細{% endblock %}
+{% block page_title %}プロジェクト詳細{% endblock %}
+
+{% block content %}
+<!-- 戻るリンク -->
+<div class="mb-6">
+    <a href="{% url 'sysadmin:project_list' %}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        プロジェクト一覧に戻る
+    </a>
+</div>
+
+<!-- プロジェクト情報カード -->
+<div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex items-start justify-between">
+        <div>
+            <h2 class="text-xl font-bold text-gray-900">{{ project.name }}</h2>
+            <div class="mt-2 space-y-1">
+                <p class="text-sm text-gray-500">スラッグ: <span class="text-gray-700 font-mono">{{ project.slug }}</span></p>
+                <p class="text-sm text-gray-500">オーナー: <a href="{% url 'sysadmin:user_detail' project.owner.pk %}" class="text-blue-600 hover:text-blue-700">{{ project.owner.username }}</a> ({{ project.owner.email }})</p>
+                <p class="text-sm text-gray-500">作成日: {{ project.created_at|date:"Y年m月d日 H:i" }}</p>
+            </div>
+        </div>
+        <form method="post" action="{% url 'sysadmin:project_switch' project.pk %}">
+            {% csrf_token %}
+            <button type="submit"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                </svg>
+                この管理画面を見る
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- 統計 -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+    <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <p class="text-2xl font-bold text-gray-900">{{ contact_count }}</p>
+        <p class="text-xs text-gray-500 mt-1">コンタクト</p>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <p class="text-2xl font-bold text-gray-900">{{ funnel_count }}</p>
+        <p class="text-xs text-gray-500 mt-1">ファネル</p>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <p class="text-2xl font-bold text-gray-900">{{ course_count }}</p>
+        <p class="text-xs text-gray-500 mt-1">コース</p>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <p class="text-2xl font-bold text-gray-900">{{ order_count }}</p>
+        <p class="text-xs text-gray-500 mt-1">注文</p>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <p class="text-2xl font-bold text-gray-900">&yen;{{ revenue|floatformat:0 }}</p>
+        <p class="text-xs text-gray-500 mt-1">売上</p>
+    </div>
+</div>
+
+<!-- メンバー一覧 -->
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-base font-semibold text-gray-900">メンバー一覧</h3>
+    </div>
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ユーザー名</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">メールアドレス</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">役割</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">参加日</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for member in members %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                    <a href="{% url 'sysadmin:user_detail' member.user.pk %}" class="text-blue-600 hover:text-blue-700">{{ member.user.username }}</a>
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">{{ member.user.email }}</td>
+                <td class="px-6 py-4">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                        {% if member.role == 'admin' %}bg-blue-100 text-blue-700{% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ member.get_role_display }}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">{{ member.created_at|date:"Y/m/d" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="px-6 py-8 text-center text-sm text-gray-400">メンバーはいません</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

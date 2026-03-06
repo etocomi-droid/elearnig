@@ -1,0 +1,47 @@
+{% extends 'base_member.html' %}
+
+{% block title %}{{ lesson.title }} - {{ site.name }}{% endblock %}
+{% block site_name %}{{ site.name }}{% endblock %}
+
+{% block content %}
+<!-- パンくず -->
+<nav class="mb-6 flex items-center gap-2 text-sm text-gray-500">
+    <a href="{% url 'members_public:member_home' site_slug=site.slug %}" class="hover:text-indigo-600 transition-colors">マイコース</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <a href="{% url 'members_public:member_course' site_slug=site.slug course_slug=course.slug %}" class="hover:text-indigo-600 transition-colors">{{ course.title }}</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <span class="text-gray-900 font-medium">{{ lesson.title }}</span>
+</nav>
+
+<!-- ロックメッセージ -->
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="px-6 md:px-8 py-16 text-center">
+        <div class="w-20 h-20 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">このレッスンはロックされています</h1>
+        <p class="text-sm text-gray-500 mb-2 max-w-md mx-auto">
+            「<span class="font-medium text-gray-700">{{ gate_lesson.title }}</span>」のテストに合格すると、このレッスンにアクセスできるようになります。
+        </p>
+
+        <div class="mt-8 flex flex-col items-center gap-3">
+            <a href="{% url 'members_public:quiz_start' site_slug=site.slug lesson_slug=gate_lesson.slug %}"
+               class="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white text-sm font-bold rounded-xl hover:bg-orange-700 transition-colors shadow-lg shadow-orange-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+                テストを受ける: {{ gate_lesson.title }}
+            </a>
+            <a href="{% url 'members_public:member_course' site_slug=site.slug course_slug=course.slug %}"
+               class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-indigo-600 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                コースに戻る
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

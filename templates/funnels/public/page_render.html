@@ -1,0 +1,1062 @@
+{% extends "base.html" %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block extra_head %}
+{% if meta_description %}
+<meta name="description" content="{{ meta_description }}">
+{% endif %}
+<style>
+    /* LP全体のスタイル */
+    .lp-container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    /* ヒーローセクション */
+    .section-hero {
+        padding: 80px 24px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .section-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
+    .section-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+    /* テキストセクション */
+    .section-text {
+        padding: 48px 24px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .section-text .text-content {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #374151;
+    }
+    .section-text .text-content p { margin-bottom: 1em; }
+    .section-text .text-content h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5em; color: #111827; }
+    .section-text .text-content h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5em; color: #111827; }
+    .section-text .text-content ul { list-style: disc; padding-left: 1.5em; margin-bottom: 1em; }
+    .section-text .text-content ol { list-style: decimal; padding-left: 1.5em; margin-bottom: 1em; }
+    .section-text .text-content strong { font-weight: 700; }
+
+    /* 画像セクション */
+    .section-image {
+        padding: 24px;
+        text-align: center;
+    }
+    .section-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    /* 動画セクション */
+    .section-video {
+        padding: 48px 24px;
+    }
+    .section-video .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .section-video .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* CTAボタンセクション */
+    .section-button {
+        padding: 32px 24px;
+        text-align: center;
+    }
+    .section-button .cta-btn {
+        display: inline-block;
+        font-weight: 700;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #ffffff;
+        transition: opacity 0.2s, transform 0.2s;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+    .section-button .cta-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+    .section-button .cta-btn.size-sm { padding: 10px 24px; font-size: 0.875rem; }
+    .section-button .cta-btn.size-md { padding: 14px 36px; font-size: 1rem; }
+    .section-button .cta-btn.size-lg { padding: 18px 48px; font-size: 1.25rem; }
+
+    /* フォームセクション */
+    .section-form {
+        padding: 48px 24px;
+        background: #f9fafb;
+    }
+    .section-form .form-inner {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 32px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .section-form input[type="email"],
+    .section-form input[type="text"] {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 1rem;
+        margin-bottom: 12px;
+        outline: none;
+    }
+    .section-form input[type="email"]:focus,
+    .section-form input[type="text"]:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .section-form .form-submit-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #ffffff;
+        background: #2563eb;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .section-form .form-submit-btn:hover {
+        background: #1d4ed8;
+    }
+
+    /* カウントダウン */
+    .section-countdown {
+        padding: 48px 24px;
+        text-align: center;
+        background: #fef3c7;
+    }
+    .section-countdown .countdown-label {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #92400e;
+        margin-bottom: 16px;
+    }
+    .section-countdown .countdown-timer {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+    .section-countdown .countdown-unit {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 12px 16px;
+        min-width: 72px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .section-countdown .countdown-unit .number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #92400e;
+    }
+    .section-countdown .countdown-unit .unit-label {
+        font-size: 0.75rem;
+        color: #b45309;
+        margin-top: 4px;
+    }
+
+    /* お客様の声 */
+    .section-testimonial {
+        padding: 48px 24px;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+    .section-testimonial .testimonial-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 24px;
+    }
+    .section-testimonial .testimonial-text {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #374151;
+        font-style: italic;
+        margin-bottom: 16px;
+    }
+    .section-testimonial .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .section-testimonial .testimonial-author img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .section-testimonial .testimonial-author .author-placeholder {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #6b7280;
+    }
+    .section-testimonial .testimonial-author .author-name {
+        font-weight: 600;
+        color: #111827;
+    }
+
+    /* FAQ */
+    .section-faq {
+        padding: 32px 24px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .section-faq .faq-item {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .section-faq .faq-question {
+        background: #f9fafb;
+        padding: 16px 20px;
+        font-weight: 600;
+        color: #111827;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .section-faq .faq-answer {
+        padding: 16px 20px;
+        color: #374151;
+        line-height: 1.7;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    /* 区切り線 */
+    .section-separator {
+        padding: 8px 24px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .section-separator hr {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    /* 予約カレンダーウィジェット */
+    .section-booking {
+        padding: 48px 24px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .section-booking .booking-heading {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #111827;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    .section-booking .booking-description {
+        font-size: 0.95rem;
+        color: #6b7280;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    .booking-widget {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .booking-calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .booking-calendar-header .month-label {
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #111827;
+    }
+    .booking-calendar-header button {
+        background: none;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        padding: 6px 10px;
+        cursor: pointer;
+        color: #374151;
+        transition: background 0.15s;
+    }
+    .booking-calendar-header button:hover {
+        background: #f3f4f6;
+    }
+    .booking-calendar-grid {
+        padding: 12px 20px 20px;
+    }
+    .booking-weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #9ca3af;
+        margin-bottom: 8px;
+    }
+    .booking-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+    }
+    .booking-day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        border-radius: 8px;
+        cursor: default;
+        color: #d1d5db;
+    }
+    .booking-day.available {
+        color: #111827;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.15s;
+    }
+    .booking-day.available:hover {
+        background: #f3f4f6;
+    }
+    .booking-day.selected {
+        color: #ffffff;
+        font-weight: 600;
+    }
+    .booking-day.other-month {
+        color: #e5e7eb;
+    }
+    .booking-times {
+        padding: 20px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .booking-times .times-label {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #111827;
+        margin-bottom: 12px;
+    }
+    .booking-times .time-slots {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    .booking-times .time-slot {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        color: #374151;
+        transition: all 0.15s;
+    }
+    .booking-times .time-slot:hover {
+        border-color: #9ca3af;
+        background: #f9fafb;
+    }
+    .booking-times .time-slot.selected {
+        color: #ffffff;
+        border-color: transparent;
+    }
+    .booking-form-panel {
+        padding: 24px 20px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .booking-form-panel .form-title {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #111827;
+        margin-bottom: 16px;
+    }
+    .booking-form-panel input,
+    .booking-form-panel textarea {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        margin-bottom: 12px;
+        outline: none;
+    }
+    .booking-form-panel input:focus,
+    .booking-form-panel textarea:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .booking-form-panel label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 4px;
+    }
+    .booking-submit-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .booking-submit-btn:hover { opacity: 0.9; }
+    .booking-submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    .booking-confirmation {
+        padding: 32px 20px;
+        text-align: center;
+    }
+    .booking-confirmation .confirm-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+    .booking-confirmation .confirm-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 8px;
+    }
+    .booking-confirmation .confirm-detail {
+        font-size: 0.9rem;
+        color: #6b7280;
+        line-height: 1.7;
+    }
+    .booking-loading {
+        text-align: center;
+        padding: 24px;
+        color: #9ca3af;
+        font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+        .section-hero h1 { font-size: 1.75rem; }
+        .section-hero p { font-size: 1rem; }
+        .section-hero { padding: 48px 16px; }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="lp-container">
+    {% for section in sections %}
+
+        {% if section.section_type == 'hero' %}
+        <!-- ヒーローセクション -->
+        <section class="section-hero" style="background-color: {{ section.content.bg_color|default:'#1e40af' }};">
+            <h1>{{ section.content.headline|default:'' }}</h1>
+            {% if section.content.subheadline %}
+            <p>{{ section.content.subheadline }}</p>
+            {% endif %}
+        </section>
+
+        {% elif section.section_type == 'text' %}
+        <!-- テキストセクション -->
+        <section class="section-text">
+            <div class="text-content">
+                {{ section.content.body|default:''|safe }}
+            </div>
+        </section>
+
+        {% elif section.section_type == 'image' %}
+        <!-- 画像セクション -->
+        {% if section.content.image_url %}
+        <section class="section-image">
+            <img src="{{ section.content.image_url }}" alt="{{ section.content.alt_text|default:'' }}">
+        </section>
+        {% endif %}
+
+        {% elif section.section_type == 'video' %}
+        <!-- 動画セクション -->
+        {% if section.embed_url %}
+        <section class="section-video">
+            <div class="video-wrapper">
+                <iframe src="{{ section.embed_url }}" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+        </section>
+        {% endif %}
+
+        {% elif section.section_type == 'button' %}
+        <!-- CTAボタンセクション -->
+        <section class="section-button">
+            <a href="{{ section.content.url|default:'#' }}"
+               class="cta-btn size-{{ section.content.size|default:'md' }}"
+               style="background-color: {{ section.content.color|default:'#2563eb' }};">
+                {{ section.content.label|default:'ボタン' }}
+            </a>
+        </section>
+
+        {% elif section.section_type == 'form' %}
+        <!-- フォームセクション -->
+        <section class="section-form">
+            <div class="form-inner">
+                <form method="post" action="/p/form-submit/">
+                    <input type="hidden" name="funnel_id" value="{{ funnel.pk }}">
+                    <input type="hidden" name="page_id" value="{{ page.pk }}">
+                    <input type="hidden" name="scenario_id" value="{{ section.content.scenario_id|default:'' }}">
+                    <input type="hidden" name="redirect_url" value="{{ section.content.redirect_url|default:'' }}">
+                    <input type="email" name="email" placeholder="メールアドレスを入力" required>
+                    <button type="submit" class="form-submit-btn">
+                        {{ section.content.submit_label|default:'送信' }}
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        {% elif section.section_type == 'countdown' %}
+        <!-- カウントダウンセクション -->
+        <section class="section-countdown">
+            {% if section.content.label %}
+            <div class="countdown-label">{{ section.content.label }}</div>
+            {% endif %}
+            <div class="countdown-timer" data-target="{{ section.content.target_date|default:'' }}" id="countdown-{{ section.pk }}">
+                <div class="countdown-unit">
+                    <div class="number" id="days-{{ section.pk }}">00</div>
+                    <div class="unit-label">日</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="number" id="hours-{{ section.pk }}">00</div>
+                    <div class="unit-label">時間</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="number" id="minutes-{{ section.pk }}">00</div>
+                    <div class="unit-label">分</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="number" id="seconds-{{ section.pk }}">00</div>
+                    <div class="unit-label">秒</div>
+                </div>
+            </div>
+        </section>
+
+        {% elif section.section_type == 'testimonial' %}
+        <!-- お客様の声 -->
+        <section class="section-testimonial">
+            <div class="testimonial-card">
+                <div class="testimonial-text">"{{ section.content.text|default:'' }}"</div>
+                <div class="testimonial-author">
+                    {% if section.content.image_url %}
+                    <img src="{{ section.content.image_url }}" alt="{{ section.content.name|default:'' }}">
+                    {% else %}
+                    <div class="author-placeholder">
+                        {{ section.content.name|first|default:'?' }}
+                    </div>
+                    {% endif %}
+                    <div class="author-name">{{ section.content.name|default:'匿名' }}</div>
+                </div>
+            </div>
+        </section>
+
+        {% elif section.section_type == 'faq' %}
+        <!-- FAQ -->
+        <section class="section-faq">
+            {% if section.content.items %}
+                {% for item in section.content.items %}
+                <div class="faq-item" {% if not forloop.last %}style="margin-bottom: 12px;"{% endif %}>
+                    <div class="faq-question" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+                        {{ item.question|default:'質問' }}
+                        <svg style="width:20px;height:20px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        {{ item.answer|default:''|safe }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% elif section.content.question %}
+                {# 旧形式との後方互換 #}
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+                        {{ section.content.question|default:'質問' }}
+                        <svg style="width:20px;height:20px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        {{ section.content.answer|default:''|safe }}
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+
+        {% elif section.section_type == 'schedule' or section.section_type == 'meeting' %}
+        <!-- 予約ウィジェット -->
+        {% if section.content.booking_type_id %}
+        <section class="section-booking">
+            {% if section.content.heading %}
+            <div class="booking-heading">{{ section.content.heading }}</div>
+            {% endif %}
+            {% if section.content.description %}
+            <div class="booking-description">{{ section.content.description }}</div>
+            {% endif %}
+            <div class="booking-widget"
+                 id="booking-widget-{{ section.pk }}"
+                 data-booking-type-id="{{ section.content.booking_type_id }}"
+                 data-accent-color="{{ section.content.accent_color|default:'#2563eb' }}">
+                <div class="booking-loading">読み込み中...</div>
+            </div>
+        </section>
+        {% endif %}
+
+        {% elif section.section_type == 'separator' %}
+        <!-- 区切り線 -->
+        <section class="section-separator">
+            <hr>
+        </section>
+
+        {% endif %}
+
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// カウントダウンタイマー
+document.querySelectorAll('.countdown-timer').forEach(function(timer) {
+    var target = timer.dataset.target;
+    if (!target) return;
+
+    var targetDate = new Date(target).getTime();
+    var id = timer.id.replace('countdown-', '');
+
+    function updateCountdown() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+
+        if (diff <= 0) {
+            document.getElementById('days-' + id).textContent = '00';
+            document.getElementById('hours-' + id).textContent = '00';
+            document.getElementById('minutes-' + id).textContent = '00';
+            document.getElementById('seconds-' + id).textContent = '00';
+            return;
+        }
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days-' + id).textContent = String(days).padStart(2, '0');
+        document.getElementById('hours-' + id).textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes-' + id).textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds-' + id).textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+});
+
+// 予約カレンダーウィジェット
+(function() {
+    var WEEKDAY_LABELS = ['日', '月', '火', '水', '木', '金', '土'];
+
+    function BookingWidget(el) {
+        this.el = el;
+        this.bookingTypeId = el.dataset.bookingTypeId;
+        this.accentColor = el.dataset.accentColor || '#2563eb';
+        this.today = new Date();
+        this.currentYear = this.today.getFullYear();
+        this.currentMonth = this.today.getMonth() + 1;
+        this.availableDates = [];
+        this.selectedDate = null;
+        this.selectedTime = null;
+        this.timeSlots = [];
+        this.init();
+    }
+
+    BookingWidget.prototype.init = function() {
+        this.el.innerHTML = '';
+        this.renderCalendarHeader();
+        this.renderCalendarGrid();
+        this.timesContainer = document.createElement('div');
+        this.timesContainer.style.display = 'none';
+        this.el.appendChild(this.timesContainer);
+        this.formContainer = document.createElement('div');
+        this.formContainer.style.display = 'none';
+        this.el.appendChild(this.formContainer);
+        this.confirmContainer = document.createElement('div');
+        this.confirmContainer.style.display = 'none';
+        this.el.appendChild(this.confirmContainer);
+        this.fetchAvailableDates();
+    };
+
+    BookingWidget.prototype.renderCalendarHeader = function() {
+        var self = this;
+        var header = document.createElement('div');
+        header.className = 'booking-calendar-header';
+
+        var prevBtn = document.createElement('button');
+        prevBtn.type = 'button';
+        prevBtn.innerHTML = '&larr;';
+        prevBtn.onclick = function() { self.changeMonth(-1); };
+
+        this.monthLabel = document.createElement('span');
+        this.monthLabel.className = 'month-label';
+        this.updateMonthLabel();
+
+        var nextBtn = document.createElement('button');
+        nextBtn.type = 'button';
+        nextBtn.innerHTML = '&rarr;';
+        nextBtn.onclick = function() { self.changeMonth(1); };
+
+        header.appendChild(prevBtn);
+        header.appendChild(this.monthLabel);
+        header.appendChild(nextBtn);
+        this.el.appendChild(header);
+    };
+
+    BookingWidget.prototype.updateMonthLabel = function() {
+        this.monthLabel.textContent = this.currentYear + '年' + this.currentMonth + '月';
+    };
+
+    BookingWidget.prototype.renderCalendarGrid = function() {
+        if (this.calendarGrid) this.calendarGrid.remove();
+        var grid = document.createElement('div');
+        grid.className = 'booking-calendar-grid';
+
+        var weekdays = document.createElement('div');
+        weekdays.className = 'booking-weekdays';
+        for (var i = 0; i < 7; i++) {
+            var wd = document.createElement('div');
+            wd.textContent = WEEKDAY_LABELS[i];
+            weekdays.appendChild(wd);
+        }
+        grid.appendChild(weekdays);
+
+        var days = document.createElement('div');
+        days.className = 'booking-days';
+
+        var firstDay = new Date(this.currentYear, this.currentMonth - 1, 1);
+        var startDow = firstDay.getDay();
+        var daysInMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+
+        // 前月の空白
+        for (var b = 0; b < startDow; b++) {
+            var blank = document.createElement('div');
+            blank.className = 'booking-day other-month';
+            days.appendChild(blank);
+        }
+
+        var self = this;
+        for (var d = 1; d <= daysInMonth; d++) {
+            var dayEl = document.createElement('div');
+            dayEl.className = 'booking-day';
+            dayEl.textContent = d;
+
+            var dateStr = this.currentYear + '-' +
+                String(this.currentMonth).padStart(2, '0') + '-' +
+                String(d).padStart(2, '0');
+
+            if (this.availableDates.indexOf(dateStr) >= 0) {
+                dayEl.classList.add('available');
+                dayEl.dataset.date = dateStr;
+                dayEl.onclick = (function(ds, el) {
+                    return function() { self.selectDate(ds, el); };
+                })(dateStr, dayEl);
+            }
+
+            if (this.selectedDate === dateStr) {
+                dayEl.classList.add('selected');
+                dayEl.style.backgroundColor = this.accentColor;
+            }
+
+            days.appendChild(dayEl);
+        }
+
+        grid.appendChild(days);
+        this.calendarGrid = grid;
+
+        // Insert after header
+        var header = this.el.querySelector('.booking-calendar-header');
+        if (header.nextSibling) {
+            this.el.insertBefore(grid, header.nextSibling);
+        } else {
+            this.el.appendChild(grid);
+        }
+    };
+
+    BookingWidget.prototype.changeMonth = function(delta) {
+        this.currentMonth += delta;
+        if (this.currentMonth > 12) { this.currentMonth = 1; this.currentYear++; }
+        if (this.currentMonth < 1) { this.currentMonth = 12; this.currentYear--; }
+        this.updateMonthLabel();
+        this.selectedDate = null;
+        this.selectedTime = null;
+        this.timesContainer.style.display = 'none';
+        this.formContainer.style.display = 'none';
+        this.fetchAvailableDates();
+    };
+
+    BookingWidget.prototype.fetchAvailableDates = function() {
+        var self = this;
+        fetch('/b/api/' + this.bookingTypeId + '/dates/?year=' + this.currentYear + '&month=' + this.currentMonth)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                self.availableDates = data.available_dates || [];
+                self.renderCalendarGrid();
+            })
+            .catch(function() {
+                self.availableDates = [];
+                self.renderCalendarGrid();
+            });
+    };
+
+    BookingWidget.prototype.selectDate = function(dateStr, el) {
+        this.selectedDate = dateStr;
+        this.selectedTime = null;
+        this.formContainer.style.display = 'none';
+        // Update selected style
+        var allDays = this.el.querySelectorAll('.booking-day');
+        for (var i = 0; i < allDays.length; i++) {
+            allDays[i].classList.remove('selected');
+            allDays[i].style.backgroundColor = '';
+        }
+        el.classList.add('selected');
+        el.style.backgroundColor = this.accentColor;
+        this.fetchTimeSlots(dateStr);
+    };
+
+    BookingWidget.prototype.fetchTimeSlots = function(dateStr) {
+        var self = this;
+        this.timesContainer.innerHTML = '<div class="booking-loading">時間を取得中...</div>';
+        this.timesContainer.style.display = 'block';
+
+        fetch('/b/api/' + this.bookingTypeId + '/times/?date=' + dateStr)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                self.timeSlots = data.time_slots || [];
+                self.renderTimeSlots(dateStr);
+            })
+            .catch(function() {
+                self.timesContainer.innerHTML = '<div class="booking-loading">時間の取得に失敗しました。</div>';
+            });
+    };
+
+    BookingWidget.prototype.renderTimeSlots = function(dateStr) {
+        var self = this;
+        this.timesContainer.innerHTML = '';
+        this.timesContainer.className = 'booking-times';
+        this.timesContainer.style.display = 'block';
+
+        // 日付表示
+        var parts = dateStr.split('-');
+        var dateLabel = document.createElement('div');
+        dateLabel.className = 'times-label';
+        dateLabel.textContent = parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日の空き時間';
+        this.timesContainer.appendChild(dateLabel);
+
+        if (this.timeSlots.length === 0) {
+            var empty = document.createElement('div');
+            empty.className = 'booking-loading';
+            empty.textContent = 'この日に空き時間はありません。';
+            this.timesContainer.appendChild(empty);
+            return;
+        }
+
+        var slotsGrid = document.createElement('div');
+        slotsGrid.className = 'time-slots';
+
+        for (var i = 0; i < this.timeSlots.length; i++) {
+            var slot = this.timeSlots[i];
+            var slotEl = document.createElement('div');
+            slotEl.className = 'time-slot';
+            slotEl.textContent = slot.display;
+            slotEl.dataset.start = slot.start;
+            slotEl.dataset.end = slot.end;
+            slotEl.onclick = (function(s, el) {
+                return function() { self.selectTime(s, el); };
+            })(slot, slotEl);
+            slotsGrid.appendChild(slotEl);
+        }
+
+        this.timesContainer.appendChild(slotsGrid);
+    };
+
+    BookingWidget.prototype.selectTime = function(slot, el) {
+        this.selectedTime = slot;
+        var allSlots = this.el.querySelectorAll('.time-slot');
+        for (var i = 0; i < allSlots.length; i++) {
+            allSlots[i].classList.remove('selected');
+            allSlots[i].style.backgroundColor = '';
+        }
+        el.classList.add('selected');
+        el.style.backgroundColor = this.accentColor;
+        this.renderForm();
+    };
+
+    BookingWidget.prototype.renderForm = function() {
+        var self = this;
+        this.formContainer.innerHTML = '';
+        this.formContainer.className = 'booking-form-panel';
+        this.formContainer.style.display = 'block';
+
+        var title = document.createElement('div');
+        title.className = 'form-title';
+        title.textContent = '予約情報を入力してください';
+        this.formContainer.appendChild(title);
+
+        var form = document.createElement('form');
+        form.onsubmit = function(e) { e.preventDefault(); self.submitBooking(form); return false; };
+
+        var fields = [
+            { name: 'name', label: 'お名前', type: 'text', required: true, ph: '山田 太郎' },
+            { name: 'email', label: 'メールアドレス', type: 'email', required: true, ph: 'taro@example.com' },
+            { name: 'phone', label: '電話番号（任意）', type: 'tel', required: false, ph: '090-1234-5678' }
+        ];
+
+        for (var i = 0; i < fields.length; i++) {
+            var f = fields[i];
+            var lbl = document.createElement('label');
+            lbl.textContent = f.label;
+            form.appendChild(lbl);
+            var inp = document.createElement('input');
+            inp.type = f.type;
+            inp.name = f.name;
+            inp.required = f.required;
+            inp.placeholder = f.ph;
+            form.appendChild(inp);
+        }
+
+        var memoLabel = document.createElement('label');
+        memoLabel.textContent = 'メモ（任意）';
+        form.appendChild(memoLabel);
+        var memo = document.createElement('textarea');
+        memo.name = 'memo';
+        memo.rows = 3;
+        memo.placeholder = 'ご要望や補足情報があればご記入ください';
+        form.appendChild(memo);
+
+        var btn = document.createElement('button');
+        btn.type = 'submit';
+        btn.className = 'booking-submit-btn';
+        btn.style.backgroundColor = this.accentColor;
+        btn.textContent = '予約を確定する';
+        form.appendChild(btn);
+
+        this.formContainer.appendChild(form);
+    };
+
+    BookingWidget.prototype.submitBooking = function(form) {
+        var self = this;
+        var btn = form.querySelector('.booking-submit-btn');
+        btn.disabled = true;
+        btn.textContent = '送信中...';
+
+        var formData = {
+            booking_type_id: this.bookingTypeId,
+            date: this.selectedDate,
+            start_time: this.selectedTime.start,
+            end_time: this.selectedTime.end,
+            name: form.querySelector('[name="name"]').value,
+            email: form.querySelector('[name="email"]').value,
+            phone: form.querySelector('[name="phone"]').value || '',
+            memo: form.querySelector('[name="memo"]').value || ''
+        };
+
+        fetch('/b/submit/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                self.showConfirmation(data);
+            } else {
+                alert(data.error || '予約に失敗しました。もう一度お試しください。');
+                btn.disabled = false;
+                btn.textContent = '予約を確定する';
+            }
+        })
+        .catch(function() {
+            alert('通信エラーが発生しました。もう一度お試しください。');
+            btn.disabled = false;
+            btn.textContent = '予約を確定する';
+        });
+    };
+
+    BookingWidget.prototype.showConfirmation = function(data) {
+        // Hide other panels
+        this.el.querySelector('.booking-calendar-header').style.display = 'none';
+        this.calendarGrid.style.display = 'none';
+        this.timesContainer.style.display = 'none';
+        this.formContainer.style.display = 'none';
+
+        this.confirmContainer.innerHTML = '';
+        this.confirmContainer.className = 'booking-confirmation';
+        this.confirmContainer.style.display = 'block';
+
+        var icon = document.createElement('div');
+        icon.className = 'confirm-icon';
+        icon.style.backgroundColor = this.accentColor + '20';
+        icon.innerHTML = '<svg style="width:28px;height:28px;color:' + this.accentColor + ';" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+        this.confirmContainer.appendChild(icon);
+
+        var title = document.createElement('div');
+        title.className = 'confirm-title';
+        title.textContent = '予約が確定しました';
+        this.confirmContainer.appendChild(title);
+
+        var detail = document.createElement('div');
+        detail.className = 'confirm-detail';
+        var lines = ['日時: ' + (data.datetime_display || this.selectedDate + ' ' + this.selectedTime.display)];
+        if (data.zoom_join_url) {
+            lines.push('Zoom URL: ' + data.zoom_join_url);
+        }
+        lines.push('確認メールをお送りしました。');
+        detail.innerHTML = lines.join('<br>');
+        this.confirmContainer.appendChild(detail);
+    };
+
+    // 全ウィジェットを初期化
+    document.querySelectorAll('.booking-widget').forEach(function(el) {
+        new BookingWidget(el);
+    });
+})();
+</script>
+{% endblock %}

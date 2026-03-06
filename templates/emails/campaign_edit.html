@@ -1,0 +1,185 @@
+{% extends "base_admin.html" %}
+
+{% block title %}{% if is_new %}一斉配信作成{% else %}{{ campaign.name }} - 一斉配信編集{% endif %}{% endblock %}
+{% block page_title %}{% if is_new %}一斉配信作成{% else %}一斉配信編集{% endif %}{% endblock %}
+
+{% block content %}
+<!-- パンくずリスト -->
+<nav class="mb-6">
+    <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="{% url 'emails:campaign_list' %}" class="hover:text-blue-600 transition-colors">一斉配信一覧</a></li>
+        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+        <li class="text-gray-900 font-medium">{% if is_new %}新規作成{% else %}{{ campaign.name }}{% endif %}</li>
+    </ol>
+</nav>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- メインフォーム -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h2 class="text-base font-semibold text-gray-900">配信内容</h2>
+            </div>
+            <div class="px-6 py-6">
+                <form method="post" id="campaign-form">
+                    {% csrf_token %}
+
+                    <!-- キャンペーン名 -->
+                    <div class="mb-5">
+                        <label for="id_name" class="block text-sm font-medium text-gray-700 mb-1">
+                            キャンペーン名 <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.name.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- 件名 -->
+                    <div class="mb-5">
+                        <label for="id_subject" class="block text-sm font-medium text-gray-700 mb-1">
+                            件名 <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.subject.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- 本文(HTML) -->
+                    <div class="mb-5">
+                        <label for="id_body_html" class="block text-sm font-medium text-gray-700 mb-1">
+                            本文 (HTML) <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.body_html }}
+                        {% if form.body_html.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.body_html.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- 本文(テキスト) -->
+                    <div class="mb-5">
+                        <label for="id_body_text" class="block text-sm font-medium text-gray-700 mb-1">
+                            本文 (テキスト)
+                        </label>
+                        {{ form.body_text }}
+                        {% if form.body_text.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.body_text.errors.0 }}</p>
+                        {% endif %}
+                        <p class="mt-1 text-xs text-gray-500">テキスト形式のフォールバック（任意）</p>
+                    </div>
+
+                    <!-- ターゲットタグ -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            ターゲットタグ
+                        </label>
+                        <p class="text-xs text-gray-500 mb-3">タグを選択しない場合、プロジェクト内の全コンタクトが対象になります</p>
+                        <div class="bg-gray-50 rounded-lg border border-gray-200 p-4">
+                            {% if form.target_tags.field.queryset.count > 0 %}
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                {% for checkbox in form.target_tags %}
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    {{ checkbox.tag }}
+                                    <span class="text-sm text-gray-700">{{ checkbox.choice_label }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <p class="text-sm text-gray-500 text-center py-2">タグがまだ作成されていません</p>
+                            {% endif %}
+                        </div>
+                        {% if form.target_tags.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.target_tags.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <button type="submit"
+                                class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                            {% if is_new %}作成{% else %}更新{% endif %}
+                        </button>
+                        <a href="{% url 'emails:campaign_list' %}"
+                           class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                            キャンセル
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- サイドパネル -->
+    <div class="lg:col-span-1">
+        {% if not is_new %}
+        <!-- ステータスカード -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h3 class="text-sm font-semibold text-gray-900">ステータス</h3>
+            </div>
+            <div class="px-6 py-4">
+                <div class="mb-4">
+                    {% if campaign.status == 'draft' %}
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                        下書き
+                    </span>
+                    {% elif campaign.status == 'scheduled' %}
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                        予約済み
+                    </span>
+                    {% elif campaign.status == 'sending' %}
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        送信中
+                    </span>
+                    {% elif campaign.status == 'sent' %}
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                        送信済み
+                    </span>
+                    {% endif %}
+                </div>
+
+                <dl class="space-y-3 text-sm">
+                    <div>
+                        <dt class="text-gray-500">作成日</dt>
+                        <dd class="font-medium text-gray-900">{{ campaign.created_at|date:"Y/m/d H:i" }}</dd>
+                    </div>
+                    {% if campaign.sent_at %}
+                    <div>
+                        <dt class="text-gray-500">配信日</dt>
+                        <dd class="font-medium text-gray-900">{{ campaign.sent_at|date:"Y/m/d H:i" }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if campaign.scheduled_at %}
+                    <div>
+                        <dt class="text-gray-500">配信予定日</dt>
+                        <dd class="font-medium text-gray-900">{{ campaign.scheduled_at|date:"Y/m/d H:i" }}</dd>
+                    </div>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+
+        <!-- 配信アクション -->
+        {% if campaign.status == 'draft' %}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h3 class="text-sm font-semibold text-gray-900">配信アクション</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-xs text-gray-500 mb-4">
+                    この一斉配信をターゲットコンタクトに送信します。送信後は取り消しできません。
+                </p>
+                <a href="{% url 'emails:campaign_send' pk=campaign.pk %}"
+                   class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-green-600 hover:bg-green-700 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                    配信する
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

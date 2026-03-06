@@ -1,0 +1,84 @@
+{% extends "base_admin.html" %}
+
+{% block title %}配信確認 - {{ campaign.name }}{% endblock %}
+{% block page_title %}配信確認{% endblock %}
+
+{% block content %}
+<!-- パンくずリスト -->
+<nav class="mb-6">
+    <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="{% url 'emails:campaign_list' %}" class="hover:text-blue-600 transition-colors">一斉配信一覧</a></li>
+        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+        <li><a href="{% url 'emails:campaign_edit' pk=campaign.pk %}" class="hover:text-blue-600 transition-colors">{{ campaign.name }}</a></li>
+        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+        <li class="text-gray-900 font-medium">配信確認</li>
+    </ol>
+</nav>
+
+<div class="max-w-lg mx-auto">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-100">
+            <h2 class="text-base font-semibold text-gray-900">配信の確認</h2>
+        </div>
+        <div class="px-6 py-6">
+            <!-- 配信内容のサマリー -->
+            <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 mb-6">
+                <dl class="space-y-3 text-sm">
+                    <div>
+                        <dt class="text-gray-500">キャンペーン名</dt>
+                        <dd class="font-medium text-gray-900">{{ campaign.name }}</dd>
+                    </div>
+                    <div>
+                        <dt class="text-gray-500">件名</dt>
+                        <dd class="font-medium text-gray-900">{{ campaign.subject }}</dd>
+                    </div>
+                    <div>
+                        <dt class="text-gray-500">配信対象</dt>
+                        <dd class="font-medium text-gray-900">
+                            {{ target_count }} 件のコンタクト
+                            {% if campaign.target_tags.exists %}
+                            <span class="text-gray-500 text-xs">
+                                （タグ: {% for tag in campaign.target_tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}）
+                            </span>
+                            {% else %}
+                            <span class="text-gray-500 text-xs">（全コンタクト）</span>
+                            {% endif %}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="flex items-start gap-3 mb-6">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-900">本当に配信しますか？</p>
+                    <p class="text-sm text-gray-500 mt-1">
+                        {{ target_count }} 件のコンタクトにメールが送信されます。送信後は取り消しできません。
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-green-600 hover:bg-green-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                        配信を実行する
+                    </button>
+                </form>
+                <a href="{% url 'emails:campaign_edit' pk=campaign.pk %}"
+                   class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                    キャンセル
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

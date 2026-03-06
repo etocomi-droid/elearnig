@@ -1,0 +1,59 @@
+{% extends "base_admin.html" %}
+
+{% block title %}{% if is_create %}ファネル作成{% else %}ファネル編集{% endif %}{% endblock %}
+{% block page_title %}{% if is_create %}新規ファネル作成{% else %}ファネル編集{% endif %}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <!-- パンくず -->
+    <nav class="mb-6 text-sm">
+        <a href="{% url 'funnels:funnel_list' %}" class="text-blue-600 hover:text-blue-800">ファネル一覧</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <span class="text-gray-600">{% if is_create %}新規作成{% else %}編集{% endif %}</span>
+    </nav>
+
+    <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="space-y-5">
+                <!-- ファネル名 -->
+                <div>
+                    <label for="id_name" class="block text-sm font-medium text-gray-700 mb-1">ファネル名</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- スラッグ -->
+                <div>
+                    <label for="id_slug" class="block text-sm font-medium text-gray-700 mb-1">スラッグ（URL用）</label>
+                    {{ form.slug }}
+                    <p class="mt-1 text-xs text-gray-400">公開URLに使用されます: /p/<strong>スラッグ</strong>/ページ/</p>
+                    {% if form.slug.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.slug.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 公開設定 -->
+                <div class="flex items-center gap-3">
+                    {{ form.is_published }}
+                    <label for="id_is_published" class="text-sm font-medium text-gray-700">公開する</label>
+                </div>
+            </div>
+
+            <div class="mt-8 flex items-center gap-3">
+                <button type="submit"
+                        class="px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                    {% if is_create %}作成{% else %}更新{% endif %}
+                </button>
+                <a href="{% url 'funnels:funnel_list' %}"
+                   class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    キャンセル
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

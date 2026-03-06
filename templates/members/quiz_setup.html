@@ -1,0 +1,225 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}テスト設定 - {{ lesson.title }}{% endblock %}
+{% block page_title %}テスト設定 - {{ lesson.title }}{% endblock %}
+
+{% block content %}
+<!-- パンくずリスト -->
+<nav class="mb-6 flex items-center gap-2 text-sm text-gray-500">
+    <a href="{% url 'members:member_site_list' %}" class="hover:text-blue-600 transition-colors">会員サイト</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <a href="{% url 'members:site_edit' pk=site.pk %}" class="hover:text-blue-600 transition-colors">{{ site.name }}</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <a href="{% url 'members:course_edit' pk=course.pk %}" class="hover:text-blue-600 transition-colors">{{ course.title }}</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <span class="text-gray-900 font-medium">{{ lesson.title }} - テスト設定</span>
+</nav>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- 左カラム: テスト設定 -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h2 class="text-base font-semibold text-gray-900">テスト設定</h2>
+            </div>
+            <form method="post" class="p-6 space-y-5">
+                {% csrf_token %}
+
+                <div>
+                    <label for="id_description" class="block text-sm font-medium text-gray-700 mb-1">テスト説明</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.description.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_passing_score" class="block text-sm font-medium text-gray-700 mb-1">合格ライン(%)</label>
+                    {{ form.passing_score }}
+                    {% if form.passing_score.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.passing_score.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_time_limit_minutes" class="block text-sm font-medium text-gray-700 mb-1">制限時間(分)</label>
+                    {{ form.time_limit_minutes }}
+                    <p class="mt-1 text-xs text-gray-400">空欄の場合は制限なし</p>
+                    {% if form.time_limit_minutes.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.time_limit_minutes.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_max_attempts" class="block text-sm font-medium text-gray-700 mb-1">最大受験回数</label>
+                    {{ form.max_attempts }}
+                    <p class="mt-1 text-xs text-gray-400">0 = 無制限</p>
+                    {% if form.max_attempts.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.max_attempts.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center gap-2">
+                        {{ form.shuffle_questions }}
+                        <label for="id_shuffle_questions" class="text-sm font-medium text-gray-700">問題順ランダム</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        {{ form.shuffle_choices }}
+                        <label for="id_shuffle_choices" class="text-sm font-medium text-gray-700">選択肢ランダム</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        {{ form.is_gate }}
+                        <label for="id_is_gate" class="text-sm font-medium text-gray-700">ゲート（合格しないと次へ進めない）</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        {{ form.is_final_test }}
+                        <label for="id_is_final_test" class="text-sm font-medium text-gray-700">最終テスト（合格で証書発行）</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        {{ form.show_correct_answers }}
+                        <label for="id_show_correct_answers" class="text-sm font-medium text-gray-700">正解を表示</label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit"
+                            class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-orange-600 text-white text-sm font-medium rounded-lg hover:bg-orange-700 transition-colors">
+                        設定を保存
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 受験結果リンク -->
+        <div class="mt-4">
+            <a href="{% url 'members:quiz_attempts' pk=quiz.pk %}"
+               class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                受験結果を見る
+            </a>
+        </div>
+
+        <!-- テスト削除 -->
+        <div class="mt-3">
+            <button type="button" onclick="document.getElementById('quiz-delete-modal').classList.remove('hidden')"
+                    class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-white text-red-600 text-sm font-medium rounded-lg border border-red-200 hover:bg-red-50 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+                テストを削除
+            </button>
+        </div>
+    </div>
+
+    <!-- 右カラム: 問題一覧 -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                <h2 class="text-base font-semibold text-gray-900">問題一覧</h2>
+                <a href="{% url 'members:question_create' pk=quiz.pk %}"
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-600 text-white text-sm font-medium rounded-lg hover:bg-orange-700 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    問題追加
+                </a>
+            </div>
+
+            {% if questions %}
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-100">
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-12">#</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">問題文</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-24">タイプ</th>
+                            <th class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider w-16">配点</th>
+                            <th class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider w-20">選択肢</th>
+                            <th class="px-6 py-3 w-28"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        {% for question in questions %}
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-3 text-sm text-gray-400">{{ question.sort_order }}</td>
+                            <td class="px-6 py-3">
+                                <a href="{% url 'members:question_edit' pk=question.pk %}"
+                                   class="text-sm font-medium text-gray-900 hover:text-orange-600 transition-colors">
+                                    {{ question.text|truncatechars:60 }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-3">
+                                {% if question.question_type == 'true_false' %}
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">○×式</span>
+                                {% elif question.question_type == 'single' %}
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">択一式</span>
+                                {% elif question.question_type == 'multiple' %}
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700">複数選択</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-3 text-center text-sm text-gray-600">{{ question.points }}</td>
+                            <td class="px-6 py-3 text-center text-sm text-gray-500">{{ question.choices.count }}</td>
+                            <td class="px-6 py-3 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <a href="{% url 'members:question_edit' pk=question.pk %}"
+                                       class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">編集</a>
+                                    <form method="post" action="{% url 'members:question_delete' pk=question.pk %}" class="inline"
+                                          onsubmit="return confirm('この問題を削除しますか？');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="text-sm text-red-600 hover:text-red-800 font-medium transition-colors">削除</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="p-12 text-center">
+                <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                </div>
+                <p class="text-sm text-gray-500 mb-4">問題がまだありません</p>
+                <a href="{% url 'members:question_create' pk=quiz.pk %}"
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-600 text-white text-sm font-medium rounded-lg hover:bg-orange-700 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    最初の問題を作成
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- テスト削除確認モーダル -->
+<div id="quiz-delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/50" onclick="document.getElementById('quiz-delete-modal').classList.add('hidden')"></div>
+    <div class="relative bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">テストを削除</h3>
+        <p class="text-sm text-gray-600 mb-6">
+            「{{ lesson.title }}」のテストを削除しますか？問題・選択肢・受験記録がすべて削除されます。この操作は取り消せません。
+        </p>
+        <div class="flex gap-3 justify-end">
+            <button type="button" onclick="document.getElementById('quiz-delete-modal').classList.add('hidden')"
+                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                キャンセル
+            </button>
+            <form method="post" action="{% url 'members:quiz_delete' pk=lesson.pk %}">
+                {% csrf_token %}
+                <button type="submit"
+                        class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
+                    削除する
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

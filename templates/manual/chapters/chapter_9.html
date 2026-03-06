@@ -1,0 +1,127 @@
+<p>ここでは、システムの全機能を使って<strong>「無料セミナーに申し込んでもらい、フォローメールを送り、有料講座を販売し、動画コンテンツを届ける」</strong>という一連の流れを作ってみましょう。</p>
+
+<h2>ステップ1: 会員サイトとコースを作る（教室を準備する）</h2>
+
+<ol>
+    <li>左メニュー → <strong>「会員サイト」</strong> → <strong>「新規サイト作成」</strong></li>
+    <li>サイト名: <strong>マイオンラインスクール</strong>、スラッグ: <strong>my-school</strong></li>
+    <li><strong>「コース追加」</strong> → コース名: <strong>動画講座・入門編</strong></li>
+    <li>レッスンを3つ追加:
+        <ul>
+            <li>第1回「はじめに」（テキスト、プレビュー=オン）</li>
+            <li>第2回「基礎知識」（動画）</li>
+            <li>第3回「実践」（動画）</li>
+        </ul>
+    </li>
+    <li>すべてのレッスンを「公開する」にチェック</li>
+</ol>
+
+<h2>ステップ2: 商品を作る（売り物を準備する）</h2>
+
+<ol>
+    <li>左メニュー → <strong>「商品管理」</strong> → <strong>「新規商品作成」</strong></li>
+    <li>商品名: <strong>動画講座・入門編</strong></li>
+    <li>価格: <strong>9800</strong>（円）</li>
+    <li>商品タイプ: <strong>単品</strong></li>
+    <li>購入後の自動処理:
+        <ul>
+            <li>コースアクセス権: <strong>動画講座・入門編</strong>（ステップ1で作ったコース）</li>
+            <li>タグを追加: <strong>購入済み</strong></li>
+        </ul>
+    </li>
+    <li><strong>「作成」</strong> を押す</li>
+</ol>
+
+<h2>ステップ3: メールのシナリオを作る（自動メールを準備する）</h2>
+
+<ol>
+    <li>左メニュー → <strong>「メール配信」</strong> → <strong>「新規シナリオ作成」</strong></li>
+    <li>シナリオ名: <strong>無料セミナーフォロー</strong></li>
+    <li>ステップを追加:</li>
+</ol>
+
+<table>
+    <thead>
+        <tr><th>ステップ</th><th>遅延</th><th>件名</th><th>内容</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>1</td><td>0日後</td><td>お申込みありがとうございます</td><td>セミナー申込のお礼</td></tr>
+        <tr><td>2</td><td>1日後</td><td>セミナーの準備をしましょう</td><td>予習のご案内</td></tr>
+        <tr><td>3</td><td>3日後</td><td>セミナーはいかがでしたか？</td><td>感想のお願い</td></tr>
+        <tr><td>4</td><td>5日後</td><td>特別なご案内</td><td>有料講座の紹介</td></tr>
+    </tbody>
+</table>
+
+<h2>ステップ4: ファネル（集客ページ）を作る（チラシを作る）</h2>
+
+<ol>
+    <li>左メニュー → <strong>「ファネル」</strong> → <strong>「新規ファネル作成」</strong></li>
+    <li>ファネル名: <strong>無料セミナー</strong>、スラッグ: <strong>free-seminar</strong></li>
+</ol>
+
+<h3>ページ1: 申し込みページ</h3>
+
+<ol>
+    <li><strong>「ページ追加」</strong> → タイトル: <strong>セミナー紹介</strong>、種類: <strong>ランディングページ</strong></li>
+    <li>以下のセクションを追加:
+        <ul>
+            <li><strong>ヒーロー</strong>: 見出し「無料オンラインセミナー開催！」</li>
+            <li><strong>テキスト</strong>: セミナーの紹介文</li>
+            <li><strong>お客様の声</strong>: 過去の参加者の感想</li>
+            <li><strong>フォーム</strong>: メールアドレス入力欄
+                <ul>
+                    <li>シナリオID:（ステップ3で作ったシナリオのID）</li>
+                    <li>リダイレクトURL: /p/free-seminar/thanks/</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ol>
+
+<h3>ページ2: お礼ページ</h3>
+
+<ol>
+    <li><strong>「ページ追加」</strong> → タイトル: <strong>お申込み完了</strong>、種類: <strong>サンクスページ</strong>、スラッグ: <strong>thanks</strong></li>
+    <li>以下のセクションを追加:
+        <ul>
+            <li><strong>ヒーロー</strong>: 見出し「お申込みありがとうございます！」</li>
+            <li><strong>テキスト</strong>: 次のステップの案内</li>
+        </ul>
+    </li>
+</ol>
+
+<h3>公開する</h3>
+
+<p>ファネル編集画面で <strong>「公開する」</strong> にチェック → <strong>「更新」</strong></p>
+
+<h2>ステップ5: 動作を確認する</h2>
+
+<ol>
+    <li>公開URL（例: /p/free-seminar/intro/）にアクセス</li>
+    <li>セミナー紹介ページが表示される</li>
+    <li>フォームにメールアドレスを入力 → 送信</li>
+    <li>サンクスページが表示される</li>
+    <li>コンタクト一覧に新しいお客さまが登録されている</li>
+    <li>シナリオのメールが自動で送られ始める（コンソールに表示）</li>
+</ol>
+
+<h2>完成した仕組みのイメージ</h2>
+
+<div class="codeblock">お客さまが紹介ページを見る
+  ↓
+フォームにメール入力して送信
+  ↓
+コンタクト（顧客台帳）に自動登録
+  ↓
+シナリオメールが自動スタート
+  ↓  ↓  ↓  ↓
+  0日後: お礼メール
+  1日後: 準備のご案内
+  3日後: 感想のお願い
+  5日後: 有料講座の紹介メール ← ここに購入リンクを入れる
+  ↓
+お客さまが有料講座を購入（Stripe決済）
+  ↓
+自動でコースのアクセス権が付与される
+  ↓
+お客さまが会員サイトで動画レッスンを受講できる</div>

@@ -1,0 +1,167 @@
+{% extends "base_admin.html" %}
+
+{% block title %}コンタクト一覧{% endblock %}
+{% block page_title %}コンタクト{% endblock %}
+
+{% block content %}
+<!-- ヘッダー: 検索・フィルター -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+    <div class="px-6 py-4 border-b border-gray-100">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-base font-semibold text-gray-900">コンタクト一覧</h2>
+                <p class="text-sm text-gray-500 mt-0.5">全 {{ total_count }} 件</p>
+            </div>
+        </div>
+    </div>
+    <div class="px-6 py-4">
+        <form method="get" class="flex items-center gap-4">
+            <!-- 検索 -->
+            <div class="flex-1 relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input type="text"
+                       name="q"
+                       value="{{ search_query }}"
+                       placeholder="名前またはメールアドレスで検索..."
+                       class="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm
+                              focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                              placeholder-gray-400 transition-colors">
+            </div>
+
+            <!-- タグフィルタ -->
+            <select name="tag"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white
+                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                <option value="">全てのタグ</option>
+                {% for tag in tags %}
+                <option value="{{ tag.id }}" {% if selected_tag == tag.id|stringformat:"d" %}selected{% endif %}>
+                    {{ tag.name }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <!-- 検索ボタン -->
+            <button type="submit"
+                    class="px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600
+                           hover:bg-blue-700 transition-colors">
+                検索
+            </button>
+
+            {% if search_query or selected_tag %}
+            <a href="{% url 'contacts:contact_list' %}"
+               class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-100
+                      hover:bg-gray-200 transition-colors">
+                クリア
+            </a>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<!-- テーブル -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    {% if contacts %}
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-gray-100">
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">名前</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">メールアドレス</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">タグ</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">登録日</th>
+                <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+            {% for contact in contacts %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4">
+                    <a href="{% url 'contacts:contact_detail' contact.pk %}"
+                       class="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors">
+                        {{ contact.name|default:"-" }}
+                    </a>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-sm text-gray-600">{{ contact.email }}</span>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex flex-wrap gap-1.5">
+                        {% for ct in contact.contact_tags.all %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium text-white"
+                              style="background-color: {{ ct.tag.color }};">
+                            {{ ct.tag.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-sm text-gray-500">{{ contact.created_at|date:"Y/m/d H:i" }}</span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="{% url 'contacts:contact_detail' contact.pk %}"
+                       class="text-sm text-blue-600 hover:text-blue-800 transition-colors">
+                        詳細
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- ページネーション -->
+    {% if is_paginated %}
+    <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+        <p class="text-sm text-gray-500">
+            {{ page_obj.paginator.count }} 件中 {{ page_obj.start_index }}〜{{ page_obj.end_index }} 件を表示
+        </p>
+        <nav class="flex items-center gap-1">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_tag %}&tag={{ selected_tag }}{% endif %}"
+               class="px-3 py-1.5 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition-colors">
+                前へ
+            </a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <span class="px-3 py-1.5 rounded-lg text-sm font-medium text-white bg-blue-600">{{ num }}</span>
+                {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+                <a href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_tag %}&tag={{ selected_tag }}{% endif %}"
+                   class="px-3 py-1.5 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition-colors">
+                    {{ num }}
+                </a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_tag %}&tag={{ selected_tag }}{% endif %}"
+               class="px-3 py-1.5 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition-colors">
+                次へ
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <!-- 空状態 -->
+    <div class="text-center py-16">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-100 mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        </div>
+        {% if search_query or selected_tag %}
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">検索結果がありません</h3>
+        <p class="text-sm text-gray-500">検索条件を変更してお試しください</p>
+        {% else %}
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">コンタクトがありません</h3>
+        <p class="text-sm text-gray-500">ファネルからの登録やCSVインポートでコンタクトを追加できます</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

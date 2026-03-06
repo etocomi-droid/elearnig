@@ -1,0 +1,163 @@
+{% extends "base_admin.html" %}
+
+{% block title %}{% if is_new %}商品作成{% else %}商品編集{% endif %}{% endblock %}
+{% block page_title %}{% if is_new %}商品作成{% else %}商品編集: {{ product.name }}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <!-- 戻るリンク -->
+    <div class="mb-6">
+        <a href="{% url 'products:product_list' %}"
+           class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            商品一覧に戻る
+        </a>
+    </div>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- 基本情報 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h2 class="text-base font-semibold text-gray-900">基本情報</h2>
+            </div>
+            <div class="px-6 py-6 space-y-5">
+                <!-- 商品名 -->
+                <div>
+                    <label for="id_name" class="block text-sm font-medium text-gray-700 mb-1">商品名 <span class="text-red-500">*</span></label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 説明 -->
+                <div>
+                    <label for="id_description" class="block text-sm font-medium text-gray-700 mb-1">説明</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.description.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 商品タイプ -->
+                <div>
+                    <label for="id_product_type" class="block text-sm font-medium text-gray-700 mb-1">商品タイプ <span class="text-red-500">*</span></label>
+                    {{ form.product_type }}
+                    {% if form.product_type.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.product_type.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 価格 -->
+                <div>
+                    <label for="id_price" class="block text-sm font-medium text-gray-700 mb-1">価格(円) <span class="text-red-500">*</span></label>
+                    {{ form.price }}
+                    {% if form.price.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.price.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 課金間隔 (subscription のみ) -->
+                <div id="billing_interval_field">
+                    <label for="id_billing_interval" class="block text-sm font-medium text-gray-700 mb-1">課金間隔</label>
+                    {{ form.billing_interval }}
+                    <p class="mt-1 text-xs text-gray-500">サブスクリプション商品の場合に設定してください</p>
+                    {% if form.billing_interval.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.billing_interval.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 有効/無効 -->
+                <div class="flex items-center gap-3">
+                    {{ form.is_active }}
+                    <label for="id_is_active" class="text-sm font-medium text-gray-700">有効にする</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 購入後アクション -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h2 class="text-base font-semibold text-gray-900">購入後アクション</h2>
+                <p class="text-sm text-gray-500 mt-0.5">商品が購入された際に自動実行するアクションを設定します</p>
+            </div>
+            <div class="px-6 py-6 space-y-5">
+                <!-- コースアクセス権付与 -->
+                <div>
+                    <label for="id_grant_course" class="block text-sm font-medium text-gray-700 mb-1">
+                        アクセス権付与コース
+                    </label>
+                    {{ form.grant_course }}
+                    <p class="mt-1 text-xs text-gray-500">購入者に指定コースへのアクセス権を付与します</p>
+                    {% if form.grant_course.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.grant_course.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- タグ付与 -->
+                <div>
+                    <label for="id_add_tag" class="block text-sm font-medium text-gray-700 mb-1">
+                        タグ付与
+                    </label>
+                    {{ form.add_tag }}
+                    <p class="mt-1 text-xs text-gray-500">購入者に指定タグを付与します</p>
+                    {% if form.add_tag.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.add_tag.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- シナリオ開始 -->
+                <div>
+                    <label for="id_start_scenario" class="block text-sm font-medium text-gray-700 mb-1">
+                        シナリオ開始
+                    </label>
+                    {{ form.start_scenario }}
+                    <p class="mt-1 text-xs text-gray-500">購入者を指定シナリオに登録します</p>
+                    {% if form.start_scenario.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.start_scenario.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- 送信ボタン -->
+        <div class="flex items-center justify-between">
+            <a href="{% url 'products:product_list' %}"
+               class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 bg-gray-100
+                      hover:bg-gray-200 transition-colors">
+                キャンセル
+            </a>
+            <button type="submit"
+                    class="px-6 py-2 rounded-lg text-sm font-medium text-white bg-blue-600
+                           hover:bg-blue-700 transition-colors">
+                {% if is_new %}作成する{% else %}更新する{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // product_type に応じて billing_interval の表示/非表示を制御
+    document.addEventListener('DOMContentLoaded', function() {
+        const productTypeSelect = document.getElementById('id_product_type');
+        const billingIntervalField = document.getElementById('billing_interval_field');
+
+        function toggleBillingInterval() {
+            if (productTypeSelect.value === 'subscription') {
+                billingIntervalField.style.display = 'block';
+            } else {
+                billingIntervalField.style.display = 'none';
+            }
+        }
+
+        productTypeSelect.addEventListener('change', toggleBillingInterval);
+        toggleBillingInterval();
+    });
+</script>
+{% endblock %}

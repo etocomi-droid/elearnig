@@ -1,0 +1,76 @@
+{% extends "base_admin.html" %}
+
+{% block page_title %}問い合わせ詳細{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <a href="{% url 'accounts:inquiry_list' %}" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        問い合わせ一覧に戻る
+    </a>
+
+    <!-- 問い合わせ情報 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="flex items-start justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-900">{{ inquiry.subject }}</h2>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                {% if inquiry.status == 'open' %}bg-red-100 text-red-800
+                {% elif inquiry.status == 'replied' %}bg-green-100 text-green-800
+                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                {{ inquiry.get_status_display }}
+            </span>
+        </div>
+        <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+            <div>
+                <span class="text-gray-500">送信者:</span>
+                <span class="text-gray-900 ml-1">{{ inquiry.contact.name|default:"-" }} ({{ inquiry.contact.email }})</span>
+            </div>
+            <div>
+                <span class="text-gray-500">サイト:</span>
+                <span class="text-gray-900 ml-1">{{ inquiry.site.name }}</span>
+            </div>
+            <div>
+                <span class="text-gray-500">受信日時:</span>
+                <span class="text-gray-900 ml-1">{{ inquiry.created_at|date:"Y/m/d H:i" }}</span>
+            </div>
+        </div>
+
+        <!-- 問い合わせ内容 -->
+        <div class="bg-gray-50 rounded-lg p-4 mt-4">
+            <p class="text-sm text-gray-800 whitespace-pre-wrap">{{ inquiry.body }}</p>
+        </div>
+    </div>
+
+    <!-- 管理者返信 -->
+    {% if inquiry.admin_reply %}
+    <div class="bg-blue-50 rounded-2xl border border-blue-200 p-6 mb-6">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-sm font-semibold text-blue-800">返信済み</span>
+            {% if inquiry.replied_at %}
+            <span class="text-xs text-blue-600">{{ inquiry.replied_at|date:"Y/m/d H:i" }}</span>
+            {% endif %}
+        </div>
+        <p class="text-sm text-blue-900 whitespace-pre-wrap">{{ inquiry.admin_reply }}</p>
+    </div>
+    {% endif %}
+
+    <!-- 返信フォーム -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+        <h3 class="text-sm font-semibold text-gray-900 mb-3">
+            {% if inquiry.admin_reply %}返信を更新{% else %}返信する{% endif %}
+        </h3>
+        <form method="post" action="{% url 'accounts:inquiry_reply' inquiry.pk %}" class="space-y-3">
+            {% csrf_token %}
+            <textarea name="admin_reply" rows="5" required
+                      class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="返信内容を入力...">{{ inquiry.admin_reply }}</textarea>
+            <button type="submit"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                {% if inquiry.admin_reply %}返信を更新{% else %}返信を送信{% endif %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

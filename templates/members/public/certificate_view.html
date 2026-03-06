@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ certificate.title }} - {{ contact.name|default:contact.email }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+            background-color: #f5f0eb;
+            color: #2c1810;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ===== Print Button ===== */
+        .print-controls {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .print-btn {
+            font-family: 'Noto Serif JP', serif;
+            background: linear-gradient(135deg, #b8860b, #daa520, #b8860b);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .print-btn:hover {
+            box-shadow: 0 4px 16px rgba(184, 134, 11, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .print-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ===== Certificate Outer Frame ===== */
+        .certificate-wrapper {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 1.414 / 1;
+            position: relative;
+            background: #fffef8;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                0 10px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(184, 134, 11, 0.1);
+        }
+
+        /* ===== Gold Border System ===== */
+        .certificate-border-outer {
+            position: absolute;
+            inset: 8px;
+            border: 3px solid #b8860b;
+            pointer-events: none;
+        }
+
+        .certificate-border-inner {
+            position: absolute;
+            inset: 16px;
+            border: 1px solid #daa520;
+            pointer-events: none;
+        }
+
+        .certificate-border-decorative {
+            position: absolute;
+            inset: 20px;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            pointer-events: none;
+        }
+
+        /* ===== Corner Ornaments ===== */
+        .corner-ornament {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+        }
+
+        .corner-ornament::before,
+        .corner-ornament::after {
+            content: '';
+            position: absolute;
+            background: #b8860b;
+        }
+
+        /* Top-left */
+        .corner-tl {
+            top: 24px;
+            left: 24px;
+        }
+        .corner-tl::before {
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+        }
+        .corner-tl::after {
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 40px;
+        }
+
+        /* Top-right */
+        .corner-tr {
+            top: 24px;
+            right: 24px;
+        }
+        .corner-tr::before {
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+        }
+        .corner-tr::after {
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 40px;
+        }
+
+        /* Bottom-left */
+        .corner-bl {
+            bottom: 24px;
+            left: 24px;
+        }
+        .corner-bl::before {
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+        }
+        .corner-bl::after {
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            height: 40px;
+        }
+
+        /* Bottom-right */
+        .corner-br {
+            bottom: 24px;
+            right: 24px;
+        }
+        .corner-br::before {
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+        }
+        .corner-br::after {
+            bottom: 0;
+            right: 0;
+            width: 2px;
+            height: 40px;
+        }
+
+        /* ===== Corner Filigree (inner decorative curls) ===== */
+        .corner-ornament .filigree {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #daa520;
+            border-radius: 50%;
+        }
+
+        .corner-tl .filigree {
+            top: 6px;
+            left: 6px;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        .corner-tr .filigree {
+            top: 6px;
+            right: 6px;
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        .corner-bl .filigree {
+            bottom: 6px;
+            left: 6px;
+            border-right-color: transparent;
+            border-top-color: transparent;
+        }
+
+        .corner-br .filigree {
+            bottom: 6px;
+            right: 6px;
+            border-left-color: transparent;
+            border-top-color: transparent;
+        }
+
+        /* ===== Background Image ===== */
+        .certificate-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* ===== Certificate Content ===== */
+        .certificate-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 60px;
+            text-align: center;
+        }
+
+        /* ===== Decorative Top Line ===== */
+        .decorative-line {
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b8860b, transparent);
+            margin-bottom: 1.2rem;
+        }
+
+        /* ===== Certificate Title ===== */
+        .certificate-title {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #2c1810;
+            letter-spacing: 0.5em;
+            margin-bottom: 0.3rem;
+            text-indent: 0.5em;
+        }
+
+        .decorative-line-below-title {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #b8860b, #daa520, #b8860b, transparent);
+            margin-bottom: 1.8rem;
+        }
+
+        /* ===== Preamble ===== */
+        .certificate-preamble {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #5a4a3a;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.6rem;
+        }
+
+        /* ===== Contact Name ===== */
+        .contact-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a0f08;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.3rem;
+            text-indent: 0.3em;
+            border-bottom: 2px solid #b8860b;
+            padding-bottom: 0.3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .contact-honorific {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #5a4a3a;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== Course Title ===== */
+        .course-section {
+            margin-bottom: 1rem;
+        }
+
+        .course-label {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #8a7a6a;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.3rem;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c1810;
+            letter-spacing: 0.15em;
+        }
+
+        /* ===== Description ===== */
+        .certificate-description {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #4a3a2a;
+            line-height: 1.9;
+            letter-spacing: 0.08em;
+            max-width: 520px;
+            margin-bottom: 1.8rem;
+        }
+
+        /* ===== Issue Date ===== */
+        .issue-date {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #5a4a3a;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ===== Issuer ===== */
+        .issuer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .issuer-label {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #8a7a6a;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.2rem;
+        }
+
+        .issuer-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2c1810;
+            letter-spacing: 0.25em;
+            text-indent: 0.25em;
+        }
+
+        /* ===== Seal / Stamp Effect ===== */
+        .seal {
+            width: 56px;
+            height: 56px;
+            border: 2px solid #c0392b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+            color: #c0392b;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            opacity: 0.8;
+        }
+
+        /* ===== Certificate Number ===== */
+        .certificate-number {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: #a09080;
+            letter-spacing: 0.1em;
+        }
+
+        /* ===== Print Styles ===== */
+        @media print {
+            .print-controls {
+                display: none !important;
+            }
+
+            body {
+                background-color: #fff;
+                padding: 0;
+                margin: 0;
+                display: block;
+            }
+
+            .certificate-wrapper {
+                max-width: none;
+                width: 100%;
+                height: 100vh;
+                box-shadow: none;
+                margin: 0;
+                aspect-ratio: auto;
+            }
+
+            .certificate-border-outer {
+                border-color: #b8860b !important;
+            }
+
+            .certificate-border-inner {
+                border-color: #daa520 !important;
+            }
+
+            .corner-ornament::before,
+            .corner-ornament::after {
+                background: #b8860b !important;
+            }
+
+            .corner-ornament .filigree {
+                border-color: #daa520 !important;
+            }
+
+            .corner-tl .filigree {
+                border-right-color: transparent !important;
+                border-bottom-color: transparent !important;
+            }
+
+            .corner-tr .filigree {
+                border-left-color: transparent !important;
+                border-bottom-color: transparent !important;
+            }
+
+            .corner-bl .filigree {
+                border-right-color: transparent !important;
+                border-top-color: transparent !important;
+            }
+
+            .corner-br .filigree {
+                border-left-color: transparent !important;
+                border-top-color: transparent !important;
+            }
+
+            .seal {
+                border-color: #c0392b !important;
+                color: #c0392b !important;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+
+        /* ===== Responsive Adjustments ===== */
+        @media screen and (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .certificate-content {
+                padding: 35px 30px;
+            }
+
+            .certificate-title {
+                font-size: 1.6rem;
+                letter-spacing: 0.3em;
+            }
+
+            .contact-name {
+                font-size: 1.4rem;
+            }
+
+            .course-title {
+                font-size: 1rem;
+            }
+
+            .certificate-description {
+                font-size: 0.8rem;
+            }
+
+            .corner-ornament {
+                width: 40px;
+                height: 40px;
+            }
+
+            .corner-tl::before, .corner-tr::before,
+            .corner-bl::before, .corner-br::before {
+                width: 25px;
+            }
+
+            .corner-tl::after, .corner-tr::after,
+            .corner-bl::after, .corner-br::after {
+                height: 25px;
+            }
+
+            .certificate-number {
+                right: 30px;
+                bottom: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Print Button -->
+    <div class="print-controls">
+        <button class="print-btn" onclick="window.print()">
+            印刷する
+        </button>
+    </div>
+
+    <!-- Certificate -->
+    <div class="certificate-wrapper">
+
+        <!-- Background image (if set) -->
+        {% if certificate.template_image %}
+        <div class="certificate-bg" style="background-image: url('{{ certificate.template_image.url }}');"></div>
+        {% endif %}
+
+        <!-- Border system -->
+        <div class="certificate-border-outer"></div>
+        <div class="certificate-border-inner"></div>
+        <div class="certificate-border-decorative"></div>
+
+        <!-- Corner ornaments -->
+        <div class="corner-ornament corner-tl"><div class="filigree"></div></div>
+        <div class="corner-ornament corner-tr"><div class="filigree"></div></div>
+        <div class="corner-ornament corner-bl"><div class="filigree"></div></div>
+        <div class="corner-ornament corner-br"><div class="filigree"></div></div>
+
+        <!-- Content -->
+        <div class="certificate-content">
+
+            <div class="decorative-line"></div>
+
+            <h1 class="certificate-title">{{ certificate.title }}</h1>
+
+            <div class="decorative-line-below-title"></div>
+
+            <p class="certificate-preamble">上記の者は</p>
+
+            <p class="contact-name">{{ contact.name|default:contact.email }}</p>
+            <p class="contact-honorific">殿</p>
+
+            <div class="course-section">
+                <p class="course-label">修了コース</p>
+                <p class="course-title">{{ course.title }}</p>
+            </div>
+
+            {% if certificate.description %}
+            <p class="certificate-description">{{ certificate.description }}</p>
+            {% endif %}
+
+            <p class="issue-date">{{ issued.issued_at|date:"Y年n月j日" }}</p>
+
+            <div class="issuer-section">
+                <span class="issuer-label">発行者</span>
+                <span class="issuer-name">{{ certificate.issuer_name }}</span>
+                <div class="seal">認定</div>
+            </div>
+
+        </div>
+
+        <!-- Certificate number -->
+        <div class="certificate-number">
+            証書番号: {{ issued.certificate_number }}
+        </div>
+
+    </div>
+
+</body>
+</html>

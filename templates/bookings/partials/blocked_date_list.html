@@ -1,0 +1,23 @@
+{% if blocked_dates %}
+<div class="space-y-2">
+    {% for bd in blocked_dates %}
+    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
+        <div class="flex items-center gap-3">
+            <span class="text-sm font-medium text-gray-700">{{ bd.date|date:"Y/m/d" }}</span>
+            {% if bd.reason %}
+            <span class="text-sm text-gray-500">- {{ bd.reason }}</span>
+            {% endif %}
+        </div>
+        <form hx-post="{% url 'bookings:blocked_date_delete' pk=bd.pk %}"
+              hx-target="#blocked-date-list"
+              hx-swap="innerHTML"
+              hx-confirm="このブロック日を削除しますか？">
+            {% csrf_token %}
+            <button type="submit" class="text-xs text-red-500 hover:text-red-700 font-medium transition-colors">削除</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-sm text-gray-400 text-center py-4">ブロック日が設定されていません</p>
+{% endif %}

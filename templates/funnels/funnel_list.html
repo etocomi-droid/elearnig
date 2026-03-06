@@ -1,0 +1,109 @@
+{% extends "base_admin.html" %}
+
+{% block title %}ファネル一覧{% endblock %}
+{% block page_title %}ファネル{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <p class="text-sm text-gray-500">ファネルを作成してランディングページを構築できます。</p>
+    </div>
+    <a href="{% url 'funnels:funnel_create' %}"
+       class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        新規ファネル作成
+    </a>
+</div>
+
+{% if funnels %}
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ファネル名</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ページ数</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">公開状態</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">作成日</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">公開URL</th>
+                <th class="px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">操作</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+            {% for funnel in funnels %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4">
+                    <a href="{% url 'funnels:funnel_edit' pk=funnel.pk %}" class="text-sm font-medium text-gray-900 hover:text-blue-600">
+                        {{ funnel.name }}
+                    </a>
+                    <p class="text-xs text-gray-400 mt-0.5">{{ funnel.slug }}</p>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-sm text-gray-600">{{ funnel.pages.count }}ページ</span>
+                </td>
+                <td class="px-6 py-4">
+                    {% if funnel.is_published %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        公開中
+                    </span>
+                    {% else %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                        非公開
+                    </span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    {{ funnel.created_at|date:"Y/m/d" }}
+                </td>
+                <td class="px-6 py-4">
+                    {% if funnel.is_published and funnel.pages.count > 0 %}
+                        {% with first_page=funnel.pages.first %}
+                        {% if first_page %}
+                        <a href="{% url 'funnels_public:public_page' funnel_slug=funnel.slug page_slug=first_page.slug %}"
+                           target="_blank"
+                           class="text-xs text-blue-600 hover:text-blue-800 underline">
+                            /p/{{ funnel.slug }}/{{ first_page.slug }}/
+                        </a>
+                        {% endif %}
+                        {% endwith %}
+                    {% else %}
+                    <span class="text-xs text-gray-400">-</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <div class="flex items-center justify-end gap-2">
+                        <a href="{% url 'funnels:funnel_edit' pk=funnel.pk %}"
+                           class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                            編集
+                        </a>
+                        <a href="{% url 'funnels:funnel_delete' pk=funnel.pk %}"
+                           class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-600 bg-white border border-red-300 rounded-md hover:bg-red-50">
+                            削除
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="bg-white rounded-xl border border-gray-200 p-12 text-center">
+    <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+    </svg>
+    <h3 class="mt-4 text-sm font-medium text-gray-900">ファネルがありません</h3>
+    <p class="mt-1 text-sm text-gray-500">最初のファネルを作成して、ランディングページを構築しましょう。</p>
+    <div class="mt-6">
+        <a href="{% url 'funnels:funnel_create' %}"
+           class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            新規ファネル作成
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

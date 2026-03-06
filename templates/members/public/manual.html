@@ -1,0 +1,276 @@
+{% extends 'base_member.html' %}
+
+{% block title %}受講生マニュアル - {{ site.name }}{% endblock %}
+{% block site_name %}{{ site.name }}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .manual-content h2 { font-size: 1.25rem; font-weight: 700; color: #111827; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #E5E7EB; }
+    .manual-content h3 { font-size: 1.05rem; font-weight: 600; color: #1F2937; margin-top: 1.75rem; margin-bottom: 0.75rem; }
+    .manual-content p { color: #374151; font-size: 0.875rem; line-height: 1.75; margin-bottom: 0.75rem; }
+    .manual-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    .manual-content ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    .manual-content li { color: #374151; font-size: 0.875rem; line-height: 1.75; margin-bottom: 0.25rem; }
+    .manual-content .note { border-left: 4px solid #3B82F6; background: #EFF6FF; padding: 0.75rem 1rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1rem; font-size: 0.875rem; color: #1E40AF; }
+    .manual-content .warning { border-left: 4px solid #F59E0B; background: #FFFBEB; padding: 0.75rem 1rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1rem; font-size: 0.875rem; color: #92400E; }
+    .manual-content strong { color: #111827; }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ナビゲーション -->
+<div class="mb-6 bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-3 flex items-center justify-between">
+    <nav class="flex items-center gap-4">
+        <a href="{% url 'members_public:member_home' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/>
+            </svg>
+            マイコース
+        </a>
+        <a href="{% url 'members_public:member_profile' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            プロフィール
+        </a>
+        <a href="{% url 'members_public:member_password' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            パスワード変更
+        </a>
+        <a href="{% url 'members_public:member_inquiry' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+            </svg>
+            お問い合わせ
+        </a>
+        <a href="{% url 'members_public:member_manual' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            マニュアル
+        </a>
+    </nav>
+    <a href="{% url 'members_public:member_logout' site_slug=site.slug %}"
+       class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+        ログアウト
+    </a>
+</div>
+
+<div class="max-w-4xl mx-auto">
+    <!-- ページヘッダー -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">受講生マニュアル</h1>
+        <p class="text-sm text-gray-500">学習を始める前にお読みください。各機能の使い方を説明しています。</p>
+    </div>
+
+    <!-- 目次 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
+        <div class="px-6 py-4 border-b border-gray-100">
+            <h2 class="text-base font-semibold text-gray-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                </svg>
+                目次
+            </h2>
+        </div>
+        <nav class="px-6 py-4">
+            <ol class="space-y-2">
+                <li>
+                    <a href="#section-1" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors">1. 学習の始め方</a>
+                </li>
+                <li>
+                    <a href="#section-2" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors">2. コースの受講方法</a>
+                </li>
+                <li>
+                    <a href="#section-3" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors">3. テストと修了証</a>
+                </li>
+                <li>
+                    <a href="#section-4" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors">4. プロフィール・パスワード管理</a>
+                </li>
+                <li>
+                    <a href="#section-5" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors">5. お問い合わせ</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- マニュアル本文 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="px-8 py-6 manual-content">
+
+            <!-- セクション1: 学習の始め方 -->
+            <h2 id="section-1">1. 学習の始め方</h2>
+
+            <h3>ログイン方法</h3>
+            <p>学習を始めるには、まずログインが必要です。</p>
+            <ol>
+                <li>ログインページにアクセスします。</li>
+                <li>登録済みの<strong>メールアドレス</strong>と<strong>パスワード</strong>を入力します。</li>
+                <li>「ログイン」ボタンをクリックすると、マイコース画面（ダッシュボード）に移動します。</li>
+            </ol>
+            <div class="note">
+                <strong>ヒント：</strong>パスワードを忘れた場合は、管理者にお問い合わせください。
+            </div>
+
+            <h3>ダッシュボード画面の見方</h3>
+            <p>ログイン後に表示されるマイコース画面（ダッシュボード）では、以下の情報を確認できます。</p>
+            <ul>
+                <li><strong>全体の進捗バー</strong> - すべてのコースを合わせた学習の進捗率が表示されます。</li>
+                <li><strong>統計カード</strong> - 完了レッスン数、テスト受験数、修了証数が表示されます。</li>
+                <li><strong>最近のアクティビティ</strong> - 最近アクセスしたレッスンの一覧です。</li>
+                <li><strong>受講中のコース一覧</strong> - 登録されているコースがカード形式で表示され、各コースの進捗率を確認できます。</li>
+            </ul>
+
+            <h3>セッション管理について</h3>
+            <p>セキュリティのため、<strong>同時に1台のデバイスのみ</strong>でご利用いただけます。</p>
+            <div class="warning">
+                <strong>注意：</strong>別のデバイス（パソコン、スマートフォンなど）でログインすると、先にログインしていたデバイスのセッションは自動的に無効になります。その場合、再度ログインが必要です。
+            </div>
+
+            <p><a href="#top" class="text-xs text-indigo-500 hover:underline">目次に戻る</a></p>
+
+            <!-- セクション2: コースの受講方法 -->
+            <h2 id="section-2">2. コースの受講方法</h2>
+
+            <h3>コースを選択する</h3>
+            <p>マイコース画面に表示されている受講中のコース一覧から、学習したいコースをクリックします。コース詳細画面に移動し、そのコースに含まれるレッスンの一覧が表示されます。</p>
+
+            <h3>レッスン一覧の見方</h3>
+            <p>コース詳細画面では、各レッスンの状態を確認できます。</p>
+            <ul>
+                <li><strong>完了マーク（緑色のチェック）</strong> - そのレッスンは完了済みです。</li>
+                <li><strong>テストアイコン</strong> - そのレッスンにはテストが設定されています。</li>
+                <li><strong>ロックアイコン</strong> - ゲートテストに合格していないため、まだ受講できません。</li>
+            </ul>
+            <p>画面上部のプログレスバーで、コース全体の進捗率も確認できます。</p>
+
+            <h3>レッスンの閲覧</h3>
+            <p>レッスン一覧からレッスンをクリックすると、レッスンの内容が表示されます。レッスンには以下のコンテンツが含まれる場合があります。</p>
+            <ul>
+                <li><strong>動画</strong> - 埋め込みの動画プレーヤーで視聴できます。</li>
+                <li><strong>テキスト</strong> - 説明文や解説が表示されます。</li>
+            </ul>
+
+            <h3>レッスンを完了にする</h3>
+            <p>レッスンの内容を学習し終えたら、画面にある<strong>「完了にする」ボタン</strong>をクリックしてください。レッスンが完了状態になり、コースの進捗率に反映されます。</p>
+            <div class="note">
+                <strong>ヒント：</strong>テストが設定されているレッスンでは、テストに合格すると自動的にレッスンが完了になります。
+            </div>
+
+            <h3>前後のレッスンへの移動</h3>
+            <p>レッスン画面の下部に、前のレッスンと次のレッスンへのリンクが表示されます。これを使って順番にレッスンを進めることができます。</p>
+
+            <p><a href="#top" class="text-xs text-indigo-500 hover:underline">目次に戻る</a></p>
+
+            <!-- セクション3: テストと修了証 -->
+            <h2 id="section-3">3. テストと修了証</h2>
+
+            <h3>テストの種類</h3>
+            <p>コースには以下の種類のテストが設定されている場合があります。</p>
+            <ul>
+                <li><strong>通常テスト</strong> - レッスンの理解度を確認するためのテストです。不合格でも次のレッスンに進めます。</li>
+                <li><strong>ゲートテスト</strong> - このテストに合格しないと、次のレッスンに進むことができません。必ず合格してから先に進んでください。</li>
+                <li><strong>最終テスト</strong> - コースの最後に設けられるテストです。合格すると修了証が発行されます。</li>
+            </ul>
+
+            <h3>テストの受け方</h3>
+            <ol>
+                <li>テストが設定されているレッスンで「テストを受ける」ボタンをクリックします。</li>
+                <li>出題される問題に対して、選択肢の中から正しいと思う回答を選びます。</li>
+                <li>すべての問題に回答したら「送信する」ボタンをクリックします。</li>
+            </ol>
+
+            <h3>テスト結果の確認</h3>
+            <p>テストを送信すると、すぐに結果が表示されます。結果画面では以下の情報を確認できます。</p>
+            <ul>
+                <li><strong>正解率（スコア）</strong> - 全問中の正解した割合がパーセントで表示されます。</li>
+                <li><strong>合格/不合格</strong> - 合格基準を満たしているかどうかが表示されます。</li>
+                <li><strong>各問題の正誤</strong> - 問題ごとに正解・不正解が確認できます。</li>
+            </ul>
+
+            <h3>再受験について</h3>
+            <p>テストには<strong>最大受験回数</strong>が設定されている場合があります。</p>
+            <div class="warning">
+                <strong>注意：</strong>最大受験回数に達すると、それ以上テストを受けることができなくなります。回数制限がある場合は、十分に学習してから受験してください。
+            </div>
+
+            <h3>ゲートテストについて</h3>
+            <p>ゲートテストは、特定のレッスンに設定された関門です。このテストに<strong>合格しないと、後続のレッスンに進むことができません</strong>。レッスン一覧でロックアイコンが表示されている場合は、先にゲートテストに合格する必要があります。</p>
+
+            <h3>修了証の取得と確認</h3>
+            <p>コースの最終テストに合格すると、<strong>修了証</strong>が自動的に発行されます。</p>
+            <ul>
+                <li>発行された修了証は、マイコース画面（ダッシュボード）の「取得した修了証」セクションから確認できます。</li>
+                <li>修了証をクリックすると、証書の詳細ページが表示されます。</li>
+            </ul>
+
+            <p><a href="#top" class="text-xs text-indigo-500 hover:underline">目次に戻る</a></p>
+
+            <!-- セクション4: プロフィール・パスワード管理 -->
+            <h2 id="section-4">4. プロフィール・パスワード管理</h2>
+
+            <h3>プロフィールの確認・変更</h3>
+            <p>ナビゲーションバーの「プロフィール」をクリックすると、プロフィール編集画面に移動します。</p>
+            <ol>
+                <li>変更したい項目（名前、メールアドレス、電話番号）を編集します。</li>
+                <li>「保存する」ボタンをクリックして変更を保存します。</li>
+            </ol>
+            <div class="note">
+                <strong>ヒント：</strong>メールアドレスはログインに使用するため、変更する場合は新しいアドレスを正確に入力してください。
+            </div>
+
+            <h3>パスワードの変更</h3>
+            <p>ナビゲーションバーの「パスワード変更」をクリックすると、パスワード変更画面に移動します。</p>
+            <ol>
+                <li><strong>現在のパスワード</strong>を入力して本人確認を行います。</li>
+                <li><strong>新しいパスワード</strong>を入力します。</li>
+                <li>確認のため、新しいパスワードをもう一度入力します。</li>
+                <li>「パスワードを変更」ボタンをクリックします。</li>
+            </ol>
+            <div class="warning">
+                <strong>注意：</strong>パスワードは<strong>8文字以上</strong>で設定してください。セキュリティのため、英字・数字を組み合わせることを推奨します。
+            </div>
+
+            <p><a href="#top" class="text-xs text-indigo-500 hover:underline">目次に戻る</a></p>
+
+            <!-- セクション5: お問い合わせ -->
+            <h2 id="section-5">5. お問い合わせ</h2>
+
+            <h3>お問い合わせの送信方法</h3>
+            <p>ナビゲーションバーの「お問い合わせ」をクリックすると、お問い合わせフォームに移動します。</p>
+            <ol>
+                <li><strong>件名</strong>を入力します（お問い合わせの概要を簡潔に記載してください）。</li>
+                <li><strong>内容</strong>を入力します（質問や不明点の詳細を記載してください）。</li>
+                <li>「送信する」ボタンをクリックしてお問い合わせを送信します。</li>
+            </ol>
+
+            <h3>送信履歴の確認</h3>
+            <p>お問い合わせフォーム画面の「送信履歴を見る」リンクから、過去に送信したお問い合わせの一覧を確認できます。各お問い合わせの件名、送信日時、ステータスが表示されます。</p>
+
+            <h3>管理者からの返信の確認</h3>
+            <p>管理者が返信すると、お問い合わせ履歴画面の該当するお問い合わせに返信内容が表示されます。返信日時も合わせて確認できます。</p>
+
+            <h3>ステータスの見方</h3>
+            <p>各お問い合わせには、以下のいずれかのステータスが表示されます。</p>
+            <ul>
+                <li><strong>未対応</strong>（黄色） - お問い合わせを受け付けました。管理者がまだ確認していない状態です。</li>
+                <li><strong>返信済み</strong>（緑色） - 管理者から返信があります。返信内容をご確認ください。</li>
+                <li><strong>クローズ</strong>（灰色） - お問い合わせが解決済みとして閉じられた状態です。</li>
+            </ul>
+
+            <p><a href="#top" class="text-xs text-indigo-500 hover:underline">目次に戻る</a></p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

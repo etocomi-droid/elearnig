@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}決済エラー{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div class="max-w-md w-full text-center">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 px-8 py-12">
+            <!-- エラーアイコン -->
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-100 mb-6">
+                <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </div>
+
+            <h1 class="text-2xl font-bold text-gray-900 mb-3">決済エラーが発生しました</h1>
+            <p class="text-gray-600 mb-4">
+                決済処理中にエラーが発生しました。<br>
+                しばらく時間をおいてから再度お試しください。
+            </p>
+
+            {% if error_message %}
+            <div class="mb-6 p-4 bg-red-50 rounded-lg border border-red-200">
+                <p class="text-sm text-red-800">{{ error_message }}</p>
+            </div>
+            {% endif %}
+
+            <div class="space-y-3">
+                <a href="javascript:history.back()"
+                   class="block w-full px-6 py-3 rounded-lg text-sm font-medium text-white bg-blue-600
+                          hover:bg-blue-700 transition-colors">
+                    戻る
+                </a>
+                <a href="/"
+                   class="block w-full px-6 py-3 rounded-lg text-sm font-medium text-gray-700 bg-gray-100
+                          hover:bg-gray-200 transition-colors">
+                    トップページへ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

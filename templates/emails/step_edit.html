@@ -1,0 +1,122 @@
+{% extends "base_admin.html" %}
+
+{% block title %}{% if is_new %}ステップ追加{% else %}ステップ {{ step.step_number }} 編集{% endif %} - {{ scenario.name }}{% endblock %}
+{% block page_title %}{% if is_new %}ステップ追加{% else %}ステップ編集{% endif %}{% endblock %}
+
+{% block content %}
+<!-- パンくずリスト -->
+<nav class="mb-6">
+    <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="{% url 'emails:scenario_list' %}" class="hover:text-blue-600 transition-colors">シナリオ一覧</a></li>
+        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+        <li><a href="{% url 'emails:scenario_edit' pk=scenario.pk %}" class="hover:text-blue-600 transition-colors">{{ scenario.name }}</a></li>
+        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+        <li class="text-gray-900 font-medium">{% if is_new %}ステップ追加{% else %}ステップ {{ step.step_number }}{% endif %}</li>
+    </ol>
+</nav>
+
+<!-- ステップ編集フォーム -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200">
+    <div class="px-6 py-4 border-b border-gray-100">
+        <h2 class="text-base font-semibold text-gray-900">
+            {% if is_new %}新しいステップ{% else %}ステップ {{ step.step_number }} の編集{% endif %}
+        </h2>
+    </div>
+    <div class="px-6 py-6">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+                <!-- ステップ番号 -->
+                <div>
+                    <label for="id_step_number" class="block text-sm font-medium text-gray-700 mb-1">
+                        ステップ番号 <span class="text-red-500">*</span>
+                    </label>
+                    {{ form.step_number }}
+                    {% if form.step_number.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.step_number.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- 遅延日数 -->
+                <div>
+                    <label for="id_delay_days" class="block text-sm font-medium text-gray-700 mb-1">
+                        遅延日数
+                    </label>
+                    {{ form.delay_days }}
+                    {% if form.delay_days.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.delay_days.errors.0 }}</p>
+                    {% endif %}
+                    <p class="mt-1 text-xs text-gray-500">登録から何日後に配信するか</p>
+                </div>
+
+                <!-- 遅延時間 -->
+                <div>
+                    <label for="id_delay_hours" class="block text-sm font-medium text-gray-700 mb-1">
+                        遅延時間
+                    </label>
+                    {{ form.delay_hours }}
+                    {% if form.delay_hours.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.delay_hours.errors.0 }}</p>
+                    {% endif %}
+                    <p class="mt-1 text-xs text-gray-500">遅延日数に加える時間（0〜23）</p>
+                </div>
+            </div>
+
+            <!-- 件名 -->
+            <div class="mb-5">
+                <label for="id_subject" class="block text-sm font-medium text-gray-700 mb-1">
+                    件名 <span class="text-red-500">*</span>
+                </label>
+                {{ form.subject }}
+                {% if form.subject.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.subject.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- 本文(HTML) -->
+            <div class="mb-5">
+                <label for="id_body_html" class="block text-sm font-medium text-gray-700 mb-1">
+                    本文 (HTML) <span class="text-red-500">*</span>
+                </label>
+                {{ form.body_html }}
+                {% if form.body_html.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.body_html.errors.0 }}</p>
+                {% endif %}
+                <p class="mt-1 text-xs text-gray-500">HTML形式でメール本文を入力してください</p>
+            </div>
+
+            <!-- 本文(テキスト) -->
+            <div class="mb-5">
+                <label for="id_body_text" class="block text-sm font-medium text-gray-700 mb-1">
+                    本文 (テキスト)
+                </label>
+                {{ form.body_text }}
+                {% if form.body_text.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.body_text.errors.0 }}</p>
+                {% endif %}
+                <p class="mt-1 text-xs text-gray-500">テキスト形式のフォールバック（任意）</p>
+            </div>
+
+            <!-- 有効/無効 -->
+            <div class="mb-6">
+                <label class="flex items-center gap-2">
+                    {{ form.is_active }}
+                    <span class="text-sm font-medium text-gray-700">有効にする</span>
+                </label>
+            </div>
+
+            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <button type="submit"
+                        class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                    {% if is_new %}追加{% else %}更新{% endif %}
+                </button>
+                <a href="{% url 'emails:scenario_edit' pk=scenario.pk %}"
+                   class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                    キャンセル
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

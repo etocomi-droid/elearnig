@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}ご購入ありがとうございます{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div class="max-w-md w-full text-center">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 px-8 py-12">
+            <!-- 成功アイコン -->
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
+                <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+
+            <h1 class="text-2xl font-bold text-gray-900 mb-3">ご購入ありがとうございます</h1>
+            <p class="text-gray-600 mb-8">
+                お支払いが正常に完了しました。<br>
+                ご登録のメールアドレスに確認メールをお送りしますので、ご確認ください。
+            </p>
+
+            <div class="space-y-3">
+                <a href="/"
+                   class="block w-full px-6 py-3 rounded-lg text-sm font-medium text-white bg-blue-600
+                          hover:bg-blue-700 transition-colors">
+                    トップページへ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

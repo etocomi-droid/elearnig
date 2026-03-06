@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}ありがとうございます{% endblock %}
+
+{% block extra_head %}
+<style>
+    .thanks-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 80px 24px;
+        text-align: center;
+    }
+    .thanks-icon {
+        width: 80px;
+        height: 80px;
+        background: #dcfce7;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+    .thanks-icon svg {
+        width: 40px;
+        height: 40px;
+        color: #16a34a;
+    }
+    .thanks-title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 12px;
+    }
+    .thanks-message {
+        font-size: 1rem;
+        color: #6b7280;
+        line-height: 1.7;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="thanks-container">
+    <div class="thanks-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+    </div>
+    <h1 class="thanks-title">ありがとうございます！</h1>
+    <p class="thanks-message">
+        登録が完了しました。<br>
+        確認メールをお送りしましたので、メールをご確認ください。
+    </p>
+</div>
+{% endblock %}

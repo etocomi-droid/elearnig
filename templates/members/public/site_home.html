@@ -1,0 +1,260 @@
+{% extends 'base_member.html' %}
+
+{% block title %}{{ site.name }}{% endblock %}
+{% block site_name %}{{ site.name }}{% endblock %}
+
+{% block extra_head %}
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+{% endblock %}
+
+{% block content %}
+<!-- ナビゲーション -->
+<div class="mb-6 bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-3 flex items-center justify-between">
+    <nav class="flex items-center gap-4">
+        <a href="{% url 'members_public:member_home' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/>
+            </svg>
+            マイコース
+        </a>
+        <a href="{% url 'members_public:member_profile' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            プロフィール
+        </a>
+        <a href="{% url 'members_public:member_password' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            パスワード変更
+        </a>
+        <a href="{% url 'members_public:member_inquiry' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+            </svg>
+            お問い合わせ
+        </a>
+        <a href="{% url 'members_public:member_manual' site_slug=site.slug %}"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            マニュアル
+        </a>
+    </nav>
+    <a href="{% url 'members_public:member_logout' site_slug=site.slug %}"
+       class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+        ログアウト
+    </a>
+</div>
+
+<!-- ヘッダーセクション -->
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">マイコース</h1>
+        <p class="text-sm text-gray-500">{{ contact.name|default:contact.email }} さん、ようこそ</p>
+    </div>
+</div>
+
+<!-- 全体の進捗バー -->
+{% if total_lessons > 0 %}
+<div class="mb-6 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+    <div class="flex items-center justify-between mb-2">
+        <h2 class="text-sm font-semibold text-gray-700">全体の進捗</h2>
+        <span class="text-sm font-bold {% if overall_progress == 100 %}text-green-600{% else %}text-indigo-600{% endif %}">
+            {{ overall_progress }}%
+        </span>
+    </div>
+    <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+        <div class="h-full rounded-full transition-all duration-500 {% if overall_progress == 100 %}bg-green-500{% else %}bg-indigo-500{% endif %}"
+             style="width: {{ overall_progress }}%"></div>
+    </div>
+    <p class="text-xs text-gray-500 mt-2">{{ completed_lessons }}/{{ total_lessons }} レッスン完了</p>
+</div>
+{% endif %}
+
+<!-- 統計カード -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-2xl font-bold text-gray-900">{{ completed_lessons }}</p>
+                <p class="text-xs text-gray-500">完了レッスン数</p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                </svg>
+            </div>
+            <div>
+                {% with best_scores.values|length as quiz_count %}
+                <p class="text-2xl font-bold text-gray-900">{{ quiz_count }}</p>
+                {% endwith %}
+                <p class="text-xs text-gray-500">テスト受験数</p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-2xl font-bold text-gray-900">{{ certificates|length }}</p>
+                <p class="text-xs text-gray-500">修了証数</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 最近のアクティビティ -->
+{% if recent_progress %}
+<div class="mb-6 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="px-5 py-4 border-b border-gray-100">
+        <h2 class="text-sm font-semibold text-gray-700">最近のアクティビティ</h2>
+    </div>
+    <div class="divide-y divide-gray-50">
+        {% for progress in recent_progress %}
+        <a href="{% url 'members_public:member_lesson' site_slug=site.slug lesson_slug=progress.lesson.slug %}"
+           class="block px-5 py-3 hover:bg-gray-50 transition-colors">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3 min-w-0">
+                    {% if progress.is_completed %}
+                    <span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </span>
+                    {% else %}
+                    <span class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13"/>
+                        </svg>
+                    </span>
+                    {% endif %}
+                    <div class="min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate">{{ progress.lesson.title }}</p>
+                        <p class="text-xs text-gray-500">{{ progress.enrollment.course.title }}</p>
+                    </div>
+                </div>
+                <span class="text-xs text-gray-400 flex-shrink-0 ml-3">{{ progress.last_accessed_at|date:"n/j H:i" }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- 修了証セクション -->
+{% if certificates %}
+<div class="mb-6 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="px-5 py-4 border-b border-gray-100">
+        <h2 class="text-sm font-semibold text-gray-700">取得した修了証</h2>
+    </div>
+    <div class="divide-y divide-gray-50">
+        {% for issued in certificates %}
+        <a href="{% url 'members_public:certificate_view' site_slug=site.slug cert_number=issued.certificate_number %}"
+           class="block px-5 py-3 hover:bg-gray-50 transition-colors">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">{{ issued.certificate.title }}</p>
+                        <p class="text-xs text-gray-500">{{ issued.certificate.course.title }} - {{ issued.issued_at|date:"Y年n月j日" }}</p>
+                    </div>
+                </div>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- コース一覧 -->
+<div class="mb-4">
+    <h2 class="text-sm font-semibold text-gray-700">受講中のコース</h2>
+</div>
+
+{% if course_data %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for item in course_data %}
+    <a href="{% url 'members_public:member_course' site_slug=site.slug course_slug=item.course.slug %}"
+       class="block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all group overflow-hidden">
+
+        <!-- サムネイル -->
+        {% if item.course.thumbnail %}
+        <div class="aspect-video bg-gray-100 overflow-hidden">
+            <img src="{{ item.course.thumbnail.url }}" alt="{{ item.course.title }}"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        {% else %}
+        <div class="aspect-video bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 flex items-center justify-center">
+            <svg class="w-16 h-16 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+        </div>
+        {% endif %}
+
+        <div class="p-5">
+            <h3 class="text-base font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors mb-2">
+                {{ item.course.title }}
+            </h3>
+            {% if item.course.description %}
+            <p class="text-sm text-gray-500 line-clamp-2 mb-4">{{ item.course.description }}</p>
+            {% endif %}
+
+            <!-- プログレスバー -->
+            <div class="space-y-2">
+                <div class="flex items-center justify-between text-xs">
+                    <span class="text-gray-500">{{ item.completed_lessons }}/{{ item.total_lessons }} レッスン完了</span>
+                    <span class="font-semibold {% if item.progress_percent == 100 %}text-green-600{% else %}text-indigo-600{% endif %}">
+                        {{ item.progress_percent }}%
+                    </span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                    <div class="h-full rounded-full transition-all duration-500 {% if item.progress_percent == 100 %}bg-green-500{% else %}bg-indigo-500{% endif %}"
+                         style="width: {{ item.progress_percent }}%"></div>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-20 bg-white rounded-2xl border border-gray-100">
+    <div class="w-20 h-20 rounded-full bg-gray-50 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+    </div>
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">受講中のコースがありません</h3>
+    <p class="text-sm text-gray-500">コースに登録されると、ここに表示されます。</p>
+</div>
+{% endif %}
+{% endblock %}

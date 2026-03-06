@@ -1,0 +1,122 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}オペレーター編集{% endblock %}
+{% block page_title %}オペレーター編集{% endblock %}
+
+{% block content %}
+<div class="max-w-lg">
+    <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <!-- ユーザー情報 -->
+        <div class="mb-6 pb-6 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-bold text-gray-600">
+                    {{ member.user.username|first|upper }}
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-900">{{ member.user.username }}</p>
+                    <p class="text-sm text-gray-500">{{ member.user.email }}</p>
+                </div>
+            </div>
+        </div>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- 役割 -->
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-700 mb-1">役割</label>
+                <select name="role" id="role"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        onchange="togglePermissions()">
+                    <option value="admin" {% if member.role == 'admin' %}selected{% endif %}>管理者（全権限）</option>
+                    <option value="operator" {% if member.role == 'operator' %}selected{% endif %}>オペレーター（個別権限）</option>
+                </select>
+            </div>
+
+            <!-- 個別権限 -->
+            <div id="permissions-section" class="space-y-3 {% if member.role == 'admin' %}hidden{% endif %}">
+                <p class="text-sm font-medium text-gray-700">個別権限</p>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="can_manage_contacts" value="1"
+                               {% if member.can_manage_contacts %}checked{% endif %}
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700">コンタクト管理</span>
+                            <p class="text-xs text-gray-500">コンタクトの閲覧・編集</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="can_manage_funnels" value="1"
+                               {% if member.can_manage_funnels %}checked{% endif %}
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700">ファネル管理</span>
+                            <p class="text-xs text-gray-500">ファネル・ページの作成・編集</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="can_manage_emails" value="1"
+                               {% if member.can_manage_emails %}checked{% endif %}
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700">メール配信管理</span>
+                            <p class="text-xs text-gray-500">シナリオ・一斉配信の管理</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="can_manage_products" value="1"
+                               {% if member.can_manage_products %}checked{% endif %}
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700">商品管理</span>
+                            <p class="text-xs text-gray-500">商品・注文の管理</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="can_manage_members" value="1"
+                               {% if member.can_manage_members %}checked{% endif %}
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700">会員サイト管理</span>
+                            <p class="text-xs text-gray-500">コース・レッスン・テストの管理</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="can_manage_bookings" value="1"
+                               {% if member.can_manage_bookings %}checked{% endif %}
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700">予約管理</span>
+                            <p class="text-xs text-gray-500">予約タイプ・予約の管理</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button type="submit"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                    保存する
+                </button>
+                <a href="{% url 'accounts:operator_list' %}"
+                   class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    戻る
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function togglePermissions() {
+    const role = document.getElementById('role').value;
+    const section = document.getElementById('permissions-section');
+    if (role === 'admin') {
+        section.classList.add('hidden');
+    } else {
+        section.classList.remove('hidden');
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "sysadmin/base_sysadmin.html" %}
+
+{% block title %}サポート - システム管理{% endblock %}
+{% block page_title %}サポート{% endblock %}
+
+{% block content %}
+<!-- フィルタータブ -->
+<div class="mb-6 flex items-center gap-2">
+    <a href="{% url 'sysadmin:support_list' %}"
+       class="px-4 py-2 text-sm font-medium rounded-lg transition-colors
+              {% if not current_status %}bg-blue-600 text-white{% else %}text-gray-600 bg-gray-100 hover:bg-gray-200{% endif %}">
+        全て
+    </a>
+    <a href="{% url 'sysadmin:support_list' %}?status=open"
+       class="px-4 py-2 text-sm font-medium rounded-lg transition-colors
+              {% if current_status == 'open' %}bg-blue-600 text-white{% else %}text-gray-600 bg-gray-100 hover:bg-gray-200{% endif %}">
+        オープン
+    </a>
+    <a href="{% url 'sysadmin:support_list' %}?status=pending"
+       class="px-4 py-2 text-sm font-medium rounded-lg transition-colors
+              {% if current_status == 'pending' %}bg-blue-600 text-white{% else %}text-gray-600 bg-gray-100 hover:bg-gray-200{% endif %}">
+        対応待ち
+    </a>
+    <a href="{% url 'sysadmin:support_list' %}?status=closed"
+       class="px-4 py-2 text-sm font-medium rounded-lg transition-colors
+              {% if current_status == 'closed' %}bg-blue-600 text-white{% else %}text-gray-600 bg-gray-100 hover:bg-gray-200{% endif %}">
+        クローズ
+    </a>
+</div>
+
+<!-- サポートスレッド一覧 -->
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">件名</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">プロジェクト</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ステータス</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">最終更新</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">メッセージ数</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for thread in threads %}
+            <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="window.location='{% url 'sysadmin:support_detail' thread.pk %}'">
+                <td class="px-6 py-4">
+                    <a href="{% url 'sysadmin:support_detail' thread.pk %}" class="text-sm font-medium text-gray-900 hover:text-blue-600">
+                        {{ thread.subject }}
+                    </a>
+                    {% if thread.created_by %}
+                    <p class="text-xs text-gray-500 mt-0.5">{{ thread.created_by.username }}</p>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-700">{{ thread.project.name }}</td>
+                <td class="px-6 py-4 text-center">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                        {% if thread.status == 'open' %}bg-green-100 text-green-700
+                        {% elif thread.status == 'pending' %}bg-yellow-100 text-yellow-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ thread.get_status_display }}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">{{ thread.updated_at|date:"Y/m/d H:i" }}</td>
+                <td class="px-6 py-4 text-sm text-gray-700 text-center">{{ thread.message_count }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-400">サポートスレッドはありません</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- ページネーション -->
+{% if is_paginated %}
+<div class="mt-6 flex items-center justify-center gap-2">
+    {% if page_obj.has_previous %}
+    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}page={{ page_obj.previous_page_number }}"
+       class="px-3 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">前へ</a>
+    {% endif %}
+    <span class="px-3 py-2 text-sm text-gray-500">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}page={{ page_obj.next_page_number }}"
+       class="px-3 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">次へ</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

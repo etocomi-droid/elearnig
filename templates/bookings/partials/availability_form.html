@@ -1,0 +1,60 @@
+{% load bookings_tags %}
+<div class="space-y-4">
+    {% with day_names="月曜日,火曜日,水曜日,木曜日,金曜日,土曜日,日曜日" %}
+    {% for day_name in day_names|split:"," %}
+    {% with day_index=forloop.counter0 %}
+    <div class="border border-gray-200 rounded-lg p-4">
+        <div class="flex items-center justify-between mb-3">
+            <h4 class="text-sm font-semibold text-gray-700">{{ day_name }}</h4>
+        </div>
+
+        <!-- 既存の受付時間 -->
+        {% for avail in availabilities|get_item:day_index %}
+        <div class="flex items-center gap-3 mb-2 py-1.5 px-3 bg-gray-50 rounded-lg">
+            <span class="text-sm text-gray-700">{{ avail.start_time|time:"H:i" }} - {{ avail.end_time|time:"H:i" }}</span>
+            {% if not avail.is_active %}
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-500">無効</span>
+            {% endif %}
+            <form hx-post="{% url 'bookings:availability_delete' pk=avail.pk %}"
+                  hx-target="#availability-list"
+                  hx-swap="innerHTML"
+                  hx-confirm="この受付時間を削除しますか？"
+                  class="ml-auto">
+                {% csrf_token %}
+                <button type="submit" class="text-xs text-red-500 hover:text-red-700 font-medium transition-colors">削除</button>
+            </form>
+        </div>
+        {% empty %}
+        <p class="text-xs text-gray-400 mb-2">受付時間が設定されていません</p>
+        {% endfor %}
+
+        <!-- 追加フォーム -->
+        <form hx-post="{% url 'bookings:availability_save' pk=booking_type.pk %}"
+              hx-target="#availability-list"
+              hx-swap="innerHTML"
+              class="flex items-end gap-2 mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="day_of_week" value="{{ day_index }}">
+            <div>
+                <label class="block text-xs text-gray-500 mb-1">開始</label>
+                <input type="time" name="start_time" value="09:00" required
+                       class="px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label class="block text-xs text-gray-500 mb-1">終了</label>
+                <input type="time" name="end_time" value="17:00" required
+                       class="px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button type="submit"
+                    class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                追加
+            </button>
+        </form>
+    </div>
+    {% endwith %}
+    {% endfor %}
+    {% endwith %}
+</div>

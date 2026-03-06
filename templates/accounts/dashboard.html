@@ -1,0 +1,106 @@
+{% extends "base_admin.html" %}
+
+{% block title %}ダッシュボード{% endblock %}
+{% block page_title %}ダッシュボード{% endblock %}
+
+{% block content %}
+<!-- 統計カード -->
+<div class="grid grid-cols-4 gap-6 mb-8">
+    <!-- コンタクト数 -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </div>
+        </div>
+        <p class="text-2xl font-bold text-gray-900">{{ contact_count }}</p>
+        <p class="text-sm text-gray-500 mt-1">コンタクト</p>
+    </div>
+
+    <!-- ファネル数 -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center">
+                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                </svg>
+            </div>
+        </div>
+        <p class="text-2xl font-bold text-gray-900">{{ funnel_count }}</p>
+        <p class="text-sm text-gray-500 mt-1">ファネル</p>
+    </div>
+
+    <!-- 注文数 -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                </svg>
+            </div>
+        </div>
+        <p class="text-2xl font-bold text-gray-900">{{ order_count }}</p>
+        <p class="text-sm text-gray-500 mt-1">注文</p>
+    </div>
+
+    <!-- メールシナリオ数 -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center">
+                <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+        </div>
+        <p class="text-2xl font-bold text-gray-900">{{ scenario_count|default:"0" }}</p>
+        <p class="text-sm text-gray-500 mt-1">メールシナリオ</p>
+    </div>
+</div>
+
+<!-- クイックアクション -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <h2 class="text-base font-semibold text-gray-900 mb-4">クイックアクション</h2>
+    <div class="grid grid-cols-3 gap-4">
+        <a href="{% url 'contacts:contact_list' %}"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors group">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-gray-900">コンタクト一覧</p>
+                <p class="text-xs text-gray-500">顧客を管理する</p>
+            </div>
+        </a>
+
+        <a href="{% url 'funnels:funnel_list' %}"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-colors group">
+            <div class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-gray-900">ファネル作成</p>
+                <p class="text-xs text-gray-500">新しいファネルを作る</p>
+            </div>
+        </a>
+
+        <a href="{% url 'emails:scenario_list' %}"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:border-orange-300 hover:bg-orange-50 transition-colors group">
+            <div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center group-hover:bg-orange-200 transition-colors">
+                <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-gray-900">メール配信</p>
+                <p class="text-xs text-gray-500">シナリオを管理する</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

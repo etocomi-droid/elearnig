@@ -1,0 +1,107 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}オペレーター管理{% endblock %}
+{% block page_title %}オペレーター管理{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <p class="text-sm text-gray-500">プロジェクトメンバーの管理・権限設定を行えます。</p>
+    <a href="{% url 'accounts:operator_invite' %}"
+       class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        招待
+    </a>
+</div>
+
+{% if members %}
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ユーザー名</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">メールアドレス</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">役割</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">権限サマリー</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for member in members %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {{ member.user.username }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ member.user.email }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {% if member.role == 'admin' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                        管理者
+                    </span>
+                    {% else %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        オペレーター
+                    </span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    {% if member.role == 'admin' %}
+                        <span class="text-gray-400">全権限</span>
+                    {% else %}
+                        <div class="flex flex-wrap gap-1">
+                            {% if member.can_manage_contacts %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">コンタクト</span>
+                            {% endif %}
+                            {% if member.can_manage_funnels %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">ファネル</span>
+                            {% endif %}
+                            {% if member.can_manage_emails %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">メール</span>
+                            {% endif %}
+                            {% if member.can_manage_products %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">商品</span>
+                            {% endif %}
+                            {% if member.can_manage_members %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">会員</span>
+                            {% endif %}
+                            {% if member.can_manage_bookings %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">予約</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+                    <div class="flex items-center justify-end gap-2">
+                        <a href="{% url 'accounts:operator_edit' pk=member.pk %}"
+                           class="text-blue-600 hover:text-blue-800 font-medium">編集</a>
+                        <form method="post" action="{% url 'accounts:operator_delete' pk=member.pk %}"
+                              onsubmit="return confirm('このメンバーを削除してもよろしいですか？');" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium">削除</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="text-center py-16 bg-white rounded-xl border border-gray-200">
+    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+    </div>
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">メンバーがいません</h3>
+    <p class="text-sm text-gray-500 mb-4">メンバーを招待して、プロジェクトを一緒に管理しましょう。</p>
+    <a href="{% url 'accounts:operator_invite' %}"
+       class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+        招待する
+    </a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}証書設定 - {{ course.title }}{% endblock %}
+{% block page_title %}証書設定{% endblock %}
+
+{% block content %}
+<!-- パンくずリスト -->
+<nav class="mb-6 flex items-center gap-2 text-sm text-gray-500">
+    <a href="{% url 'members:member_site_list' %}" class="hover:text-blue-600 transition-colors">会員サイト</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <a href="{% url 'members:site_edit' pk=site.pk %}" class="hover:text-blue-600 transition-colors">{{ site.name }}</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <a href="{% url 'members:course_edit' pk=course.pk %}" class="hover:text-blue-600 transition-colors">{{ course.title }}</a>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <span class="text-gray-900 font-medium">証書設定</span>
+</nav>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- 左カラム: 証書設定 -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h2 class="text-base font-semibold text-gray-900">卒業証書テンプレート</h2>
+            </div>
+            <form method="post" enctype="multipart/form-data" class="p-6 space-y-5">
+                {% csrf_token %}
+
+                <div>
+                    <label for="id_title" class="block text-sm font-medium text-gray-700 mb-1">証書タイトル</label>
+                    {{ form.title }}
+                    {% if form.title.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_description" class="block text-sm font-medium text-gray-700 mb-1">メッセージ</label>
+                    {{ form.description }}
+                    <p class="mt-1 text-xs text-gray-400">証書に表示されるメッセージ</p>
+                    {% if form.description.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.description.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_issuer_name" class="block text-sm font-medium text-gray-700 mb-1">発行者名</label>
+                    {{ form.issuer_name }}
+                    {% if form.issuer_name.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.issuer_name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="id_template_image" class="block text-sm font-medium text-gray-700 mb-1">背景画像</label>
+                    {% if certificate.template_image %}
+                    <div class="mb-2 rounded-lg overflow-hidden border border-gray-200">
+                        <img src="{{ certificate.template_image.url }}" alt="" class="w-full h-auto">
+                    </div>
+                    {% endif %}
+                    {{ form.template_image }}
+                    <p class="mt-1 text-xs text-gray-400">証書の背景に使用する画像（任意）</p>
+                    {% if form.template_image.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.template_image.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="submit"
+                            class="flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors">
+                        保存
+                    </button>
+                    <a href="{% url 'members:course_edit' pk=course.pk %}"
+                       class="inline-flex justify-center items-center px-4 py-2.5 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                        戻る
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 右カラム: プレビュー・情報 -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h2 class="text-base font-semibold text-gray-900">証書情報</h2>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center gap-3 p-3 bg-amber-50 rounded-lg">
+                    <svg class="w-8 h-8 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                    <div>
+                        <p class="text-sm font-medium text-amber-800">コース: {{ course.title }}</p>
+                        <p class="text-xs text-amber-600 mt-0.5">最終テストに合格した受講生に発行されます</p>
+                    </div>
+                </div>
+
+                <div class="text-sm text-gray-600 space-y-2">
+                    <p><strong>タイトル:</strong> {{ certificate.title }}</p>
+                    <p><strong>発行者:</strong> {{ certificate.issuer_name|default:"未設定" }}</p>
+                    <p><strong>作成日:</strong> {{ certificate.created_at|date:"Y年m月d日" }}</p>
+                    {% if certificate.issued.count > 0 %}
+                    <p><strong>発行済み:</strong> {{ certificate.issued.count }}件</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

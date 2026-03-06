@@ -1,0 +1,19 @@
+{% for msg in messages %}
+<div class="flex {% if msg.is_from_admin %}justify-end{% else %}justify-start{% endif %}">
+    <div class="max-w-[70%] {% if msg.is_from_admin %}order-2{% endif %}">
+        <div class="flex items-center gap-2 mb-1 {% if msg.is_from_admin %}justify-end{% endif %}">
+            <span class="text-xs font-medium {% if msg.is_from_admin %}text-blue-600{% else %}text-gray-600{% endif %}">
+                {{ msg.sender.username|default:"不明" }}
+                {% if msg.is_from_admin %}(システム管理者){% endif %}
+            </span>
+            <span class="text-xs text-gray-400">{{ msg.created_at|date:"Y/m/d H:i" }}</span>
+        </div>
+        <div class="px-4 py-3 rounded-2xl text-sm leading-relaxed
+            {% if msg.is_from_admin %}bg-blue-600 text-white rounded-tr-sm{% else %}bg-gray-100 text-gray-800 rounded-tl-sm{% endif %}">
+            {{ msg.body|linebreaksbr }}
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="text-center text-sm text-gray-400 py-8">メッセージはありません</div>
+{% endfor %}

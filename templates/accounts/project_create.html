@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}プロジェクト作成{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-2xl mx-auto px-6 h-16 flex items-center">
+            <a href="{% url 'accounts:project_list' %}" class="text-gray-400 hover:text-gray-600 transition-colors mr-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </a>
+            <h1 class="text-lg font-bold text-gray-900">新規プロジェクト作成</h1>
+        </div>
+    </header>
+
+    <div class="max-w-2xl mx-auto px-6 py-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-gray-900">プロジェクト情報</h2>
+                <p class="mt-1 text-sm text-gray-500">プロジェクトの基本情報を入力してください</p>
+            </div>
+
+            {% if form.errors %}
+            <div class="mb-6 px-4 py-3 rounded-lg bg-red-50 border border-red-200">
+                <ul class="text-sm text-red-700 space-y-1">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- プロジェクト名 -->
+                <div>
+                    <label for="id_name" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        プロジェクト名
+                    </label>
+                    <input type="text"
+                           name="name"
+                           id="id_name"
+                           required
+                           autofocus
+                           value="{{ form.name.value|default:'' }}"
+                           class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm
+                                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                  placeholder-gray-400 transition-colors"
+                           placeholder="マイプロジェクト">
+                </div>
+
+                <!-- スラッグ -->
+                <div>
+                    <label for="id_slug" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        スラッグ（URL用）
+                    </label>
+                    <input type="text"
+                           name="slug"
+                           id="id_slug"
+                           required
+                           value="{{ form.slug.value|default:'' }}"
+                           class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm
+                                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                  placeholder-gray-400 transition-colors"
+                           placeholder="my-project">
+                    <p class="mt-1.5 text-xs text-gray-400">半角英数字とハイフンのみ使用できます。</p>
+                </div>
+
+                <!-- ボタン -->
+                <div class="flex items-center justify-end gap-3 pt-4">
+                    <a href="{% url 'accounts:project_list' %}"
+                       class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-700 bg-white border border-gray-300
+                              hover:bg-gray-50 transition-colors">
+                        キャンセル
+                    </a>
+                    <button type="submit"
+                            class="px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600
+                                   hover:bg-blue-700 transition-colors shadow-sm">
+                        プロジェクトを作成
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

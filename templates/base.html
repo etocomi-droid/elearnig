@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}eLearning Platform{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-white min-h-screen">
+    {% block body %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% endblock %}
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

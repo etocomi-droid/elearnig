@@ -1,0 +1,210 @@
+{% extends "base_admin.html" %}
+
+{% block title %}ページ編集 - {{ page.title }}{% endblock %}
+{% block page_title %}ページ編集{% endblock %}
+
+{% block content %}
+<!-- パンくず -->
+<nav class="mb-6 text-sm">
+    <a href="{% url 'funnels:funnel_list' %}" class="text-blue-600 hover:text-blue-800">ファネル一覧</a>
+    <span class="mx-2 text-gray-400">/</span>
+    <a href="{% url 'funnels:funnel_edit' pk=funnel.pk %}" class="text-blue-600 hover:text-blue-800">{{ funnel.name }}</a>
+    <span class="mx-2 text-gray-400">/</span>
+    <span class="text-gray-600">{{ page.title }}</span>
+</nav>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- 左カラム: ページ基本情報 -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h2 class="text-base font-semibold text-gray-900 mb-4">ページ情報</h2>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="id_title" class="block text-sm font-medium text-gray-700 mb-1">タイトル</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <label for="id_slug" class="block text-sm font-medium text-gray-700 mb-1">スラッグ</label>
+                        {{ form.slug }}
+                        {% if form.slug.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.slug.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <label for="id_page_type" class="block text-sm font-medium text-gray-700 mb-1">ページタイプ</label>
+                        {{ form.page_type }}
+                    </div>
+
+                    <div>
+                        <label for="id_meta_title" class="block text-sm font-medium text-gray-700 mb-1">メタタイトル</label>
+                        {{ form.meta_title }}
+                    </div>
+
+                    <div>
+                        <label for="id_meta_description" class="block text-sm font-medium text-gray-700 mb-1">メタディスクリプション</label>
+                        {{ form.meta_description }}
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit"
+                            class="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        更新
+                    </button>
+                </div>
+            </form>
+
+            <!-- プレビュー & 削除 -->
+            <div class="mt-4 pt-4 border-t border-gray-200 space-y-2">
+                {% if funnel.is_published %}
+                <a href="{% url 'funnels_public:public_page' funnel_slug=funnel.slug page_slug=page.slug %}"
+                   target="_blank"
+                   class="block w-full text-center px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors">
+                    公開ページを確認
+                </a>
+                {% endif %}
+                <a href="{% url 'funnels:page_delete' pk=page.pk %}"
+                   class="block w-full text-center px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50 transition-colors">
+                    このページを削除
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右カラム: セクション一覧 -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-base font-semibold text-gray-900">セクション</h2>
+
+                <!-- セクション追加ドロップダウン -->
+                <div class="relative" x-data="{ open: false }">
+                    <button onclick="this.nextElementSibling.classList.toggle('hidden')"
+                            type="button"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        セクション追加
+                    </button>
+                    <div class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-20 py-1" id="section-dropdown">
+                        {% for type_value, type_label in section_type_choices %}
+                        <form method="post" action="{% url 'funnels:section_add' page_id=page.pk %}"
+                              hx-post="{% url 'funnels:section_add' page_id=page.pk %}"
+                              hx-target="#section-list"
+                              hx-swap="innerHTML">
+                            {% csrf_token %}
+                            <input type="hidden" name="section_type" value="{{ type_value }}">
+                            <button type="submit"
+                                    class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                    onclick="document.getElementById('section-dropdown').classList.add('hidden')">
+                                {{ type_label }}
+                            </button>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- セクションリスト -->
+            <div id="section-list">
+                {% include "funnels/partials/section_list.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- セクション編集モーダル -->
+<div id="section-modal" class="hidden fixed inset-0 z-50">
+    <div class="fixed inset-0 bg-black/50" onclick="closeSectionModal()"></div>
+    <div class="fixed inset-y-0 right-0 w-full max-w-lg bg-white shadow-xl overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">セクション編集</h3>
+                <button onclick="closeSectionModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="section-modal-content">
+                <!-- HTMX で section_form.html がここに読み込まれる -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// ドロップダウンの外側クリックで閉じる
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('section-dropdown');
+    if (dropdown && !dropdown.parentElement.contains(e.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+
+// セクション編集モーダルの開閉
+function openSectionModal(url) {
+    const modal = document.getElementById('section-modal');
+    const content = document.getElementById('section-modal-content');
+    modal.classList.remove('hidden');
+    // HTMXでフォームをロード
+    htmx.ajax('GET', url, {target: '#section-modal-content', swap: 'innerHTML'});
+}
+
+function closeSectionModal() {
+    document.getElementById('section-modal').classList.add('hidden');
+    document.getElementById('section-modal-content').innerHTML = '';
+}
+
+// HTMX イベント: セクション編集保存後にモーダルを閉じる
+document.body.addEventListener('htmx:afterSwap', function(evt) {
+    if (evt.detail.target.id === 'section-list' && document.getElementById('section-modal')) {
+        closeSectionModal();
+    }
+});
+
+// SortableJS でセクション並び替え
+function initSortable() {
+    const el = document.getElementById('sortable-sections');
+    if (el) {
+        new Sortable(el, {
+            handle: '.drag-handle',
+            animation: 150,
+            ghostClass: 'bg-blue-50',
+            onEnd: function() {
+                const items = el.querySelectorAll('[data-section-id]');
+                const order = Array.from(items).map(item => parseInt(item.dataset.sectionId));
+
+                fetch("{% url 'funnels:section_reorder' page_id=page.pk %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify({ order: order }),
+                });
+            }
+        });
+    }
+}
+
+// 初期化 & HTMX更新後に再初期化
+document.addEventListener('DOMContentLoaded', initSortable);
+document.body.addEventListener('htmx:afterSwap', function(evt) {
+    if (evt.detail.target.id === 'section-list') {
+        initSortable();
+    }
+});
+</script>
+{% endblock %}
