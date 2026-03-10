@@ -91,6 +91,8 @@ if DATABASE_URL:
     DATABASES['default']['OPTIONS'] = {
         'connect_timeout': 10,
     }
+    DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
+    DATABASES['default']['CONN_MAX_AGE'] = 0
 else:
     DATABASES = {
         'default': {
@@ -164,6 +166,13 @@ else:
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'sk_test_placeholder')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', 'whsec_placeholder')
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY', 'pk_test_placeholder')
+
+
+# Session & Cookie (HTTPS on Vercel)
+
+SESSION_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SECURE = not DEBUG
 
 
 # Authentication
