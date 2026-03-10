@@ -88,6 +88,9 @@ if DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.parse(DATABASE_URL)
     }
+    DATABASES['default']['OPTIONS'] = {
+        'connect_timeout': 10,
+    }
 else:
     DATABASES = {
         'default': {
