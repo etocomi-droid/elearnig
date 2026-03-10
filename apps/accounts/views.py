@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
@@ -11,6 +11,11 @@ from django.views.generic import ListView
 from apps.accounts.forms import SignupForm, ProjectForm
 from apps.accounts.models import Project, ProjectMember, User
 from apps.sysadmin.models import SupportThread, SupportMessage, Inquiry
+
+
+def custom_logout_view(request):
+    logout(request)
+    return redirect('/login/')
 
 
 def signup_view(request):
