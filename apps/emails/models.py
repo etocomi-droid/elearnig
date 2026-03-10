@@ -3,6 +3,11 @@ from django.db import models
 
 class Scenario(models.Model):
     project = models.ForeignKey('accounts.Project', on_delete=models.CASCADE, related_name='scenarios')
+    site = models.ForeignKey(
+        'members.MemberSite', on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='scenarios',
+        verbose_name='会員サイト',
+    )
     name = models.CharField('シナリオ名', max_length=200)
     is_active = models.BooleanField('有効', default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -57,6 +62,11 @@ class Campaign(models.Model):
         ('sent', '送信済み'),
     ]
     project = models.ForeignKey('accounts.Project', on_delete=models.CASCADE, related_name='campaigns')
+    site = models.ForeignKey(
+        'members.MemberSite', on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='campaigns',
+        verbose_name='会員サイト',
+    )
     name = models.CharField('キャンペーン名', max_length=200)
     subject = models.CharField('件名', max_length=200)
     body_html = models.TextField('本文(HTML)')

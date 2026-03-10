@@ -74,10 +74,20 @@ def site_edit_view(request, pk):
         lesson_count=Count('lessons'),
     ).order_by('sort_order')
 
+    # サイトに紐づくファネル・シナリオ・キャンペーン
+    site_funnels = site.funnels.all().order_by('-created_at')[:10]
+    site_scenarios = site.scenarios.annotate(
+        step_count=Count('steps', distinct=True),
+    ).order_by('-created_at')[:10]
+    site_campaigns = site.campaigns.all().order_by('-created_at')[:10]
+
     return render(request, 'members/site_edit.html', {
         'form': form,
         'site': site,
         'courses': courses,
+        'site_funnels': site_funnels,
+        'site_scenarios': site_scenarios,
+        'site_campaigns': site_campaigns,
         'is_new': False,
     })
 

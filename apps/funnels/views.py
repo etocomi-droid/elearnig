@@ -85,9 +85,23 @@ class FunnelListView(LoginRequiredMixin, ListView):
     context_object_name = 'funnels'
 
     def get_queryset(self):
-        return Funnel.objects.filter(
+        qs = Funnel.objects.filter(
             project=self.request.current_project
         ).prefetch_related('pages').order_by('-created_at')
+        site_id = self.request.GET.get('site')
+        if site_id:
+            qs = qs.filter(site_id=site_id)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        site_id = self.request.GET.get('site')
+        if site_id:
+            from apps.members.models import MemberSite
+            context['current_site'] = MemberSite.objects.filter(
+                pk=site_id, project=self.request.current_project
+            ).first()
+        return context
 
 
 # ---------- ファネル作成 ----------
@@ -99,13 +113,21 @@ def funnel_create_view(request):
     if not project:
         return redirect('accounts:project_list')
 
+    site_id = request.GET.get('site') or request.POST.get('site')
+    site = None
+    if site_id:
+        from apps.members.models import MemberSite
+        site = get_object_or_404(MemberSite, pk=site_id, project=project)
+
     if request.method == 'POST':
         form = FunnelForm(request.POST)
         if form.is_valid():
             funnel = form.save(commit=False)
             funnel.project = project
+            funnel.site = site
             funnel.save()
             messages.success(request, f'ファネル「{funnel.name}」を作成しました。')
+            redirect_url = f"{'funnels:funnel_edit'}"
             return redirect('funnels:funnel_edit', pk=funnel.pk)
     else:
         form = FunnelForm()
@@ -113,6 +135,7 @@ def funnel_create_view(request):
     return render(request, 'funnels/funnel_form.html', {
         'form': form,
         'is_create': True,
+        'current_site': site,
     })
 
 

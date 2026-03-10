@@ -5,6 +5,11 @@ class Funnel(models.Model):
     project = models.ForeignKey(
         'accounts.Project', on_delete=models.CASCADE, related_name='funnels'
     )
+    site = models.ForeignKey(
+        'members.MemberSite', on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='funnels',
+        verbose_name='会員サイト',
+    )
     name = models.CharField('ファネル名', max_length=200)
     slug = models.SlugField('スラッグ')
     is_published = models.BooleanField('公開', default=False)

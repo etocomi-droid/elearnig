@@ -70,73 +70,262 @@
         {% endif %}
     </div>
 
-    <!-- コース一覧 -->
+    <!-- タブ付きコンテンツ -->
     {% if not is_new %}
     <div class="lg:col-span-2">
-        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
-            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-                <h2 class="text-base font-semibold text-gray-900">コース一覧</h2>
-                <a href="{% url 'members:course_create' %}?site={{ site.pk }}"
-                   class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                    </svg>
-                    コース追加
-                </a>
-            </div>
+        <!-- タブナビゲーション -->
+        <nav class="flex space-x-1 bg-white rounded-lg shadow-sm border border-gray-200 p-1 mb-6">
+            <button onclick="showTab('courses')" id="tab-courses"
+                    class="px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white transition-colors">
+                コース
+            </button>
+            <button onclick="showTab('funnels')" id="tab-funnels"
+                    class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">
+                ファネル
+            </button>
+            <button onclick="showTab('scenarios')" id="tab-scenarios"
+                    class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">
+                シナリオ
+            </button>
+            <button onclick="showTab('campaigns')" id="tab-campaigns"
+                    class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">
+                一斉配信
+            </button>
+        </nav>
 
-            {% if courses %}
-            <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {% for course in courses %}
-                <a href="{% url 'members:course_edit' pk=course.pk %}"
-                   class="block rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all group overflow-hidden">
-                    {% if course.thumbnail %}
-                    <div class="aspect-video bg-gray-100 overflow-hidden">
-                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    {% else %}
-                    <div class="aspect-video bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center">
-                        <svg class="w-12 h-12 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- タブ: コース -->
+        <div id="panel-courses">
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-base font-semibold text-gray-900">コース一覧</h2>
+                    <a href="{% url 'members:course_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        コース追加
+                    </a>
+                </div>
+                {% if courses %}
+                <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {% for course in courses %}
+                    <a href="{% url 'members:course_edit' pk=course.pk %}"
+                       class="block rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all group overflow-hidden">
+                        {% if course.thumbnail %}
+                        <div class="aspect-video bg-gray-100 overflow-hidden">
+                            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        </div>
+                        {% else %}
+                        <div class="aspect-video bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        {% endif %}
+                        <div class="p-4">
+                            <h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
+                                {{ course.title }}
+                            </h3>
+                            <div class="flex items-center gap-3 text-xs text-gray-500">
+                                <span>{{ course.lesson_count }} レッスン</span>
+                                {% if course.is_published %}
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">公開</span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">非公開</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="p-12 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
                     </div>
-                    {% endif %}
-                    <div class="p-4">
-                        <h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
-                            {{ course.title }}
-                        </h3>
-                        <div class="flex items-center gap-3 text-xs text-gray-500">
-                            <span>{{ course.lesson_count }} レッスン</span>
-                            {% if course.is_published %}
-                                <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">公開</span>
+                    <p class="text-sm text-gray-500 mb-4">コースがまだありません</p>
+                    <a href="{% url 'members:course_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        最初のコースを作成
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- タブ: ファネル -->
+        <div id="panel-funnels" style="display:none;">
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-base font-semibold text-gray-900">ファネル</h2>
+                    <a href="{% url 'funnels:funnel_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        ファネル追加
+                    </a>
+                </div>
+                {% if site_funnels %}
+                <div class="divide-y divide-gray-100">
+                    {% for funnel in site_funnels %}
+                    <a href="{% url 'funnels:funnel_edit' pk=funnel.pk %}" class="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-900">{{ funnel.name }}</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">{{ funnel.pages.count }} ページ</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            {% if funnel.is_published %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">公開</span>
                             {% else %}
-                                <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">非公開</span>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">非公開</span>
                             {% endif %}
                         </div>
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-            {% else %}
-            <div class="p-12 text-center">
-                <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                    </svg>
+                    </a>
+                    {% endfor %}
                 </div>
-                <p class="text-sm text-gray-500 mb-4">コースがまだありません</p>
-                <a href="{% url 'members:course_create' %}?site={{ site.pk }}"
-                   class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                    </svg>
-                    最初のコースを作成
-                </a>
+                <div class="px-6 py-3 border-t border-gray-100">
+                    <a href="{% url 'funnels:funnel_list' %}?site={{ site.pk }}" class="text-sm text-blue-600 hover:text-blue-700">すべて表示 &rarr;</a>
+                </div>
+                {% else %}
+                <div class="p-12 text-center">
+                    <p class="text-sm text-gray-500 mb-4">ファネルがまだありません</p>
+                    <a href="{% url 'funnels:funnel_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        最初のファネルを作成
+                    </a>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
+        </div>
+
+        <!-- タブ: シナリオ -->
+        <div id="panel-scenarios" style="display:none;">
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-base font-semibold text-gray-900">シナリオ（ステップメール）</h2>
+                    <a href="{% url 'emails:scenario_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        シナリオ追加
+                    </a>
+                </div>
+                {% if site_scenarios %}
+                <div class="divide-y divide-gray-100">
+                    {% for scenario in site_scenarios %}
+                    <a href="{% url 'emails:scenario_edit' pk=scenario.pk %}" class="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-900">{{ scenario.name }}</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">{{ scenario.step_count }} ステップ</p>
+                        </div>
+                        <div>
+                            {% if scenario.is_active %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">有効</span>
+                            {% else %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">無効</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="px-6 py-3 border-t border-gray-100">
+                    <a href="{% url 'emails:scenario_list' %}?site={{ site.pk }}" class="text-sm text-blue-600 hover:text-blue-700">すべて表示 &rarr;</a>
+                </div>
+                {% else %}
+                <div class="p-12 text-center">
+                    <p class="text-sm text-gray-500 mb-4">シナリオがまだありません</p>
+                    <a href="{% url 'emails:scenario_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        最初のシナリオを作成
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- タブ: 一斉配信 -->
+        <div id="panel-campaigns" style="display:none;">
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-base font-semibold text-gray-900">一斉配信</h2>
+                    <a href="{% url 'emails:campaign_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        一斉配信作成
+                    </a>
+                </div>
+                {% if site_campaigns %}
+                <div class="divide-y divide-gray-100">
+                    {% for campaign in site_campaigns %}
+                    <a href="{% url 'emails:campaign_edit' pk=campaign.pk %}" class="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-900">{{ campaign.name }}</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">{{ campaign.subject }}</p>
+                        </div>
+                        <div>
+                            {% if campaign.status == 'sent' %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">送信済み</span>
+                            {% elif campaign.status == 'draft' %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">下書き</span>
+                            {% else %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">{{ campaign.get_status_display }}</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="px-6 py-3 border-t border-gray-100">
+                    <a href="{% url 'emails:campaign_list' %}?site={{ site.pk }}" class="text-sm text-blue-600 hover:text-blue-700">すべて表示 &rarr;</a>
+                </div>
+                {% else %}
+                <div class="p-12 text-center">
+                    <p class="text-sm text-gray-500 mb-4">一斉配信がまだありません</p>
+                    <a href="{% url 'emails:campaign_create' %}?site={{ site.pk }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        最初の一斉配信を作成
+                    </a>
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function showTab(name) {
+    ['courses', 'funnels', 'scenarios', 'campaigns'].forEach(function(t) {
+        var panel = document.getElementById('panel-' + t);
+        var btn = document.getElementById('tab-' + t);
+        if (!panel || !btn) return;
+        panel.style.display = (t === name) ? '' : 'none';
+        if (t === name) {
+            btn.className = 'px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white transition-colors';
+        } else {
+            btn.className = 'px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors';
+        }
+    });
+}
+</script>
 {% endblock %}

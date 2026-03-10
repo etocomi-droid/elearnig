@@ -32,7 +32,7 @@ class ScenarioListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         project = self.request.current_project
-        return (
+        qs = (
             Scenario.objects
             .filter(project=project)
             .annotate(
@@ -40,12 +40,22 @@ class ScenarioListView(LoginRequiredMixin, ListView):
                 subscriber_count=Count('subscriptions', distinct=True),
             )
         )
+        site_id = self.request.GET.get('site')
+        if site_id:
+            qs = qs.filter(site_id=site_id)
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_count'] = Scenario.objects.filter(
             project=self.request.current_project
         ).count()
+        site_id = self.request.GET.get('site')
+        if site_id:
+            from apps.members.models import MemberSite
+            context['current_site'] = MemberSite.objects.filter(
+                pk=site_id, project=self.request.current_project
+            ).first()
         return context
 
 
@@ -57,11 +67,18 @@ def scenario_create_view(request):
     if not project:
         return redirect('accounts:project_list')
 
+    site_id = request.GET.get('site') or request.POST.get('site')
+    site = None
+    if site_id:
+        from apps.members.models import MemberSite
+        site = get_object_or_404(MemberSite, pk=site_id, project=project)
+
     if request.method == 'POST':
         form = ScenarioForm(request.POST)
         if form.is_valid():
             scenario = form.save(commit=False)
             scenario.project = project
+            scenario.site = site
             scenario.save()
             messages.success(request, f'シナリオ「{scenario.name}」を作成しました。')
             return redirect('emails:scenario_edit', pk=scenario.pk)
@@ -71,6 +88,7 @@ def scenario_create_view(request):
     return render(request, 'emails/scenario_edit.html', {
         'form': form,
         'is_new': True,
+        'current_site': site,
     })
 
 
@@ -223,13 +241,23 @@ class CampaignListView(LoginRequiredMixin, ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Campaign.objects.filter(project=self.request.current_project)
+        qs = Campaign.objects.filter(project=self.request.current_project)
+        site_id = self.request.GET.get('site')
+        if site_id:
+            qs = qs.filter(site_id=site_id)
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_count'] = Campaign.objects.filter(
             project=self.request.current_project
         ).count()
+        site_id = self.request.GET.get('site')
+        if site_id:
+            from apps.members.models import MemberSite
+            context['current_site'] = MemberSite.objects.filter(
+                pk=site_id, project=self.request.current_project
+            ).first()
         return context
 
 
@@ -241,13 +269,20 @@ def campaign_create_view(request):
     if not project:
         return redirect('accounts:project_list')
 
+    site_id = request.GET.get('site') or request.POST.get('site')
+    site = None
+    if site_id:
+        from apps.members.models import MemberSite
+        site = get_object_or_404(MemberSite, pk=site_id, project=project)
+
     if request.method == 'POST':
         form = CampaignForm(request.POST, project=project)
         if form.is_valid():
             campaign = form.save(commit=False)
             campaign.project = project
+            campaign.site = site
             campaign.save()
-            form.save_m2m()  # ManyToMany の target_tags を保存
+            form.save_m2m()
             messages.success(request, f'一斉配信「{campaign.name}」を作成しました。')
             return redirect('emails:campaign_edit', pk=campaign.pk)
     else:
@@ -256,6 +291,7 @@ def campaign_create_view(request):
     return render(request, 'emails/campaign_edit.html', {
         'form': form,
         'is_new': True,
+        'current_site': site,
     })
 
 
