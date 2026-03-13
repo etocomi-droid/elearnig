@@ -4,9 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
-from apps.accounts.views import signup_view, custom_logout_view
+from apps.accounts.views import signup_view, custom_logout_view, password_reset_view
 
 urlpatterns = [
+    path('password-reset/', password_reset_view, name='password_reset'),
     path('django-admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('logout/', custom_logout_view, name='logout'),

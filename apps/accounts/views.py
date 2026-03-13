@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import View
@@ -28,6 +29,71 @@ def signup_view(request):
     else:
         form = SignupForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
+
+def password_reset_view(request):
+    """パスワードリセット（ユーザー名またはメールで検索 → 新パスワード設定）"""
+    if request.method == 'POST':
+        step = request.POST.get('step', 'find')
+
+        if step == 'find':
+            identifier = request.POST.get('identifier', '').strip()
+            if not identifier:
+                messages.error(request, 'ユーザー名またはメールアドレスを入力してください。')
+                return render(request, 'accounts/password_reset.html')
+
+            user = User.objects.filter(
+                Q(username=identifier) | Q(email=identifier)
+            ).first()
+
+            if not user:
+                messages.error(request, '該当するアカウントが見つかりません。')
+                return render(request, 'accounts/password_reset.html')
+
+            return render(request, 'accounts/password_reset.html', {
+                'found_user': user,
+                'user_id': user.pk,
+            })
+
+        elif step == 'reset':
+            user_id = request.POST.get('user_id', '')
+            new_password = request.POST.get('new_password', '')
+            confirm_password = request.POST.get('confirm_password', '')
+
+            if not new_password:
+                messages.error(request, '新しいパスワードを入力してください。')
+                user = User.objects.filter(pk=user_id).first()
+                return render(request, 'accounts/password_reset.html', {
+                    'found_user': user,
+                    'user_id': user_id,
+                })
+
+            if len(new_password) < 8:
+                messages.error(request, 'パスワードは8文字以上で入力してください。')
+                user = User.objects.filter(pk=user_id).first()
+                return render(request, 'accounts/password_reset.html', {
+                    'found_user': user,
+                    'user_id': user_id,
+                })
+
+            if new_password != confirm_password:
+                messages.error(request, 'パスワードが一致しません。')
+                user = User.objects.filter(pk=user_id).first()
+                return render(request, 'accounts/password_reset.html', {
+                    'found_user': user,
+                    'user_id': user_id,
+                })
+
+            try:
+                user = User.objects.get(pk=user_id)
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'パスワードを変更しました。新しいパスワードでログインしてください。')
+                return redirect('login')
+            except User.DoesNotExist:
+                messages.error(request, 'ユーザーが見つかりません。')
+
+    return render(request, 'accounts/password_reset.html')
 
 
 class DashboardView(LoginRequiredMixin, View):
