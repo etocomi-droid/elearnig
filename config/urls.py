@@ -3,10 +3,34 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.http import JsonResponse
 
 from apps.accounts.views import signup_view, custom_logout_view
 
+
+# TEMP: debug file listing
+def _debug_files(request):
+    import os
+    base = '/var/task'
+    templates_dir = os.path.join(base, 'templates')
+    result = {
+        'cwd': os.getcwd(),
+        'base_contents': sorted(os.listdir(base)) if os.path.isdir(base) else 'NOT FOUND',
+        'templates_exists': os.path.isdir(templates_dir),
+    }
+    if os.path.isdir(templates_dir):
+        all_files = []
+        for root, dirs, files in os.walk(templates_dir):
+            for f in files:
+                all_files.append(os.path.relpath(os.path.join(root, f), base))
+        result['template_files'] = sorted(all_files)
+    else:
+        result['template_files'] = []
+    return JsonResponse(result)
+
+
 urlpatterns = [
+    path('_debug/files/', _debug_files),
     path('django-admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('logout/', custom_logout_view, name='logout'),
