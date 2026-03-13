@@ -39,6 +39,9 @@ if VERCEL_URL:
         CSRF_TRUSTED_ORIGINS.append(vercel_origin)
 if 'https://elearnig.vercel.app' not in CSRF_TRUSTED_ORIGINS:
     CSRF_TRUSTED_ORIGINS.append('https://elearnig.vercel.app')
+# Trust all Vercel preview/production subdomains
+if 'https://*.vercel.app' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://*.vercel.app')
 
 
 # Application definition
