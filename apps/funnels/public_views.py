@@ -31,7 +31,7 @@ def public_page_view(request, funnel_slug, page_slug):
     meta_title = page.meta_title or page.title
     meta_description = page.meta_description or ''
 
-    return render(request, 'funnels/public/page_render.html', {
+    return render(request, 'funnels/pub/page_render.html', {
         'funnel': funnel,
         'page': page,
         'sections': processed_sections,
@@ -116,7 +116,7 @@ def form_submit_view(request):
         pass
 
     # フォールバック: シンプルなサンクスメッセージ
-    return render(request, 'funnels/public/thanks_fallback.html', {
+    return render(request, 'funnels/pub/thanks_fallback.html', {
         'funnel': funnel,
     })
 
