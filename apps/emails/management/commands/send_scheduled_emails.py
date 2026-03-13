@@ -83,12 +83,23 @@ class Command(BaseCommand):
             # メール送信
             contact = subscription.contact
             try:
+                # テンプレート変数の置換
+                subject = self._render_template(
+                    next_step.subject, contact, subscription.scenario
+                )
+                body_html = self._render_template(
+                    next_step.body_html, contact, subscription.scenario
+                )
+                body_text = self._render_template(
+                    next_step.body_text or '', contact, subscription.scenario
+                )
+
                 send_mail(
-                    subject=next_step.subject,
-                    message=next_step.body_text or '',
+                    subject=subject,
+                    message=body_text,
                     from_email=None,  # settings.DEFAULT_FROM_EMAIL を使用
                     recipient_list=[contact.email],
-                    html_message=next_step.body_html,
+                    html_message=body_html,
                     fail_silently=False,
                 )
 
@@ -166,3 +177,27 @@ class Command(BaseCommand):
                 f'completed={completed_count}'
             )
         )
+
+    @staticmethod
+    def _render_template(text, contact, scenario):
+        """メール本文内の {{変数}} をコンタクト情報・シナリオ設定で置換する"""
+        if not text:
+            return text
+        replacements = {
+            '{{name}}': contact.name or '',
+            '{{email}}': contact.email or '',
+            '{{sender_name}}': scenario.sender_name or '',
+            '{{cta_url}}': scenario.cta_url or '',
+            # 旧形式（PDFテンプレートとの互換性）
+            '（お名前）': contact.name or '',
+            '（運営者名）': scenario.sender_name or '',
+            '（申込リンク）': scenario.cta_url or '',
+            '（リンク）': scenario.cta_url or '',
+            '（相談リンク）': scenario.cta_url or '',
+            '（説明会リンク）': scenario.cta_url or '',
+            '（面談リンク）': scenario.cta_url or '',
+            '（署名）': scenario.sender_name or '',
+        }
+        for key, value in replacements.items():
+            text = text.replace(key, value)
+        return text

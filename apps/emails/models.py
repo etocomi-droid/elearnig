@@ -9,6 +9,10 @@ class Scenario(models.Model):
         verbose_name='会員サイト',
     )
     name = models.CharField('シナリオ名', max_length=200)
+    sender_name = models.CharField('運営者名（差出人名）', max_length=200, blank=True,
+                                   help_text='メール本文内の{{sender_name}}に置換されます')
+    cta_url = models.URLField('申込リンクURL', blank=True,
+                              help_text='メール本文内の{{cta_url}}に置換されます')
     is_active = models.BooleanField('有効', default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -6,12 +6,22 @@ from apps.contacts.models import Tag
 class ScenarioForm(forms.ModelForm):
     class Meta:
         model = Scenario
-        fields = ['name', 'is_active']
+        fields = ['name', 'sender_name', 'cta_url', 'is_active']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'block w-full px-4 py-2 border border-gray-300 rounded-lg text-sm '
                          'focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
                 'placeholder': 'シナリオ名を入力',
+            }),
+            'sender_name': forms.TextInput(attrs={
+                'class': 'block w-full px-4 py-2 border border-gray-300 rounded-lg text-sm '
+                         'focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
+                'placeholder': '例：田中太郎、○○事務局',
+            }),
+            'cta_url': forms.URLInput(attrs={
+                'class': 'block w-full px-4 py-2 border border-gray-300 rounded-lg text-sm '
+                         'focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
+                'placeholder': 'https://example.com/apply',
             }),
             'is_active': forms.CheckboxInput(attrs={
                 'class': 'h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500',

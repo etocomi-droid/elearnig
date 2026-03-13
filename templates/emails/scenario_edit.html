@@ -33,6 +33,41 @@
                 {% endif %}
             </div>
 
+            <!-- 運営者名 -->
+            <div class="mb-5">
+                <label for="id_sender_name" class="block text-sm font-medium text-gray-700 mb-1">
+                    運営者名（差出人名）
+                </label>
+                {{ form.sender_name }}
+                <p class="mt-1 text-xs text-gray-500">メール本文内の <code class="px-1 py-0.5 bg-gray-100 rounded text-xs">{{ "{{sender_name}}" }}</code> に自動挿入されます</p>
+                {% if form.sender_name.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.sender_name.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- 申込リンクURL -->
+            <div class="mb-5">
+                <label for="id_cta_url" class="block text-sm font-medium text-gray-700 mb-1">
+                    申込リンクURL
+                </label>
+                {{ form.cta_url }}
+                <p class="mt-1 text-xs text-gray-500">メール本文内の <code class="px-1 py-0.5 bg-gray-100 rounded text-xs">{{ "{{cta_url}}" }}</code> に自動挿入されます</p>
+                {% if form.cta_url.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.cta_url.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- 使える変数の一覧 -->
+            <div class="mb-5 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p class="text-xs font-medium text-blue-800 mb-1">ステップメールで使える変数：</p>
+                <ul class="text-xs text-blue-700 space-y-0.5">
+                    <li><code class="px-1 py-0.5 bg-blue-100 rounded">{{ "{{name}}" }}</code> → 宛先のお名前</li>
+                    <li><code class="px-1 py-0.5 bg-blue-100 rounded">{{ "{{email}}" }}</code> → 宛先のメールアドレス</li>
+                    <li><code class="px-1 py-0.5 bg-blue-100 rounded">{{ "{{sender_name}}" }}</code> → 上で設定した運営者名</li>
+                    <li><code class="px-1 py-0.5 bg-blue-100 rounded">{{ "{{cta_url}}" }}</code> → 上で設定した申込リンクURL</li>
+                </ul>
+            </div>
+
             <!-- 有効/無効 -->
             <div class="mb-5">
                 <label class="flex items-center gap-2">
