@@ -1,5 +1,8 @@
 import json
+import os
+import uuid
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,6 +18,24 @@ from apps.funnels.forms import FunnelForm, FunnelPageForm
 from apps.funnels.models import Funnel, FunnelPage, PageSection
 
 
+ALLOWED_IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'}
+
+
+def save_section_image(uploaded_file, project_id):
+    """アップロードされた画像を保存し、メディアURLを返す"""
+    ext = os.path.splitext(uploaded_file.name)[1].lower()
+    if ext not in ALLOWED_IMAGE_EXTENSIONS:
+        return None
+    filename = f"{uuid.uuid4().hex}{ext}"
+    rel_path = f"sections/{project_id}/{filename}"
+    full_path = os.path.join(settings.MEDIA_ROOT, rel_path)
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    with open(full_path, 'wb+') as f:
+        for chunk in uploaded_file.chunks():
+            f.write(chunk)
+    return f"{settings.MEDIA_URL}{rel_path}"
+
+
 # ---------- デフォルトコンテンツ ----------
 
 SECTION_DEFAULTS = {
@@ -22,6 +43,7 @@ SECTION_DEFAULTS = {
         'headline': '大きな見出しテキスト',
         'subheadline': 'サブ見出しテキスト',
         'bg_color': '#1e40af',
+        'bg_image_url': '',
     },
     'text': {
         'body': '<p>ここにテキストを入力してください。</p>',
@@ -347,14 +369,37 @@ def section_edit_view(request, pk):
         content = {}
         st = section.section_type
 
+        project_id = project.pk
+
         if st == 'hero':
             content['headline'] = request.POST.get('headline', '')
             content['subheadline'] = request.POST.get('subheadline', '')
             content['bg_color'] = request.POST.get('bg_color', '#1e40af')
+            # 背景画像アップロード
+            if 'bg_image_file' in request.FILES:
+                url = save_section_image(request.FILES['bg_image_file'], project_id)
+                if url:
+                    content['bg_image_url'] = url
+                else:
+                    content['bg_image_url'] = section.content.get('bg_image_url', '')
+            elif request.POST.get('remove_bg_image'):
+                content['bg_image_url'] = ''
+            else:
+                content['bg_image_url'] = section.content.get('bg_image_url', '')
         elif st == 'text':
             content['body'] = request.POST.get('body', '')
         elif st == 'image':
-            content['image_url'] = request.POST.get('image_url', '')
+            # 画像アップロード
+            if 'image_file' in request.FILES:
+                url = save_section_image(request.FILES['image_file'], project_id)
+                if url:
+                    content['image_url'] = url
+                else:
+                    content['image_url'] = request.POST.get('image_url', '') or section.content.get('image_url', '')
+            elif request.POST.get('remove_image'):
+                content['image_url'] = ''
+            else:
+                content['image_url'] = request.POST.get('image_url', '') or section.content.get('image_url', '')
             content['alt_text'] = request.POST.get('alt_text', '')
         elif st == 'video':
             content['video_url'] = request.POST.get('video_url', '')
@@ -374,7 +419,17 @@ def section_edit_view(request, pk):
         elif st == 'testimonial':
             content['name'] = request.POST.get('testimonial_name', '')
             content['text'] = request.POST.get('testimonial_text', '')
-            content['image_url'] = request.POST.get('image_url', '')
+            # 画像アップロード
+            if 'image_file' in request.FILES:
+                url = save_section_image(request.FILES['image_file'], project_id)
+                if url:
+                    content['image_url'] = url
+                else:
+                    content['image_url'] = request.POST.get('image_url', '') or section.content.get('image_url', '')
+            elif request.POST.get('remove_image'):
+                content['image_url'] = ''
+            else:
+                content['image_url'] = request.POST.get('image_url', '') or section.content.get('image_url', '')
         elif st == 'faq':
             questions = request.POST.getlist('faq_question')
             answers = request.POST.getlist('faq_answer')

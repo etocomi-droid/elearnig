@@ -163,9 +163,67 @@ function openSectionModal(url) {
 }
 
 function closeSectionModal() {
+    destroyAllEditors();
     document.getElementById('section-modal').classList.add('hidden');
     document.getElementById('section-modal-content').innerHTML = '';
 }
+
+// ---- Quill リッチテキストエディタ連携 ----
+var QUILL_TOOLBAR = [
+    [{ 'header': [1, 2, 3, false] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    ['link'],
+    ['clean']
+];
+
+var activeQuillInstances = [];
+
+function initRichTextEditors(container) {
+    container = container || document.getElementById('section-modal-content');
+    if (!container) return;
+    var textareas = container.querySelectorAll('textarea.richtext-editor');
+    textareas.forEach(function(textarea) {
+        if (textarea.dataset.quillInit === 'true') return;
+        var editorDiv = textarea.nextElementSibling;
+        if (!editorDiv || !editorDiv.classList.contains('quill-container')) return;
+
+        var quill = new Quill(editorDiv, {
+            theme: 'snow',
+            modules: { toolbar: QUILL_TOOLBAR },
+            placeholder: textarea.placeholder || ''
+        });
+        // 初期コンテンツを設定
+        quill.root.innerHTML = textarea.value || '';
+        textarea.dataset.quillInit = 'true';
+        textarea.__quill = quill;
+        activeQuillInstances.push({ quill: quill, textarea: textarea });
+    });
+}
+
+function syncAllEditors() {
+    activeQuillInstances.forEach(function(item) {
+        item.textarea.value = item.quill.root.innerHTML;
+    });
+}
+
+function destroyAllEditors() {
+    activeQuillInstances = [];
+}
+
+// HTMX イベント: セクションフォーム読込後にQuill初期化
+document.body.addEventListener('htmx:afterSwap', function(evt) {
+    if (evt.detail.target.id === 'section-modal-content') {
+        setTimeout(function() { initRichTextEditors(); }, 50);
+    }
+});
+
+// HTMX イベント: フォーム送信前にQuill内容をtextareaに同期
+document.body.addEventListener('htmx:configRequest', function(evt) {
+    if (evt.detail.elt && evt.detail.elt.closest && evt.detail.elt.closest('#section-modal-content')) {
+        syncAllEditors();
+    }
+});
 
 // HTMX イベント: セクション編集保存後にモーダルを閉じる
 document.body.addEventListener('htmx:afterSwap', function(evt) {

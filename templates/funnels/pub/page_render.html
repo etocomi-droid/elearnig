@@ -201,6 +201,12 @@
         font-style: italic;
         margin-bottom: 16px;
     }
+    .section-testimonial .testimonial-text p { margin-bottom: 0.5em; }
+    .section-testimonial .testimonial-text p:last-child { margin-bottom: 0; }
+    .section-testimonial .testimonial-text strong { font-weight: 700; }
+    .section-testimonial .testimonial-text em { font-style: italic; }
+    .section-testimonial .testimonial-text ul { list-style: disc; padding-left: 1.5em; margin-bottom: 0.5em; }
+    .section-testimonial .testimonial-text ol { list-style: decimal; padding-left: 1.5em; margin-bottom: 0.5em; }
     .section-testimonial .testimonial-author {
         display: flex;
         align-items: center;
@@ -286,6 +292,11 @@
         text-align: center;
         margin-bottom: 24px;
     }
+    .section-booking .booking-description p { margin-bottom: 0.5em; }
+    .section-booking .booking-description p:last-child { margin-bottom: 0; }
+    .section-booking .booking-description strong { font-weight: 700; }
+    .section-booking .booking-description ul { list-style: disc; padding-left: 1.5em; text-align: left; margin-bottom: 0.5em; }
+    .section-booking .booking-description ol { list-style: decimal; padding-left: 1.5em; text-align: left; margin-bottom: 0.5em; }
     .booking-widget {
         background: #ffffff;
         border: 1px solid #e5e7eb;
@@ -486,7 +497,7 @@
 
         {% if section.section_type == 'hero' %}
         <!-- ヒーローセクション -->
-        <section class="section-hero" style="background-color: {{ section.content.bg_color|default:'#1e40af' }};">
+        <section class="section-hero" style="background-color: {{ section.content.bg_color|default:'#1e40af' }};{% if section.content.bg_image_url %} background-image: url('{{ section.content.bg_image_url }}'); background-size: cover; background-position: center;{% endif %}">
             <h1>{{ section.content.headline|default:'' }}</h1>
             {% if section.content.subheadline %}
             <p>{{ section.content.subheadline }}</p>
@@ -576,7 +587,7 @@
         <!-- お客様の声 -->
         <section class="section-testimonial">
             <div class="testimonial-card">
-                <div class="testimonial-text">"{{ section.content.text|default:'' }}"</div>
+                <div class="testimonial-text">{{ section.content.text|default:''|safe }}</div>
                 <div class="testimonial-author">
                     {% if section.content.image_url %}
                     <img src="{{ section.content.image_url }}" alt="{{ section.content.name|default:'' }}">
@@ -631,7 +642,7 @@
             <div class="booking-heading">{{ section.content.heading }}</div>
             {% endif %}
             {% if section.content.description %}
-            <div class="booking-description">{{ section.content.description }}</div>
+            <div class="booking-description">{{ section.content.description|safe }}</div>
             {% endif %}
             <div class="booking-widget"
                  id="booking-widget-{{ section.pk }}"

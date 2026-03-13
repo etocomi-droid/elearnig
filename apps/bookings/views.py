@@ -119,7 +119,9 @@ def booking_type_delete_view(request, pk):
         messages.success(request, f'予約タイプ「{name}」を削除しました。')
         return redirect('bookings:booking_type_list')
 
-    return redirect('bookings:booking_type_edit', pk=booking_type.pk)
+    return render(request, 'bookings/booking_type_delete_confirm.html', {
+        'booking_type': booking_type,
+    })
 
 
 # ---------- 受付時間保存 (HTMX) ----------

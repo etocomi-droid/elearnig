@@ -172,7 +172,10 @@ def course_delete_view(request, pk):
         messages.success(request, f'コース「{course_title}」を削除しました。')
         return redirect('members:site_edit', pk=site.pk)
 
-    return redirect('members:course_edit', pk=course.pk)
+    return render(request, 'members/course_delete_confirm.html', {
+        'course': course,
+        'site': site,
+    })
 
 
 @login_required
@@ -261,7 +264,10 @@ def lesson_delete_view(request, pk):
         messages.success(request, f'レッスン「{lesson_title}」を削除しました。')
         return redirect('members:course_edit', pk=course.pk)
 
-    return redirect('members:lesson_edit', pk=lesson.pk)
+    return render(request, 'members/lesson_delete_confirm.html', {
+        'lesson': lesson,
+        'course': course,
+    })
 
 
 @login_required
@@ -396,7 +402,10 @@ def question_delete_view(request, pk):
         messages.success(request, '問題を削除しました。')
         return redirect('members:quiz_setup', pk=lesson.pk)
 
-    return redirect('members:quiz_setup', pk=lesson.pk)
+    return render(request, 'members/question_delete_confirm.html', {
+        'question': question,
+        'lesson': lesson,
+    })
 
 
 @login_required

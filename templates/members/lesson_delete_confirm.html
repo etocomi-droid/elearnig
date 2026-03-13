@@ -1,0 +1,46 @@
+{% extends "base_admin.html" %}
+
+{% block title %}レッスン削除 - {{ lesson.title }}{% endblock %}
+{% block page_title %}レッスン削除{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto">
+    <nav class="mb-6 text-sm">
+        <a href="{% url 'members:member_site_list' %}" class="text-blue-600 hover:text-blue-800">会員サイト</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <a href="{% url 'members:course_edit' pk=course.pk %}" class="text-blue-600 hover:text-blue-800">{{ course.title }}</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <span class="text-gray-600">{{ lesson.title }} - 削除</span>
+    </nav>
+
+    <div class="bg-white rounded-xl border border-red-200 p-6">
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">レッスンを削除しますか？</h3>
+                <p class="mt-2 text-sm text-gray-600">
+                    レッスン「<strong>{{ lesson.title }}</strong>」が完全に削除されます。この操作は取り消せません。
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-6 flex items-center gap-3">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit"
+                        class="px-5 py-2.5 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors">
+                    削除する
+                </button>
+            </form>
+            <a href="{% url 'members:lesson_edit' pk=lesson.pk %}"
+               class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                キャンセル
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
