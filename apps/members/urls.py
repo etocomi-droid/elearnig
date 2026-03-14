@@ -16,6 +16,7 @@ from apps.members.views import (
     question_delete_view,
     certificate_edit_view,
     quiz_attempts_view,
+    lesson_preview_view,
 )
 
 app_name = 'members'
@@ -30,6 +31,7 @@ urlpatterns = [
     path('lessons/create/', lesson_create_view, name='lesson_create'),
     path('lessons/<int:pk>/edit/', lesson_edit_view, name='lesson_edit'),
     path('lessons/<int:pk>/delete/', lesson_delete_view, name='lesson_delete'),
+    path('lessons/<int:pk>/preview/', lesson_preview_view, name='lesson_preview'),
     path('lessons/<int:pk>/quiz/setup/', quiz_setup_view, name='quiz_setup'),
     path('lessons/<int:pk>/quiz/delete/', quiz_delete_view, name='quiz_delete'),
     path('quiz/<int:pk>/questions/create/', question_create_view, name='question_create'),

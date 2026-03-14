@@ -160,7 +160,12 @@
                                 {% endif %}
                             </td>
                             <td class="px-6 py-3 text-center text-sm text-gray-500">{{ lesson.sort_order }}</td>
-                            <td class="px-6 py-3 text-right">
+                            <td class="px-6 py-3 text-right whitespace-nowrap">
+                                <button type="button" onclick="openPreview({{ lesson.pk }})"
+                                        class="text-sm text-gray-500 hover:text-blue-600 font-medium transition-colors mr-2"
+                                        title="プレビュー">
+                                    <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
                                 <a href="{% url 'members:lesson_edit' pk=lesson.pk %}"
                                    class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">編集</a>
                             </td>
@@ -214,6 +219,108 @@
 </div>
 
 {% if not is_new %}
+<!-- プレビューモーダル -->
+<div id="preview-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/50" onclick="closePreview()"></div>
+    <div class="relative bg-white rounded-xl shadow-xl max-w-3xl w-full mx-4 max-h-[85vh] flex flex-col">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 flex-shrink-0">
+            <h3 id="preview-title" class="text-lg font-semibold text-gray-900">レッスンプレビュー</h3>
+            <button type="button" onclick="closePreview()"
+                    class="p-1 rounded-lg hover:bg-gray-100 transition-colors">
+                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="preview-body" class="p-6 overflow-y-auto flex-1">
+            <div class="flex justify-center py-12">
+                <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="px-6 py-3 border-t border-gray-200 flex justify-between items-center flex-shrink-0">
+            <div id="preview-meta" class="text-xs text-gray-500"></div>
+            <button type="button" onclick="closePreview()"
+                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                閉じる
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function openPreview(lessonId) {
+    const modal = document.getElementById('preview-modal');
+    const body = document.getElementById('preview-body');
+    const title = document.getElementById('preview-title');
+    const meta = document.getElementById('preview-meta');
+
+    body.innerHTML = '<div class="flex justify-center py-12"><svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg></div>';
+    title.textContent = 'レッスンプレビュー';
+    meta.textContent = '';
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    fetch(`/members/lessons/${lessonId}/preview/`)
+        .then(r => r.json())
+        .then(data => {
+            title.textContent = data.title;
+            meta.textContent = `タイプ: ${data.content_type} ｜ 順序: ${data.sort_order} ｜ ${data.is_published ? '公開中' : '非公開'}`;
+
+            let html = '';
+            if (data.content_type === 'quiz' && data.quiz) {
+                html += `<div class="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                    <p class="text-sm font-medium text-amber-800">テスト: ${data.quiz.description}</p>
+                    <p class="text-xs text-amber-600 mt-1">合格ライン: ${data.quiz.passing_score}% ｜ 問題数: ${data.quiz.question_count}問</p>
+                </div>`;
+            }
+            if (data.body) {
+                html += `<div class="prose prose-sm max-w-none">${data.body}</div>`;
+            }
+            if (data.quiz && data.quiz.questions) {
+                html += '<div class="mt-6 space-y-4">';
+                html += '<h4 class="text-sm font-semibold text-gray-700 border-b pb-2">セルフチェック問題</h4>';
+                data.quiz.questions.forEach((q, i) => {
+                    html += `<div class="p-4 bg-gray-50 rounded-lg">
+                        <p class="text-sm font-medium text-gray-900 mb-2">Q${i+1}. ${q.text}</p>
+                        <ul class="space-y-1">`;
+                    q.choices.forEach(c => {
+                        const icon = c.is_correct
+                            ? '<span class="text-green-600 font-bold">&#9745;</span>'
+                            : '<span class="text-gray-400">&#9744;</span>';
+                        const cls = c.is_correct ? 'text-green-700 font-medium' : 'text-gray-600';
+                        html += `<li class="text-sm ${cls}">${icon} ${c.text}</li>`;
+                    });
+                    html += '</ul>';
+                    if (q.explanation) {
+                        html += `<p class="mt-2 text-xs text-blue-600 bg-blue-50 p-2 rounded">${q.explanation}</p>`;
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            if (!html) {
+                html = '<p class="text-gray-500 text-center py-8">コンテンツがありません</p>';
+            }
+            body.innerHTML = html;
+        })
+        .catch(() => {
+            body.innerHTML = '<p class="text-red-500 text-center py-8">プレビューの読み込みに失敗しました</p>';
+        });
+}
+
+function closePreview() {
+    document.getElementById('preview-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePreview();
+});
+</script>
+
 <!-- 削除確認モーダル -->
 <div id="delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
     <div class="absolute inset-0 bg-black/50" onclick="document.getElementById('delete-modal').classList.add('hidden')"></div>

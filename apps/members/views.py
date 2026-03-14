@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
@@ -480,3 +481,44 @@ def quiz_attempts_view(request, pk):
         'site': site,
         'attempts': attempts,
     })
+
+
+@login_required
+@project_permission_required('can_manage_members')
+def lesson_preview_view(request, pk):
+    """レッスンプレビュー（JSON API）"""
+    project = getattr(request, 'current_project', None)
+    if not project:
+        return JsonResponse({'error': 'No project'}, status=403)
+
+    lesson = get_object_or_404(Lesson, pk=pk, course__site__project=project)
+
+    data = {
+        'title': lesson.title,
+        'content_type': lesson.get_content_type_display(),
+        'body': lesson.body,
+        'sort_order': lesson.sort_order,
+        'is_published': lesson.is_published,
+        'quiz': None,
+    }
+
+    if hasattr(lesson, 'quiz'):
+        quiz = lesson.quiz
+        questions = []
+        for q in quiz.questions.prefetch_related('choices').all():
+            questions.append({
+                'text': q.text,
+                'explanation': q.explanation,
+                'choices': [
+                    {'text': c.text, 'is_correct': c.is_correct}
+                    for c in q.choices.all()
+                ],
+            })
+        data['quiz'] = {
+            'description': quiz.description,
+            'passing_score': quiz.passing_score,
+            'question_count': quiz.questions.count(),
+            'questions': questions,
+        }
+
+    return JsonResponse(data)
