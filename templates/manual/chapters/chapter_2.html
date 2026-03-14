@@ -1,13 +1,29 @@
 <h2>2.1　アカウントを作る（ユーザー登録）</h2>
 
-<p>アカウントとは、このシステムにあなた専用の「入り口」を作ることです。メールアドレスと合言葉（パスワード）を決めるだけでできます。</p>
+<p>アカウントとは、このシステムにあなた専用の「入り口」を作ることです。メールアドレスと合言葉（パスワード）を決めるだけでかんたんにできます。</p>
 
 <h3>手順</h3>
 
-<ol>
-    <li>ブラウザで <strong>http://127.0.0.1:8000/signup/</strong> を開きます</li>
-    <li>以下の4つを入力します</li>
-</ol>
+<div class="step-box">
+    <div class="step-num">1</div>
+    <div>
+        ブラウザで <strong>/signup/</strong> を開きます。<br>
+        <span style="color: #888;">（例：お使いのシステムのURLの末尾に /signup/ をつけてアクセスしてください）</span>
+    </div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        アカウント作成（サインアップ）画面
+    </div>
+    <div class="screenshot-desc">ユーザー名、メールアドレス、パスワード、パスワード（確認）の4つの入力欄と「アカウントを作成」ボタンが表示されます。画面下部に「すでにアカウントをお持ちの方はこちら」というログインページへのリンクもあります。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">2</div>
+    <div>以下の4つを入力します。</div>
+</div>
 
 <table>
     <thead>
@@ -21,12 +37,26 @@
     </tbody>
 </table>
 
-<ol start="3">
-    <li><strong>「アカウントを作成」</strong> ボタンを押します</li>
-    <li>成功すると、自動的に次の画面に移ります</li>
-</ol>
+<div class="step-box">
+    <div class="step-num">3</div>
+    <div><strong>「アカウントを作成」</strong> ボタンを押します。</div>
+</div>
 
-<div class="warning"><strong>注意</strong>: パスワードは忘れないようにメモしておきましょう。</div>
+<div class="step-box">
+    <div class="step-num">4</div>
+    <div>成功すると、自動的にログインされ、プロジェクト作成画面に移ります。</div>
+</div>
+
+<div class="warning"><strong>パスワードの注意点</strong>:
+<ul>
+    <li>8文字以上にしてください</li>
+    <li>英字と数字を組み合わせると安全です</li>
+    <li>忘れないようにメモしておきましょう</li>
+    <li>パスワード欄の右側にある <strong>目のアイコン</strong> を押すと、入力中のパスワードを確認できます</li>
+</ul>
+</div>
+
+<div class="note"><strong>ヒント</strong>: 「すでにアカウントをお持ちですか？」というリンクを押すと、ログイン画面に移動できます。</div>
 
 <h2>2.2　ログインする</h2>
 
@@ -34,23 +64,102 @@
 
 <h3>手順</h3>
 
-<ol>
-    <li>ブラウザで <strong>http://127.0.0.1:8000/login/</strong> を開きます</li>
-    <li>ユーザー名とパスワードを入力します</li>
-    <li><strong>「ログイン」</strong> ボタンを押します</li>
-    <li>成功すると、トップ画面（ダッシュボード）が表示されます</li>
-</ol>
+<div class="step-box">
+    <div class="step-num">1</div>
+    <div>ブラウザで <strong>/login/</strong> を開きます。</div>
+</div>
 
-<h2>2.3　プロジェクトを作る</h2>
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        ログイン画面
+    </div>
+    <div class="screenshot-desc">ユーザー名とパスワードの入力欄、「ログイン」ボタンが表示されます。「パスワードを忘れた方はこちら」リンクと「アカウント作成はこちら」リンクも表示されています。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">2</div>
+    <div><strong>ユーザー名</strong>と<strong>パスワード</strong>を入力します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">3</div>
+    <div><strong>「ログイン」</strong> ボタンを押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">4</div>
+    <div>成功すると、トップ画面（ダッシュボード）が表示されます。プロジェクトがまだない場合は、プロジェクト作成画面が表示されます。</div>
+</div>
+
+<div class="note"><strong>ヒント</strong>: ログイン画面にも目のアイコンがあり、パスワードの表示・非表示を切り替えられます。入力ミスが心配なときに便利です。</div>
+
+<h2>2.3　パスワードをリセットする（忘れたとき）</h2>
+
+<p>パスワードを忘れてしまっても大丈夫です。メールアドレスを使ってパスワードをリセットできます。</p>
+
+<h3>手順</h3>
+
+<div class="step-box">
+    <div class="step-num">1</div>
+    <div>ログイン画面で <strong>「パスワードを忘れた方はこちら」</strong> リンクを押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">2</div>
+    <div>パスワードリセット画面が表示されます。登録したときの<strong>メールアドレス</strong>を入力します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">3</div>
+    <div><strong>「リセットメールを送信」</strong> ボタンを押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">4</div>
+    <div>入力したメールアドレスにリセット用のメールが届きます。メール内の<strong>リンク</strong>を押してください。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">5</div>
+    <div>新しいパスワードを入力する画面が表示されます。<strong>新しいパスワード</strong>を2回入力して、<strong>「パスワードを変更」</strong>ボタンを押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">6</div>
+    <div>パスワードが変更されました。新しいパスワードでログインしてください。</div>
+</div>
+
+<div class="warning"><strong>注意</strong>:
+<ul>
+    <li>リセットメールが届かない場合は、迷惑メールフォルダもご確認ください</li>
+    <li>リセット用のリンクには有効期限があります。届いたらなるべく早く手続きしてください</li>
+</ul>
+</div>
+
+<h2>2.4　プロジェクトを作る</h2>
 
 <p>プロジェクトとは、「お店」や「事業」のようなものです。たとえば「料理教室」や「英会話スクール」など、目的ごとにプロジェクトを分けて管理できます。</p>
 
 <h3>手順</h3>
 
-<ol>
-    <li>初めてログインすると、プロジェクト作成画面が表示されます</li>
-    <li>以下を入力します</li>
-</ol>
+<div class="step-box">
+    <div class="step-num">1</div>
+    <div>初めてログインすると、プロジェクト作成画面が表示されます。</div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        プロジェクト作成画面
+    </div>
+    <div class="screenshot-desc">プロジェクト名とスラッグの入力欄、「作成」ボタンが表示されます。スラッグはプロジェクト名を入力すると自動的に提案されます。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">2</div>
+    <div>以下を入力します。</div>
+</div>
 
 <table>
     <thead>
@@ -62,17 +171,68 @@
     </tbody>
 </table>
 
-<ol start="3">
-    <li><strong>「作成」</strong> ボタンを押します</li>
-    <li>ダッシュボード画面に移ります</li>
-</ol>
+<div class="step-box">
+    <div class="step-num">3</div>
+    <div><strong>「作成」</strong> ボタンを押します。</div>
+</div>
 
-<div class="note"><strong>「スラッグ」とは？</strong> インターネットの住所（URL）の一部になる短い名前です。半角英数字とハイフン（-）だけが使えます。</div>
+<div class="step-box">
+    <div class="step-num">4</div>
+    <div>プロジェクトが作成され、ダッシュボード画面に移ります。これでシステムを使い始める準備が完了です！</div>
+</div>
 
-<h2>2.4　プロジェクトを切り替える</h2>
+<div class="note"><strong>「スラッグ」とは？</strong> インターネットの住所（URL）の一部になる短い名前です。半角英数字とハイフン（-）だけが使えます。たとえば「tanaka-cooking」とつけると、URLに含まれるようになります。わからなければ、プロジェクト名を入力すると自動で提案されますので、そのままでもOKです。</div>
 
-<p>複数のプロジェクトがある場合、画面左上のプロジェクト名を押すと、プロジェクト一覧画面に移動します。切り替えたいプロジェクトの <strong>「切替」</strong> ボタンを押してください。</p>
+<h2>2.5　プロジェクトを切り替える</h2>
 
-<h2>2.5　ログアウトする</h2>
+<p>複数のプロジェクトを運営している場合、かんたんにプロジェクトを切り替えることができます。</p>
 
-<p>画面右上のあなたのユーザー名の隣にある <strong>「ログアウト」</strong> ボタンを押すと、安全にシステムから退出できます。</p>
+<h3>手順</h3>
+
+<div class="step-box">
+    <div class="step-num">1</div>
+    <div>画面左上に表示されている<strong>現在のプロジェクト名</strong>を押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">2</div>
+    <div>プロジェクト一覧画面に移動します。作成済みのプロジェクトが一覧で表示されます。</div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        プロジェクト切り替え画面
+    </div>
+    <div class="screenshot-desc">作成済みのプロジェクト一覧が表示され、それぞれに「切替」ボタンがあります。新しいプロジェクトを作るボタンも表示されます。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">3</div>
+    <div>切り替えたいプロジェクトの <strong>「切替」</strong> ボタンを押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">4</div>
+    <div>選んだプロジェクトのダッシュボードに移動します。</div>
+</div>
+
+<div class="note"><strong>ヒント</strong>: この画面から新しいプロジェクトを追加することもできます。複数の事業を運営されている方は、事業ごとにプロジェクトを分けると管理しやすくなります。</div>
+
+<h2>2.6　ログアウトする</h2>
+
+<p>作業が終わったら、安全のためにログアウトしましょう。</p>
+
+<h3>手順</h3>
+
+<div class="step-box">
+    <div class="step-num">1</div>
+    <div>画面右上にあるあなたの<strong>ユーザー名</strong>の隣にある <strong>「ログアウト」</strong> ボタンを押します。</div>
+</div>
+
+<div class="step-box">
+    <div class="step-num">2</div>
+    <div>ログイン画面に戻ります。これで安全にシステムから退出できました。</div>
+</div>
+
+<div class="warning"><strong>セキュリティのポイント</strong>: 共有のパソコンをお使いの場合は、作業が終わったら必ずログアウトしてください。他の人にあなたのデータを見られてしまう可能性があります。</div>

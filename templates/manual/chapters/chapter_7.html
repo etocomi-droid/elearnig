@@ -4,12 +4,27 @@
 
 <p>お支払いには「Stripe（ストライプ）」という安全な決済サービスを使います。クレジットカードでのお支払いに対応しています。</p>
 
+<div class="note"><strong>ポイント</strong>: Stripe（ストライプ）は世界中で使われている安全な決済サービスです。お客さまのクレジットカード情報はStripeが安全に管理するので、あなたのシステムにカード情報が保存されることはありません。安心してお使いいただけます。</div>
+
 <h2>7.2　商品を登録する</h2>
 
 <h3>手順</h3>
 
 <ol>
     <li>左メニューの <strong>「商品管理」</strong> を押します</li>
+</ol>
+
+<p>すると、商品の一覧画面が表示されます。すでに登録した商品があれば、ここに一覧で表示されます。</p>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        商品一覧画面
+    </div>
+    <div class="screenshot-desc">左メニューの「商品管理」を押すと表示される画面です。登録済みの商品が一覧で表示され、商品名・価格・タイプ・有効/無効の状態が確認できます。右上に「新規商品作成」ボタンがあります。</div>
+</div>
+
+<ol start="2">
     <li>右上の <strong>「新規商品作成」</strong> ボタンを押します</li>
     <li>以下を入力します</li>
 </ol>
@@ -31,6 +46,14 @@
     <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
 
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        商品作成フォーム
+    </div>
+    <div class="screenshot-desc">「新規商品作成」ボタンを押すと表示される入力フォームです。商品名、説明、商品タイプ、価格、有効チェックボックスなどの入力欄があり、下部に「作成」ボタンがあります。</div>
+</div>
+
 <h3>商品タイプについて</h3>
 
 <table>
@@ -43,11 +66,11 @@
     </tbody>
 </table>
 
-<div class="note">サブスクリプションを選んだ場合は、「月額」か「年額」かも選びます。</div>
+<div class="note">サブスクリプションを選んだ場合は、「月額」か「年額」かも選びます。毎月（または毎年）自動的にお支払いが発生するタイプです。</div>
 
 <h3>購入後の自動処理（とても便利な機能）</h3>
 
-<p>商品を買ってくれたお客さまに、自動で以下のことができます。</p>
+<p>商品を買ってくれたお客さまに、自動で以下のことができます。商品の作成フォーム（または編集画面）の下部にある「自動処理」セクションで設定します。</p>
 
 <table>
     <thead>
@@ -60,7 +83,28 @@
     </tbody>
 </table>
 
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        自動処理の設定セクション
+    </div>
+    <div class="screenshot-desc">商品の作成・編集画面の下部にある「自動処理」セクションです。「コースアクセス権を付与」ではコースを選択するドロップダウン、「タグを追加」ではタグを選択するドロップダウン、「シナリオを開始」ではシナリオを選択するドロップダウンが表示されています。</div>
+</div>
+
 <div class="note"><strong>ポイント</strong>: この自動処理を使えば、お客さまが商品を買った瞬間に、メールが届き、学習コンテンツが見られるようになります。手動で何かする必要はありません。</div>
+
+<h4>自動処理の設定手順</h4>
+
+<ol>
+    <li>商品の作成画面（または編集画面）を開きます</li>
+    <li>画面を下にスクロールして <strong>「自動処理」</strong> セクションを表示します</li>
+    <li><strong>コースアクセス権を付与</strong>: お客さまに見せたいコースを選びます（コースは第4章で作成したものが表示されます）</li>
+    <li><strong>タグを追加</strong>: つけたいタグを選びます（タグはコンタクト管理で事前に作成しておきます）</li>
+    <li><strong>シナリオを開始</strong>: 自動配信したいシナリオを選びます（シナリオは第6章で作成したものが表示されます）</li>
+    <li>商品の作成（または更新）ボタンを押して保存します</li>
+</ol>
+
+<div class="note"><strong>ヒント</strong>: 自動処理は複数を組み合わせて使えます。たとえば「コースアクセス権を付与」＋「タグを追加」＋「シナリオを開始」の3つすべてを同時に設定することができます。</div>
 
 <h2>7.3　商品を編集・削除する</h2>
 
@@ -79,6 +123,8 @@
     <li>確認メッセージが出たら <strong>「OK」</strong> を押します</li>
 </ol>
 
+<div class="warning"><strong>注意</strong>: 商品を削除しても、すでに完了した注文の記録は残ります。ただし、削除した商品は新たに購入できなくなりますので、販売を一時停止したいだけの場合は、削除ではなく「有効」のチェックを外すことをおすすめします。</div>
+
 <h2>7.4　注文を確認する</h2>
 
 <p>お客さまからの注文は「注文一覧」で確認できます。</p>
@@ -89,6 +135,14 @@
     <li>商品管理画面で <strong>「注文一覧」</strong> ボタンを押します</li>
     <li>注文の一覧が表示されます</li>
 </ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        注文一覧画面
+    </div>
+    <div class="screenshot-desc">「注文一覧」ボタンを押すと表示される画面です。注文ID、お客さま名、商品名、合計金額、ステータス、注文日時が一覧表示されています。各ステータスは色分けされたラベルで表示されます。</div>
+</div>
 
 <h3>注文一覧の見かた</h3>
 
@@ -119,6 +173,8 @@
     </tbody>
 </table>
 
+<div class="note"><strong>ヒント</strong>: 注文一覧は定期的に確認しましょう。「処理中」のまま長時間経っている注文がある場合は、お客さまのお支払いに問題が発生している可能性があります。</div>
+
 <h2>7.5　お客さまから見た購入の流れ</h2>
 
 <p>お客さまが商品を買うとき、こんな流れになります。</p>
@@ -138,3 +194,17 @@
 ⑦ 「ありがとうございます」ページが表示される
     ↓
 ⑧ 自動処理が実行される（コースアクセス権、タグ、メールなど）</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        お客さまの購入画面（チェックアウト）
+    </div>
+    <div class="screenshot-desc">お客さまが商品を購入する際に表示される画面です。商品名と価格が表示され、メールアドレス・名前の入力欄、そして「購入する」ボタンがあります。ボタンを押すとStripeの安全な決済画面に遷移します。</div>
+</div>
+
+<p>上記の流れはすべて自動で行われます。あなたが手動で何かする必要はありません。お客さまが購入ボタンを押した瞬間から、決済・コース付与・メール配信まですべて自動で処理されます。</p>
+
+<div class="note"><strong>ポイント</strong>: お客さまが安心して購入できるように、購入ページには商品の説明や価格を明確に記載しましょう。また、Stripeの決済画面はSSL（暗号化通信）で保護されているので、クレジットカード情報は安全に送信されます。</div>
+
+<div class="warning"><strong>注意</strong>: Stripeの決済機能を使うには、事前にStripeアカウントの設定が必要です。設定方法は管理者にお問い合わせください。</div>

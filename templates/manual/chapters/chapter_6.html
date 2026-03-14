@@ -12,6 +12,16 @@
     </tbody>
 </table>
 
+<p>左メニューの <strong>「メール配信」</strong> を押すと、メール配信のダッシュボード画面が表示されます。ここから「シナリオ」タブと「一斉配信」タブを切り替えて操作します。</p>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        メール配信ダッシュボード
+    </div>
+    <div class="screenshot-desc">左メニューの「メール配信」を押すと表示されるダッシュボード画面です。上部に「シナリオ」タブと「一斉配信」タブがあり、切り替えて操作できます。</div>
+</div>
+
 <h2>6.2　シナリオ（ステップメール）を作る</h2>
 
 <p>シナリオとは、<strong>「申し込んだ日から数えて、○日後にこのメールを送る」</strong>という設定です。一度作っておけば、新しいお客さまが申し込むたびに自動でメールが届きます。</p>
@@ -25,6 +35,22 @@
     <li>シナリオ名を入力します（例: 無料セミナーフォローアップ）</li>
     <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        シナリオ一覧画面
+    </div>
+    <div class="screenshot-desc">「シナリオ」タブを選んだ状態のメール配信画面です。作成済みのシナリオが一覧で表示され、各シナリオのステップ数や登録者数が確認できます。右上に「新規シナリオ作成」ボタンがあります。</div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        シナリオ作成フォーム
+    </div>
+    <div class="screenshot-desc">「新規シナリオ作成」ボタンを押すと表示される入力フォームです。シナリオ名を入力する欄があり、下部に「作成」ボタンがあります。</div>
+</div>
 
 <h3>ステップ（メールの1通1通）を追加する手順</h3>
 
@@ -52,6 +78,14 @@
     <li>2通目、3通目も同じように追加します</li>
 </ol>
 
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        ステップ編集画面
+    </div>
+    <div class="screenshot-desc">シナリオのステップ編集画面です。ステップ番号、遅延日数、遅延時間、件名、本文（テキスト）、本文（HTML）の入力欄が表示されています。下部に「保存」ボタンがあります。</div>
+</div>
+
 <h3>ステップ設定の例</h3>
 
 <div class="codeblock">ステップ1: 0日後 → 「お申込みありがとうございます」
@@ -60,6 +94,34 @@
 ステップ4: 7日後 → 「特別なご案内があります」</div>
 
 <div class="note"><strong>ポイント</strong>: シナリオをファネルのフォームと連携させると、フォームに入力があった時点で自動的にメール配信が始まります（第5章「フォームブロックの設定」参照）。</div>
+
+<h3>パーソナライズ（お客さまの名前を自動挿入する）</h3>
+
+<p>メールの本文の中に特別なキーワードを入れると、お客さまごとに名前やメールアドレスを自動で差し替えて送ることができます。これを<strong>「パーソナライズ」</strong>と呼びます。</p>
+
+<table>
+    <thead>
+        <tr><th>キーワード</th><th>置き換わる内容</th><th>使用例</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>{{ contact.last_name }}</code></td><td>お客さまの姓</td><td>「{{ contact.last_name }}様、こんにちは。」→「田中様、こんにちは。」</td></tr>
+        <tr><td><code>{{ contact.first_name }}</code></td><td>お客さまの名</td><td>「{{ contact.first_name }}さん」→「太郎さん」</td></tr>
+        <tr><td><code>{{ contact.email }}</code></td><td>お客さまのメールアドレス</td><td>確認メールなどに活用</td></tr>
+    </tbody>
+</table>
+
+<div class="note"><strong>ヒント</strong>: パーソナライズを使うと、一通一通手書きしたようなメールが自動で届きます。「○○様」と名前入りのメールは、お客さまに特別感を感じてもらえるのでおすすめです。</div>
+
+<div class="warning"><strong>注意</strong>: キーワードは <code>{{</code> と <code>}}</code> で囲む書き方を正確に守ってください。スペルを間違えると、キーワードがそのまま表示されてしまいます。</div>
+
+<h3>シナリオの活用ヒント</h3>
+
+<ul>
+    <li><strong>ウェルカムメール</strong>: 申し込み直後（0日後）に、お礼と今後の流れを伝えるメールを送りましょう</li>
+    <li><strong>リマインダーメール</strong>: セミナーやイベントの前日にリマインドメールを送ると、参加率が上がります</li>
+    <li><strong>フォローアップメール</strong>: 数日後に「いかがでしたか？」と聞くメールを送ると、お客さまとの関係が深まります</li>
+    <li><strong>セールスメール</strong>: 信頼関係ができたタイミング（1〜2週間後）で、有料商品のご案内を送るのが効果的です</li>
+</ul>
 
 <h2>6.3　一斉配信（キャンペーン）を作る</h2>
 
@@ -90,6 +152,18 @@
     <li><strong>「保存」</strong> ボタンを押します</li>
 </ol>
 
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        一斉配信作成フォーム
+    </div>
+    <div class="screenshot-desc">「新規一斉配信作成」ボタンを押すと表示される入力フォームです。配信名、件名、本文（テキスト）、本文（HTML）、対象タグなどの入力欄があり、下部に「保存」ボタンがあります。</div>
+</div>
+
+<div class="note"><strong>ヒント</strong>: 一斉配信でもパーソナライズが使えます。本文に <code>{{ contact.last_name }}</code> と入力すると、お客さまの名前が自動的に挿入されます。全員に同じ内容を送る場合でも、名前入りにするだけで開封率が上がります。</div>
+
+<div class="note"><strong>ヒント</strong>: 「対象タグ」を使うと、特定のお客さまだけにメールを送れます。たとえば「購入済み」タグがついたお客さまだけに新商品の案内を送る、といった使い方ができます。タグを選ばなければ、全員に送信されます。</div>
+
 <h3>メールを送信する</h3>
 
 <ol>
@@ -99,7 +173,7 @@
     <li>確認メッセージが出たら <strong>「OK」</strong> を押します</li>
 </ol>
 
-<div class="warning"><strong>注意</strong>: 送信したメールは取り消せません。送信前に必ず内容を確認しましょう。</div>
+<div class="warning"><strong>注意</strong>: 送信したメールは取り消せません。送信前に必ず内容を確認しましょう。特に件名の誤字脱字や、リンク先のURLが正しいかを確認してください。</div>
 
 <h3>配信ステータスの見かた</h3>
 
@@ -114,3 +188,20 @@
         <tr><td>送信済み（緑）</td><td>送信が完了した</td></tr>
     </tbody>
 </table>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        配信ステータス表示
+    </div>
+    <div class="screenshot-desc">一斉配信の一覧画面に表示されるステータスの例です。各配信の横に「下書き」「予約済み」「送信中」「送信済み」のラベルが色分けで表示されています。</div>
+</div>
+
+<h3>メール配信のコツ</h3>
+
+<ul>
+    <li><strong>件名は短く、具体的に</strong>: 長すぎる件名はスマートフォンで途中で切れてしまいます。20〜30文字を目安にしましょう</li>
+    <li><strong>送信時間を考える</strong>: 一般的に、平日の午前10時〜12時、または夜の20時〜21時ごろが開封されやすいと言われています</li>
+    <li><strong>本文は読みやすく</strong>: 1つの段落は3〜4行程度にして、適度に改行を入れると読みやすくなります</li>
+    <li><strong>行動を促す</strong>: メールの最後には「詳しくはこちら」「お申し込みはこちらから」のようにリンクを入れましょう</li>
+</ul>

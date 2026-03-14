@@ -5,7 +5,7 @@
 <ul>
     <li>ユーザー名とパスワードが正しいか（大文字・小文字の違いに注意）</li>
     <li>Caps Lock（大文字固定）がオンになっていないか</li>
-    <li>正しいURLにアクセスしているか（ http://127.0.0.1:8000/login/ ）</li>
+    <li>正しいURLにアクセスしているか（管理画面の /login/ ページ）</li>
 </ul>
 
 <h2>Q2. プロジェクトが表示されません</h2>
@@ -54,6 +54,101 @@
 
 <p><strong>A.</strong> 削除したデータは元に戻せません。大切なデータは、操作前に念のため情報をメモしておくことをおすすめします。</p>
 
+<h2>Q11. 予約管理機能はどこにありますか？</h2>
+
+<p><strong>A.</strong> 左メニューの <strong>「予約管理」</strong> から利用できます。予約管理では、セミナーや個別相談などの日程を設定し、お客さまがオンラインで予約できる仕組みを作れます。</p>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        予約管理画面
+    </div>
+    <div class="screenshot-desc">予約管理の一覧画面。カレンダー形式で予約状況が表示され、予約枠の追加・編集ができます。</div>
+</div>
+
+<p>主な使い方:</p>
+<ul>
+    <li><strong>予約枠の作成</strong>: 日時、定員、場所（オンライン/対面）を設定します</li>
+    <li><strong>予約の確認</strong>: お客さまの予約状況を一覧で確認できます</li>
+    <li><strong>リマインダー</strong>: 予約日前に自動でリマインドメールを送ることができます</li>
+</ul>
+
+<h2>Q12. オペレーター機能とは何ですか？</h2>
+
+<p><strong>A.</strong> オペレーター機能は、<strong>管理者以外のスタッフにも一部の操作権限を与える</strong>機能です。たとえば、サポート担当者にコンタクト管理だけを任せたい場合などに使います。</p>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        オペレーター管理画面
+    </div>
+    <div class="screenshot-desc">オペレーターの一覧画面。登録済みのオペレーター名、メールアドレス、権限レベルが表示されます。「新規オペレーター追加」ボタンがあります。</div>
+</div>
+
+<p>設定手順:</p>
+<ol>
+    <li>左メニュー → <strong>「設定」</strong> → <strong>「オペレーター」</strong> を選びます</li>
+    <li><strong>「新規オペレーター追加」</strong> ボタンを押します</li>
+    <li>オペレーターの名前、メールアドレス、パスワードを入力します</li>
+    <li>アクセスできる機能（コンタクト管理、メール配信など）を選択します</li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
+</ol>
+
+<h2>Q13. サポート・問い合わせ機能はありますか？</h2>
+
+<p><strong>A.</strong> はい、お客さまからの問い合わせを管理する機能があります。左メニューの <strong>「サポート」</strong> から利用できます。</p>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        サポート（問い合わせ管理）画面
+    </div>
+    <div class="screenshot-desc">サポートの問い合わせ一覧画面。お客さまからの問い合わせがチケット形式で一覧表示されます。各チケットにはステータス（未対応・対応中・解決済み）、件名、お客さま名、受付日時が表示されます。</div>
+</div>
+
+<p>主な機能:</p>
+<ul>
+    <li><strong>問い合わせ一覧</strong>: お客さまからの問い合わせをチケット形式で管理できます</li>
+    <li><strong>ステータス管理</strong>: 「未対応」「対応中」「解決済み」などのステータスで進捗を管理します</li>
+    <li><strong>返信</strong>: 管理画面から直接お客さまに返信できます</li>
+    <li><strong>担当者の割り当て</strong>: オペレーター機能と連携して、問い合わせごとに担当者を設定できます</li>
+</ul>
+
+<h2>Q14. 問い合わせフォームをファネルに設置するにはどうすればいいですか？</h2>
+
+<p><strong>A.</strong> ファネルのページ編集画面で、<strong>「フォーム」セクション</strong>を追加し、フォームの種類を「問い合わせ」に設定します。お客さまがフォームに入力して送信すると、サポート画面に問い合わせが届きます。</p>
+
+<p>手順:</p>
+<ol>
+    <li>ファネルのページ編集画面を開きます</li>
+    <li><strong>「セクション追加」</strong> → <strong>「フォーム」</strong> を選びます</li>
+    <li>フォームの設定で、種類を <strong>「問い合わせ」</strong> に変更します</li>
+    <li>必要な入力項目（名前、メールアドレス、問い合わせ内容など）を設定します</li>
+    <li><strong>「保存」</strong> ボタンを押します</li>
+</ol>
+
+<h2>Q15. レッスンの内容をプレビューで確認するにはどうすればいいですか？</h2>
+
+<p><strong>A.</strong> コースの編集画面にあるレッスン一覧で、各レッスンの行に表示される<strong>目のアイコン（プレビューボタン）</strong>をクリックしてください。モーダル（ポップアップ画面）が開き、レッスンの内容をすばやく確認できます。</p>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        レッスンプレビュー機能
+    </div>
+    <div class="screenshot-desc">コース編集画面のレッスン一覧。各レッスンの行にある目のアイコン（プレビューボタン）が強調表示されています。クリックするとモーダルでレッスン内容をプレビューできます。</div>
+</div>
+
+<p>プレビューで確認できる内容:</p>
+<ul>
+    <li><strong>動画レッスン</strong>: 動画プレーヤーが表示され、再生確認ができます</li>
+    <li><strong>テキストレッスン</strong>: テキスト本文がそのまま表示されます</li>
+    <li><strong>PDFレッスン</strong>: PDFのプレビューが表示されます</li>
+    <li><strong>テスト付きレッスン</strong>: レッスン内容に加えて、テストの問題もプレビューで確認できます</li>
+</ul>
+
+<div class="note"><strong>ポイント</strong>: プレビュー機能はレッスンの編集画面に移動せずに内容を確認できるため、複数のレッスンの内容を素早くチェックしたいときに便利です。</div>
+
 <h2>用語集</h2>
 
 <table>
@@ -76,8 +171,16 @@
         <tr><td>コース</td><td>会員サイト内の「教科」</td></tr>
         <tr><td>レッスン</td><td>コース内の「授業1回分」</td></tr>
         <tr><td>ダッシュボード</td><td>ログイン後に最初に見える、全体が見渡せる画面</td></tr>
-        <tr><td>URL</td><td>インターネット上の住所（ http://... で始まるもの）</td></tr>
+        <tr><td>URL</td><td>インターネット上の住所（ https://... で始まるもの）</td></tr>
         <tr><td>プロジェクト</td><td>事業やサービスの単位（1つのお店＝1つのプロジェクト）</td></tr>
         <tr><td>CSV</td><td>表計算ソフト（Excelなど）で使えるデータ形式</td></tr>
+        <tr><td>予約管理</td><td>セミナーや個別相談の日程管理と、お客さまからのオンライン予約を受け付ける機能</td></tr>
+        <tr><td>オペレーター</td><td>管理者以外でシステムの一部機能を操作できるスタッフアカウント</td></tr>
+        <tr><td>サポート</td><td>お客さまからの問い合わせをチケット形式で管理する機能</td></tr>
+        <tr><td>ゲート</td><td>テストに合格しないと次のレッスンに進めなくする仕組み</td></tr>
+        <tr><td>卒業証書（修了証書）</td><td>最終テストに合格したお客さまに自動発行される証書</td></tr>
+        <tr><td>プレビュー</td><td>レッスンやページの内容を公開前に確認できる機能</td></tr>
+        <tr><td>モーダル</td><td>画面の上にかぶさって表示されるポップアップウィンドウ</td></tr>
+        <tr><td>リダイレクト</td><td>あるページから別のページへ自動的に移動すること</td></tr>
     </tbody>
 </table>

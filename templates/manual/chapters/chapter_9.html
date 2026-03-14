@@ -1,44 +1,172 @@
 <p>ここでは、システムの全機能を使って<strong>「無料セミナーに申し込んでもらい、フォローメールを送り、有料講座を販売し、動画コンテンツを届ける」</strong>という一連の流れを作ってみましょう。</p>
 
+<div class="note"><strong>この章の目標</strong>: 5つのステップを順番に進めることで、「集客→メール配信→決済→コンテンツ配信」の自動化された仕組みが完成します。初めての方でも、1時間ほどで完成できます。</div>
+
 <h2>ステップ1: 会員サイトとコースを作る（教室を準備する）</h2>
 
+<p>まずは、お客さまに届ける動画コンテンツの「入れ物」を作ります。これが会員サイトとコースです。</p>
+
+<h3>1-1. 会員サイトを作成する</h3>
+
 <ol>
-    <li>左メニュー → <strong>「会員サイト」</strong> → <strong>「新規サイト作成」</strong></li>
-    <li>サイト名: <strong>マイオンラインスクール</strong>、スラッグ: <strong>my-school</strong></li>
-    <li><strong>「コース追加」</strong> → コース名: <strong>動画講座・入門編</strong></li>
-    <li>レッスンを3つ追加:
+    <li>左メニュー → <strong>「会員サイト」</strong> を押します</li>
+    <li><strong>「新規サイト作成」</strong> ボタンを押します</li>
+    <li>以下のように入力します:
         <ul>
-            <li>第1回「はじめに」（テキスト、プレビュー=オン）</li>
-            <li>第2回「基礎知識」（動画）</li>
-            <li>第3回「実践」（動画）</li>
+            <li>サイト名: <strong>マイオンラインスクール</strong></li>
+            <li>スラッグ: <strong>my-school</strong></li>
+            <li>説明: <strong>オンラインで学べるスクールです</strong></li>
+            <li>有効: <strong>チェックを入れる</strong></li>
         </ul>
     </li>
-    <li>すべてのレッスンを「公開する」にチェック</li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        会員サイト作成フォーム（入力例）
+    </div>
+    <div class="screenshot-desc">サイト名に「マイオンラインスクール」、スラッグに「my-school」と入力された会員サイト作成フォームの画面。</div>
+</div>
+
+<h3>1-2. コースを追加する</h3>
+
+<ol>
+    <li>作成した会員サイトの編集画面で <strong>「コース追加」</strong> を押します</li>
+    <li>以下のように入力します:
+        <ul>
+            <li>コース名: <strong>動画講座・入門編</strong></li>
+            <li>スラッグ: <strong>intro-course</strong></li>
+            <li>説明: <strong>初心者向けの入門講座です</strong></li>
+            <li>公開する: <strong>チェックを入れる</strong></li>
+        </ul>
+    </li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        コース作成フォーム（入力例）
+    </div>
+    <div class="screenshot-desc">コース名に「動画講座・入門編」、スラッグに「intro-course」と入力されたコース作成フォームの画面。</div>
+</div>
+
+<h3>1-3. レッスンを3つ追加する</h3>
+
+<p>コースの編集画面で <strong>「レッスン追加」</strong> を押して、以下の3つのレッスンを順番に作成します。</p>
+
+<table>
+    <thead>
+        <tr><th>レッスン名</th><th>スラッグ</th><th>種類</th><th>プレビュー</th><th>並び順</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>第1回「はじめに」</td><td>lesson-1</td><td>テキスト</td><td>オン（お試し公開）</td><td>1</td></tr>
+        <tr><td>第2回「基礎知識」</td><td>lesson-2</td><td>動画</td><td>オフ</td><td>2</td></tr>
+        <tr><td>第3回「実践」</td><td>lesson-3</td><td>動画</td><td>オフ</td><td>3</td></tr>
+    </tbody>
+</table>
+
+<p>各レッスンの作成手順:</p>
+
+<ol>
+    <li><strong>「レッスン追加」</strong> ボタンを押します</li>
+    <li>レッスン名、スラッグ、種類を入力します</li>
+    <li>テキストレッスンの場合は本文にレッスン内容を入力します</li>
+    <li>動画レッスンの場合は動画URLを入力します（YouTubeやVimeoのURL）</li>
+    <li>第1回は「プレビュー」にチェックを入れます（未購入でもお試しで見られるようにするため）</li>
+    <li><strong>「公開する」</strong> にチェックを入れます</li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        レッスン追加フォーム（入力例）
+    </div>
+    <div class="screenshot-desc">レッスン作成フォームに「第1回 はじめに」と入力された画面。種類に「テキスト」が選択され、プレビューと公開にチェックが入っています。</div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        3つのレッスンが追加されたコース編集画面
+    </div>
+    <div class="screenshot-desc">コース編集画面のレッスン一覧に3つのレッスンが並んでいる状態。各レッスンの行に編集・プレビュー（目のアイコン）・削除ボタンが表示されています。</div>
+</div>
+
+<div class="note"><strong>ポイント</strong>: 第1回レッスンの「プレビュー」をオンにすると、商品を購入していないお客さまでもそのレッスンだけ見ることができます。「お試し」として使え、購入のきっかけになります。</div>
 
 <h2>ステップ2: 商品を作る（売り物を準備する）</h2>
 
+<p>次に、ステップ1で作ったコースを「商品」として販売できるようにします。</p>
+
 <ol>
-    <li>左メニュー → <strong>「商品管理」</strong> → <strong>「新規商品作成」</strong></li>
-    <li>商品名: <strong>動画講座・入門編</strong></li>
-    <li>価格: <strong>9800</strong>（円）</li>
-    <li>商品タイプ: <strong>単品</strong></li>
-    <li>購入後の自動処理:
+    <li>左メニュー → <strong>「商品管理」</strong> → <strong>「新規商品作成」</strong> を押します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        商品管理画面
+    </div>
+    <div class="screenshot-desc">商品管理の一覧画面。右上に「新規商品作成」ボタンがあります。</div>
+</div>
+
+<ol start="2">
+    <li>以下のように入力します:
+        <ul>
+            <li>商品名: <strong>動画講座・入門編</strong></li>
+            <li>価格: <strong>9800</strong>（円）</li>
+            <li>商品タイプ: <strong>単品</strong></li>
+        </ul>
+    </li>
+    <li>購入後の自動処理を設定します:
         <ul>
             <li>コースアクセス権: <strong>動画講座・入門編</strong>（ステップ1で作ったコース）</li>
             <li>タグを追加: <strong>購入済み</strong></li>
         </ul>
     </li>
-    <li><strong>「作成」</strong> を押す</li>
 </ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        商品作成フォーム（入力例）
+    </div>
+    <div class="screenshot-desc">商品名に「動画講座・入門編」、価格に「9800」、商品タイプに「単品」と入力された商品作成フォーム。購入後の自動処理セクションで、コースアクセス権とタグ追加が設定されています。</div>
+</div>
+
+<ol start="4">
+    <li><strong>「作成」</strong> を押します</li>
+</ol>
+
+<div class="note"><strong>ポイント</strong>: 「購入後の自動処理」でコースアクセス権を設定することがとても重要です。これにより、お客さまが商品を購入した瞬間に、自動で会員サイトのコースが見られるようになります。手動で権限を付ける必要はありません。</div>
 
 <h2>ステップ3: メールのシナリオを作る（自動メールを準備する）</h2>
 
+<p>無料セミナーに申し込んでくれたお客さまに、自動でフォローメールを送る仕組みを作ります。</p>
+
+<h3>3-1. シナリオを作成する</h3>
+
 <ol>
-    <li>左メニュー → <strong>「メール配信」</strong> → <strong>「新規シナリオ作成」</strong></li>
-    <li>シナリオ名: <strong>無料セミナーフォロー</strong></li>
-    <li>ステップを追加:</li>
+    <li>左メニュー → <strong>「メール配信」</strong> → <strong>「新規シナリオ作成」</strong> を押します</li>
+    <li>シナリオ名: <strong>無料セミナーフォロー</strong> と入力します</li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        シナリオ作成画面
+    </div>
+    <div class="screenshot-desc">シナリオ名の入力欄に「無料セミナーフォロー」と入力された画面。</div>
+</div>
+
+<h3>3-2. ステップ（メール）を追加する</h3>
+
+<p>シナリオの編集画面で <strong>「ステップ追加」</strong> ボタンを押して、以下の4通のメールを順番に作成します。</p>
 
 <table>
     <thead>
@@ -52,62 +180,227 @@
     </tbody>
 </table>
 
+<p>各ステップの作成手順:</p>
+
+<ol>
+    <li><strong>「ステップ追加」</strong> ボタンを押します</li>
+    <li>遅延日数を入力します（最初のメールは「0」＝申込直後に送信）</li>
+    <li>メールの件名を入力します</li>
+    <li>メールの本文を入力します</li>
+    <li><strong>「保存」</strong> ボタンを押します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        ステップ追加フォーム（入力例）
+    </div>
+    <div class="screenshot-desc">ステップ追加フォーム。遅延日数に「0」、件名に「お申込みありがとうございます」、本文にお礼メールの内容が入力されています。</div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        4つのステップが追加されたシナリオ編集画面
+    </div>
+    <div class="screenshot-desc">シナリオの編集画面に4つのメールステップが時系列で並んでいる状態。各ステップに遅延日数、件名、編集・削除ボタンが表示されています。</div>
+</div>
+
+<div class="note"><strong>ポイント</strong>: 4通目のメール「特別なご案内」の本文に、有料講座の購入リンクを入れておきましょう。これがフォローメールから有料商品につなげる仕掛けです。購入リンクのURLはステップ4で作成するファネルのURLを使います。</div>
+
 <h2>ステップ4: ファネル（集客ページ）を作る（チラシを作る）</h2>
 
-<ol>
-    <li>左メニュー → <strong>「ファネル」</strong> → <strong>「新規ファネル作成」</strong></li>
-    <li>ファネル名: <strong>無料セミナー</strong>、スラッグ: <strong>free-seminar</strong></li>
-</ol>
+<p>お客さまに見せるWebページを作ります。申し込みページ（ランディングページ）と、申し込み後のお礼ページ（サンクスページ）の2ページです。</p>
 
-<h3>ページ1: 申し込みページ</h3>
+<h3>4-1. ファネルを作成する</h3>
 
 <ol>
-    <li><strong>「ページ追加」</strong> → タイトル: <strong>セミナー紹介</strong>、種類: <strong>ランディングページ</strong></li>
-    <li>以下のセクションを追加:
+    <li>左メニュー → <strong>「ファネル」</strong> → <strong>「新規ファネル作成」</strong> を押します</li>
+    <li>以下のように入力します:
         <ul>
-            <li><strong>ヒーロー</strong>: 見出し「無料オンラインセミナー開催！」</li>
-            <li><strong>テキスト</strong>: セミナーの紹介文</li>
-            <li><strong>お客様の声</strong>: 過去の参加者の感想</li>
-            <li><strong>フォーム</strong>: メールアドレス入力欄
-                <ul>
-                    <li>シナリオID:（ステップ3で作ったシナリオのID）</li>
-                    <li>リダイレクトURL: /p/free-seminar/thanks/</li>
-                </ul>
-            </li>
+            <li>ファネル名: <strong>無料セミナー</strong></li>
+            <li>スラッグ: <strong>free-seminar</strong></li>
         </ul>
     </li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
 
-<h3>ページ2: お礼ページ</h3>
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        ファネル作成フォーム（入力例）
+    </div>
+    <div class="screenshot-desc">ファネル名に「無料セミナー」、スラッグに「free-seminar」と入力されたファネル作成フォームの画面。</div>
+</div>
+
+<h3>4-2. ページ1: 申し込みページを作る</h3>
 
 <ol>
-    <li><strong>「ページ追加」</strong> → タイトル: <strong>お申込み完了</strong>、種類: <strong>サンクスページ</strong>、スラッグ: <strong>thanks</strong></li>
-    <li>以下のセクションを追加:
+    <li>ファネル編集画面で <strong>「ページ追加」</strong> を押します</li>
+    <li>以下のように入力します:
         <ul>
-            <li><strong>ヒーロー</strong>: 見出し「お申込みありがとうございます！」</li>
-            <li><strong>テキスト</strong>: 次のステップの案内</li>
+            <li>タイトル: <strong>セミナー紹介</strong></li>
+            <li>種類: <strong>ランディングページ</strong></li>
+            <li>スラッグ: <strong>intro</strong></li>
         </ul>
     </li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
+    <li>ページ編集画面で、以下のセクションを追加します:</li>
 </ol>
 
-<h3>公開する</h3>
+<table>
+    <thead>
+        <tr><th>セクション種類</th><th>設定内容</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>ヒーロー</td><td>見出し: 「無料オンラインセミナー開催！」</td></tr>
+        <tr><td>テキスト</td><td>セミナーの紹介文（内容、日時、対象者など）</td></tr>
+        <tr><td>お客様の声</td><td>過去の参加者の感想（3件ほど）</td></tr>
+        <tr><td>フォーム</td><td>メールアドレス入力欄（設定は下記参照）</td></tr>
+    </tbody>
+</table>
 
-<p>ファネル編集画面で <strong>「公開する」</strong> にチェック → <strong>「更新」</strong></p>
+<p>フォームセクションの設定:</p>
+<ul>
+    <li>シナリオID: ステップ3で作成したシナリオの<strong>ID番号</strong>（シナリオ一覧で確認できます）</li>
+    <li>リダイレクトURL: <strong>/p/free-seminar/thanks/</strong></li>
+</ul>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        ページ編集画面（セクション追加後）
+    </div>
+    <div class="screenshot-desc">申し込みページの編集画面。ヒーロー、テキスト、お客様の声、フォームの各セクションが上から順に配置されています。各セクションはドラッグで並べ替え可能です。</div>
+</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        フォームセクションの設定画面
+    </div>
+    <div class="screenshot-desc">フォームセクションの詳細設定画面。シナリオIDの入力欄とリダイレクトURLの入力欄が表示されています。シナリオIDにはステップ3で作成したシナリオのID番号を入力します。</div>
+</div>
+
+<h3>4-3. ページ2: お礼ページを作る</h3>
+
+<ol>
+    <li>ファネル編集画面に戻り、<strong>「ページ追加」</strong> を押します</li>
+    <li>以下のように入力します:
+        <ul>
+            <li>タイトル: <strong>お申込み完了</strong></li>
+            <li>種類: <strong>サンクスページ</strong></li>
+            <li>スラッグ: <strong>thanks</strong></li>
+        </ul>
+    </li>
+    <li><strong>「作成」</strong> ボタンを押します</li>
+    <li>ページ編集画面で、以下のセクションを追加します:</li>
+</ol>
+
+<table>
+    <thead>
+        <tr><th>セクション種類</th><th>設定内容</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>ヒーロー</td><td>見出し: 「お申込みありがとうございます！」</td></tr>
+        <tr><td>テキスト</td><td>次のステップの案内（メールをご確認くださいなど）</td></tr>
+    </tbody>
+</table>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        サンクスページの編集画面
+    </div>
+    <div class="screenshot-desc">お礼ページの編集画面。ヒーローセクションに「お申込みありがとうございます！」、テキストセクションに次のステップの案内文が設定されています。</div>
+</div>
+
+<h3>4-4. ファネルを公開する</h3>
+
+<ol>
+    <li>ファネル編集画面に戻ります</li>
+    <li><strong>「公開する」</strong> にチェックを入れます</li>
+    <li><strong>「更新」</strong> ボタンを押します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        ファネル編集画面（公開設定）
+    </div>
+    <div class="screenshot-desc">ファネル編集画面。2つのページ（セミナー紹介・お申込み完了）が一覧に表示され、「公開する」チェックボックスにチェックが入った状態。</div>
+</div>
+
+<div class="note"><strong>ポイント</strong>: ファネルを公開すると、お客さまが <strong>/p/free-seminar/intro/</strong> というURLでアクセスできるようになります。このURLをSNSやブログ、広告などに掲載して集客しましょう。</div>
 
 <h2>ステップ5: 動作を確認する</h2>
 
+<p>すべての設定が終わったら、実際にお客さまの流れをテストしてみましょう。</p>
+
+<h3>5-1. 申し込みページを確認する</h3>
+
 <ol>
-    <li>公開URL（例: /p/free-seminar/intro/）にアクセス</li>
-    <li>セミナー紹介ページが表示される</li>
-    <li>フォームにメールアドレスを入力 → 送信</li>
-    <li>サンクスページが表示される</li>
-    <li>コンタクト一覧に新しいお客さまが登録されている</li>
-    <li>シナリオのメールが自動で送られ始める（コンソールに表示）</li>
+    <li>ブラウザで <strong>/p/free-seminar/intro/</strong> にアクセスします</li>
+    <li>セミナー紹介ページが正しく表示されるか確認します</li>
 </ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        公開されたセミナー紹介ページ
+    </div>
+    <div class="screenshot-desc">お客さまから見た申し込みページの表示。ヒーロー画像、紹介文、お客様の声、メールアドレス入力フォームが順に表示されています。</div>
+</div>
+
+<h3>5-2. フォーム送信をテストする</h3>
+
+<ol start="3">
+    <li>フォームにテスト用メールアドレスを入力して送信します</li>
+    <li>サンクスページ（/p/free-seminar/thanks/）に自動で移動するか確認します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        サンクスページの表示
+    </div>
+    <div class="screenshot-desc">フォーム送信後に表示されるサンクスページ。「お申込みありがとうございます！」の見出しと次のステップの案内が表示されています。</div>
+</div>
+
+<h3>5-3. コンタクト登録を確認する</h3>
+
+<ol start="5">
+    <li>管理画面に戻り、左メニュー → <strong>「コンタクト」</strong> を押します</li>
+    <li>フォームに入力したメールアドレスのコンタクトが新しく登録されているか確認します</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        コンタクト一覧（新規登録確認）
+    </div>
+    <div class="screenshot-desc">コンタクト一覧画面。フォームから申し込んだテスト用のメールアドレスが新しいコンタクトとして表示されています。</div>
+</div>
+
+<h3>5-4. メール配信を確認する</h3>
+
+<ol start="7">
+    <li>シナリオのメールが自動で送られ始めることを確認します（開発環境ではコンソールに表示されます）</li>
+</ol>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        メール配信の確認
+    </div>
+    <div class="screenshot-desc">メール配信の状況確認画面またはコンソール出力。シナリオの最初のステップ（0日後のお礼メール）が送信されたことが確認できます。</div>
+</div>
+
+<div class="warning"><strong>確認ポイント</strong>: テストで問題がなければ、以下の全体の流れが自動で動いているはずです。もし途中で止まっている場合は、各ステップの設定を見直してください。</div>
 
 <h2>完成した仕組みのイメージ</h2>
 
-<div class="codeblock">お客さまが紹介ページを見る
+<div class="codeblock">お客さまが紹介ページを見る（/p/free-seminar/intro/）
   ↓
 フォームにメール入力して送信
   ↓
@@ -125,3 +418,13 @@
 自動でコースのアクセス権が付与される
   ↓
 お客さまが会員サイトで動画レッスンを受講できる</div>
+
+<div class="screenshot">
+    <div class="screenshot-label">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        全体の仕組みが完成した状態
+    </div>
+    <div class="screenshot-desc">ダッシュボード画面。会員サイト、商品、シナリオ、ファネルがすべて作成・設定済みで、集客から決済、コンテンツ配信までの自動化された仕組みが完成しています。</div>
+</div>
+
+<div class="note"><strong>おめでとうございます！</strong> これで「集客→フォローメール→有料商品販売→コンテンツ配信」の一連の自動化された仕組みが完成しました。あとは紹介ページのURLをSNSやブログ、広告などで発信して、お客さまを集めましょう。</div>
