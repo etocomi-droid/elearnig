@@ -16,13 +16,62 @@
 
 <p>すると、商品の一覧画面が表示されます。すでに登録した商品があれば、ここに一覧で表示されます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        商品一覧画面
+<!-- 商品一覧画面 -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/products/</div>
     </div>
-    <div class="screenshot-desc">左メニューの「商品管理」を押すと表示される画面です。登録済みの商品が一覧で表示され、商品名・価格・タイプ・有効/無効の状態が確認できます。右上に「新規商品作成」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item active">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">商品管理</div>
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem; gap: 0.5rem;">
+                    <span class="mk-btn gray" style="font-size: 0.65rem;">注文一覧 ❶</span>
+                    <span class="mk-btn green" style="font-size: 0.65rem;">＋ 新規商品作成 ❷</span>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>商品名</th><th>タイプ</th><th>価格</th><th>ステータス</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="mk-link">オンライン料理講座</a></td>
+                            <td><span class="mk-badge blue">単品 ❸</span></td>
+                            <td>¥9,800</td>
+                            <td><span class="mk-badge green">有効 ❹</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">プレミアム会員</a></td>
+                            <td><span class="mk-badge purple">月額 ❺</span></td>
+                            <td>¥2,980/月</td>
+                            <td><span class="mk-badge green">有効</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">お菓子作り入門</a></td>
+                            <td><span class="mk-badge blue">単品</span></td>
+                            <td>¥4,980</td>
+                            <td><span class="mk-badge gray">無効 ❻</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 商品一覧画面：❶ 注文一覧ボタン ❷ 新規商品作成ボタン ❸ 単品タイプ（青バッジ） ❹ 有効ステータス（緑） ❺ 月額タイプ（紫バッジ） ❻ 無効ステータス（灰）</p>
 
 <ol start="2">
     <li>右上の <strong>「新規商品作成」</strong> ボタンを押します</li>
@@ -46,13 +95,67 @@
     <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        商品作成フォーム
+<!-- 商品作成フォーム（自動処理付き） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/products/create/</div>
     </div>
-    <div class="screenshot-desc">「新規商品作成」ボタンを押すと表示される入力フォームです。商品名、説明、商品タイプ、価格、有効チェックボックスなどの入力欄があり、下部に「作成」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">🛒 商品管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">新規商品作成</div>
+                <div class="mk-card">
+                    <div class="mk-sub">基本情報</div>
+                    <div class="mk-label req">商品名 ❶</div>
+                    <div class="mk-input filled">オンライン料理講座</div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">説明 ❷</div>
+                        <div class="mk-input filled" style="height: 2.5rem; font-size: 0.6rem;">全10回の動画レッスンです。初心者でも安心して学べます。</div>
+                    </div>
+                    <div style="margin-top: 0.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <div>
+                            <div class="mk-label req">商品タイプ ❸</div>
+                            <div class="mk-input filled" style="font-size: 0.65rem;">単品 ▼</div>
+                        </div>
+                        <div>
+                            <div class="mk-label req">価格（円） ❹</div>
+                            <div class="mk-input filled">9800</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">課金間隔 ❺</div>
+                        <div class="mk-input" style="color: #9CA3AF; font-size: 0.6rem;">単品の場合は不要（サブスクリプション時に「月額」「年額」を選択）</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <label style="font-size: 0.65rem; color: #374151;"><input type="checkbox" checked disabled style="margin-right: 0.25rem;"> 有効（販売中にする） ❻</label>
+                    </div>
+                </div>
+                <div class="mk-card" style="margin-top: 0.5rem;">
+                    <div class="mk-sub">購入後の自動処理 ❼</div>
+                    <div class="mk-label">コースアクセス権を付与 ❽</div>
+                    <div class="mk-input filled" style="font-size: 0.65rem;">和食の基本コース ▼</div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">タグを追加 ❾</div>
+                        <div class="mk-input filled" style="font-size: 0.65rem;">購入済み ▼</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">シナリオを開始 ❿</div>
+                        <div class="mk-input filled" style="font-size: 0.65rem;">購入者フォローメール ▼</div>
+                    </div>
+                </div>
+                <div style="margin-top: 0.75rem;">
+                    <span class="mk-btn green">作成</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 商品作成フォーム：❶ 商品名 ❷ 説明 ❸ 商品タイプ選択 ❹ 価格 ❺ 課金間隔（サブスク時のみ） ❻ 有効チェック ❼ 自動処理セクション ❽ コースアクセス権付与 ❾ タグ追加 ❿ シナリオ開始</p>
 
 <h3>商品タイプについて</h3>
 
@@ -82,14 +185,6 @@
         <tr><td>シナリオを開始</td><td>自動メールの配信を始める</td><td>「購入者フォロー」メールを送り始める</td></tr>
     </tbody>
 </table>
-
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        自動処理の設定セクション
-    </div>
-    <div class="screenshot-desc">商品の作成・編集画面の下部にある「自動処理」セクションです。「コースアクセス権を付与」ではコースを選択するドロップダウン、「タグを追加」ではタグを選択するドロップダウン、「シナリオを開始」ではシナリオを選択するドロップダウンが表示されています。</div>
-</div>
 
 <div class="note"><strong>ポイント</strong>: この自動処理を使えば、お客さまが商品を買った瞬間に、メールが届き、学習コンテンツが見られるようになります。手動で何かする必要はありません。</div>
 
@@ -136,13 +231,75 @@
     <li>注文の一覧が表示されます</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        注文一覧画面
+<!-- 注文一覧画面 -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/products/orders/</div>
     </div>
-    <div class="screenshot-desc">「注文一覧」ボタンを押すと表示される画面です。注文ID、お客さま名、商品名、合計金額、ステータス、注文日時が一覧表示されています。各ステータスは色分けされたラベルで表示されます。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">🛒 商品管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">注文一覧</div>
+                <div style="margin-bottom: 0.5rem;">
+                    <span class="mk-btn gray" style="font-size: 0.65rem;">← 商品一覧に戻る</span>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>注文ID</th><th>お客さま</th><th>商品名</th><th>合計金額</th><th>ステータス</th><th>日時</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1042</td>
+                            <td style="font-size: 0.6rem;">田中太郎<br><span style="color: #6B7280;">tanaka@example.com</span></td>
+                            <td>オンライン料理講座</td>
+                            <td>¥9,800</td>
+                            <td><span class="mk-badge green">完了 ❶</span></td>
+                            <td style="font-size: 0.6rem;">2026-03-14 10:30</td>
+                        </tr>
+                        <tr>
+                            <td>#1041</td>
+                            <td style="font-size: 0.6rem;">鈴木花子<br><span style="color: #6B7280;">suzuki@example.com</span></td>
+                            <td>プレミアム会員</td>
+                            <td>¥2,980</td>
+                            <td><span class="mk-badge green">完了</span></td>
+                            <td style="font-size: 0.6rem;">2026-03-13 14:22</td>
+                        </tr>
+                        <tr>
+                            <td>#1040</td>
+                            <td style="font-size: 0.6rem;">佐藤一郎<br><span style="color: #6B7280;">sato@example.com</span></td>
+                            <td>オンライン料理講座</td>
+                            <td>¥9,800</td>
+                            <td><span class="mk-badge blue">処理中 ❷</span></td>
+                            <td style="font-size: 0.6rem;">2026-03-13 09:15</td>
+                        </tr>
+                        <tr>
+                            <td>#1039</td>
+                            <td style="font-size: 0.6rem;">山田次郎<br><span style="color: #6B7280;">yamada@example.com</span></td>
+                            <td>お菓子作り入門</td>
+                            <td>¥4,980</td>
+                            <td><span class="mk-badge orange">返金済 ❸</span></td>
+                            <td style="font-size: 0.6rem;">2026-03-10 16:45</td>
+                        </tr>
+                        <tr>
+                            <td>#1038</td>
+                            <td style="font-size: 0.6rem;">高橋美咲<br><span style="color: #6B7280;">takahashi@example.com</span></td>
+                            <td>プレミアム会員</td>
+                            <td>¥2,980</td>
+                            <td><span class="mk-badge gray">キャンセル ❹</span></td>
+                            <td style="font-size: 0.6rem;">2026-03-08 11:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 注文一覧画面：ステータスが色分けで表示されます ❶ 完了（緑） ❷ 処理中（青） ❸ 返金済（オレンジ） ❹ キャンセル（灰）</p>
 
 <h3>注文一覧の見かた</h3>
 
@@ -195,13 +352,38 @@
     ↓
 ⑧ 自動処理が実行される（コースアクセス権、タグ、メールなど）</div>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        お客さまの購入画面（チェックアウト）
+<!-- お客さまの購入画面（チェックアウト） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/checkout/online-cooking/</div>
     </div>
-    <div class="screenshot-desc">お客さまが商品を購入する際に表示される画面です。商品名と価格が表示され、メールアドレス・名前の入力欄、そして「購入する」ボタンがあります。ボタンを押すとStripeの安全な決済画面に遷移します。</div>
+    <div class="mockup-body">
+        <div class="mk-center">
+            <div class="mk-card">
+                <div class="mk-title" style="text-align: center;">オンライン料理講座</div>
+                <div style="text-align: center; font-size: 1.2rem; font-weight: 700; color: #2563EB; margin: 0.5rem 0;">¥9,800 ❶</div>
+                <div style="text-align: center; font-size: 0.6rem; color: #6B7280; margin-bottom: 0.75rem;">全10回の動画レッスンです。初心者でも安心して学べます。</div>
+                <div class="mk-divider"></div>
+                <div class="mk-label req">メールアドレス ❷</div>
+                <div class="mk-input filled">tanaka@example.com</div>
+                <div style="margin-top: 0.5rem;">
+                    <div class="mk-label req">お名前（姓） ❸</div>
+                    <div class="mk-input filled">田中</div>
+                </div>
+                <div style="margin-top: 0.5rem;">
+                    <div class="mk-label req">お名前（名）</div>
+                    <div class="mk-input filled">太郎</div>
+                </div>
+                <div style="margin-top: 0.75rem;">
+                    <div class="mk-btn green" style="width: 100%; text-align: center;">購入する ❹</div>
+                </div>
+                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.55rem; color: #9CA3AF;">🔒 Stripeの安全な決済画面に移動します</div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ お客さまの購入画面：❶ 商品名と価格 ❷ メールアドレス入力 ❸ お名前入力 ❹ 購入ボタンでStripe決済画面へ</p>
 
 <p>上記の流れはすべて自動で行われます。あなたが手動で何かする必要はありません。お客さまが購入ボタンを押した瞬間から、決済・コース付与・メール配信まですべて自動で処理されます。</p>
 

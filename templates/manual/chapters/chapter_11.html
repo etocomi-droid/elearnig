@@ -30,13 +30,42 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ロール比較表の画面イメージ
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/operators/</div>
     </div>
-    <div class="screenshot-desc">プロジェクトオーナー・管理者（admin）・オペレーター（operator）の3つのロールの権限範囲の違いが一覧で確認できる画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+                <div class="mk-nav-item">📅 予約管理</div>
+                <div class="mk-nav-item active" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">ロール比較</div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>機能</th><th>オーナー</th><th>admin</th><th>operator</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>プロジェクト作成・削除</td><td><span class="mk-badge green">✔</span></td><td><span class="mk-badge gray">✘</span></td><td><span class="mk-badge gray">✘</span></td></tr>
+                        <tr><td>オペレーター管理</td><td><span class="mk-badge green">✔</span></td><td><span class="mk-badge gray">✘</span></td><td><span class="mk-badge gray">✘</span></td></tr>
+                        <tr><td>全機能アクセス</td><td><span class="mk-badge green">✔</span></td><td><span class="mk-badge green">✔</span></td><td><span class="mk-badge gray">✘</span></td></tr>
+                        <tr><td>個別権限のみ</td><td>—</td><td>—</td><td><span class="mk-badge green">✔</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ロール比較 — オーナー・admin・operator の3つのロールの権限の違い</p>
 
 <h2>11.2　オペレーター一覧画面</h2>
 
@@ -63,13 +92,51 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        オペレーター一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/operators/</div>
     </div>
-    <div class="screenshot-desc">メールアドレス・ロール・権限・操作ボタンが表示されたオペレーター一覧テーブルと、右上の「招待」ボタンが確認できる画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item active" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">オペレーター管理</div>
+                <div style="text-align:right;margin-bottom:0.75rem;"><div class="mk-btn green">招待</div></div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>メールアドレス</th><th>ロール</th><th>権限</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>yamada@example.com</td>
+                            <td><span class="mk-badge blue">admin</span></td>
+                            <td>全権限</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td>tanaka@example.com</td>
+                            <td><span class="mk-badge gray">operator</span></td>
+                            <td>コンタクト管理, メール配信管理</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td>suzuki@example.com</td>
+                            <td><span class="mk-badge gray">operator</span></td>
+                            <td>会員サイト管理, 予約管理</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ オペレーター一覧画面 — ❶メールアドレス ❷ロール ❸権限 ❹操作ボタンが表示されます</p>
 
 <h2>11.3　オペレーターの招待</h2>
 
@@ -91,13 +158,33 @@
     <li>必要に応じて、招待後に権限を編集してください</li>
 </ul>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        オペレーター招待フォーム
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/operators/invite/</div>
     </div>
-    <div class="screenshot-desc">メールアドレス入力欄と「招待する」ボタンが表示された招待フォーム画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">オペレーターを招待</div>
+                <div class="mk-card">
+                    <div class="mk-label req">メールアドレス</div>
+                    <div class="mk-input filled">new-staff@example.com</div>
+                    <div style="margin-top:0.5rem;font-size:0.65rem;color:#6B7280;">
+                        ※ アカウントが存在しない場合は自動的に作成されます<br>
+                        ※ 初期ロール: operator / 全権限ON
+                    </div>
+                    <div style="margin-top:0.75rem;"><div class="mk-btn green">招待する</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ オペレーター招待フォーム — メールアドレスを入力して「招待する」を押します</p>
 
 <div class="note"><strong>ポイント</strong>: 招待するメールアドレスに既にアカウントがある場合は、そのアカウントがプロジェクトメンバーとして追加されます。アカウントがない場合は、新しいアカウントが自動で作成されます。</div>
 
@@ -130,13 +217,39 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        権限編集画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/operators/2/edit/</div>
     </div>
-    <div class="screenshot-desc">ロール選択（admin / operator）のドロップダウンと、6つの権限チェックボックス（ファネル管理・メール配信管理・会員サイト管理・コンタクト管理・商品管理・予約管理）が並んだ権限編集フォーム画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">権限編集 — tanaka@example.com</div>
+                <div class="mk-card">
+                    <div class="mk-label req">ロール</div>
+                    <div class="mk-input filled">operator ▾</div>
+                    <div class="mk-divider"></div>
+                    <div class="mk-sub">権限チェックボックス</div>
+                    <div style="margin:0.35rem 0;">
+                        <div style="margin-bottom:0.25rem;">☑️ ❶ ファネル管理</div>
+                        <div style="margin-bottom:0.25rem;">☑️ ❷ メール配信管理</div>
+                        <div style="margin-bottom:0.25rem;">☐ ❸ 会員サイト管理</div>
+                        <div style="margin-bottom:0.25rem;">☑️ ❹ コンタクト管理</div>
+                        <div style="margin-bottom:0.25rem;">☐ ❺ 商品管理</div>
+                        <div style="margin-bottom:0.25rem;">☐ ❻ 予約管理</div>
+                    </div>
+                    <div style="margin-top:0.75rem;"><div class="mk-btn orange">更新</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 権限編集画面 — ロールを選び、6つの権限チェックボックスで個別にアクセス範囲を設定</p>
 
 <h2>11.5　オペレーターの削除</h2>
 
@@ -148,6 +261,36 @@
     <li>オペレーター一覧画面で、削除したいメンバーの <strong>「削除」</strong> ボタンを押します</li>
     <li>確認メッセージが表示されるので、<strong>「削除する」</strong> を押します</li>
 </ol>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/operators/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">オペレーター管理</div>
+                <div class="mk-card" style="border:2px solid #EF4444;background:#FEF2F2;">
+                    <div style="font-size:0.75rem;font-weight:600;color:#DC2626;margin-bottom:0.35rem;">オペレーターの削除</div>
+                    <div style="font-size:0.65rem;color:#374151;margin-bottom:0.5rem;">
+                        <strong>suzuki@example.com</strong> をプロジェクトから削除しますか？<br>
+                        削除されたオペレーターは、このプロジェクトにアクセスできなくなります。
+                    </div>
+                    <div style="display:flex;gap:0.5rem;">
+                        <div class="mk-btn gray">キャンセル</div>
+                        <div class="mk-btn" style="background:#EF4444;color:#fff;">削除する</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p class="mockup-caption">▲ 削除確認ダイアログ — 削除対象のメールアドレスを確認してから「削除する」を押します</p>
 
 <div class="note"><strong>ポイント</strong>: オペレーター管理はプロジェクトオーナーのみが実行可能です。オペレーター自身が他のオペレーターを招待・編集・削除することはできません。</div>
 

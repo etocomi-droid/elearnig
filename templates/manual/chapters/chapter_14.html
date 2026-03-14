@@ -40,21 +40,80 @@
     <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        予約タイプ一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/bookings/</div>
     </div>
-    <div class="screenshot-desc">作成済みの予約タイプが一覧表示され、各タイプの名前・種類（schedule/meeting）・所要時間が確認でき、右上に「新規作成」ボタンがある画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+                <div class="mk-nav-item active">📅 予約管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">予約管理</div>
+                <div style="text-align:right;margin-bottom:0.75rem;"><div class="mk-btn green">新規作成</div></div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>予約タイプ名</th><th>種類</th><th>所要時間</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>無料相談会</td>
+                            <td><span class="mk-badge blue">meeting</span></td>
+                            <td>30分</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td>入門セミナー</td>
+                            <td><span class="mk-badge purple">schedule</span></td>
+                            <td>90分</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 予約タイプ一覧画面 — 予約タイプ名・種類（meeting/schedule）・所要時間が確認できます</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        予約タイプ作成フォーム
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/bookings/create/</div>
     </div>
-    <div class="screenshot-desc">予約タイプ名・予約の種類（schedule/meeting選択）・所要時間・場所の各入力欄と「作成」ボタンが表示された新規作成フォーム画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">📅 予約管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">予約タイプ作成</div>
+                <div class="mk-card">
+                    <div class="mk-label req">❶ 予約タイプ名</div>
+                    <div class="mk-input filled">無料相談会</div>
+                    <div class="mk-label req">❷ 予約の種類</div>
+                    <div class="mk-input filled">meeting ▾</div>
+                    <div class="mk-label req">❸ 所要時間（分）</div>
+                    <div class="mk-input filled">30</div>
+                    <div class="mk-label">❹ 場所</div>
+                    <div class="mk-input filled">https://zoom.us/j/xxxxxxxxx</div>
+                    <div style="margin-top:0.75rem;"><div class="mk-btn green">作成</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 予約タイプ作成フォーム — ❶タイプ名 ❷種類 ❸所要時間 ❹場所を入力して作成</p>
 
 <h2>14.3　予約枠の設定</h2>
 
@@ -77,13 +136,71 @@
     <li>過去の日付には枠を設定できません</li>
 </ul>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        カレンダー・予約枠設定画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/bookings/1/slots/</div>
     </div>
-    <div class="screenshot-desc">カレンダーで日付を選択し、開始時間・終了時間を入力して予約枠を追加できる画面。設定済みの枠が一覧表示され、各枠に「削除」ボタンが付いている</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">📅 予約管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">予約枠設定 — 無料相談会</div>
+                <div style="display:flex;gap:0.75rem;">
+                    <!-- カレンダー -->
+                    <div style="flex:1;">
+                        <div class="mk-sub">カレンダー</div>
+                        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:0.375rem;padding:0.5rem;">
+                            <div style="text-align:center;font-size:0.7rem;font-weight:600;margin-bottom:0.35rem;">2026年 3月</div>
+                            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:0.15rem;font-size:0.55rem;text-align:center;">
+                                <div style="color:#6B7280;font-weight:600;">日</div>
+                                <div style="color:#6B7280;font-weight:600;">月</div>
+                                <div style="color:#6B7280;font-weight:600;">火</div>
+                                <div style="color:#6B7280;font-weight:600;">水</div>
+                                <div style="color:#6B7280;font-weight:600;">木</div>
+                                <div style="color:#6B7280;font-weight:600;">金</div>
+                                <div style="color:#6B7280;font-weight:600;">土</div>
+                                <div style="color:#D1D5DB;">1</div><div style="color:#D1D5DB;">2</div><div style="color:#D1D5DB;">3</div><div style="color:#D1D5DB;">4</div><div style="color:#D1D5DB;">5</div><div style="color:#D1D5DB;">6</div><div style="color:#D1D5DB;">7</div>
+                                <div style="color:#D1D5DB;">8</div><div style="color:#D1D5DB;">9</div><div style="color:#D1D5DB;">10</div><div style="color:#D1D5DB;">11</div><div style="color:#D1D5DB;">12</div><div style="color:#D1D5DB;">13</div><div style="color:#D1D5DB;">14</div>
+                                <div>15</div><div style="background:#DBEAFE;border-radius:50%;color:#2563EB;font-weight:bold;">16</div><div>17</div><div style="background:#DBEAFE;border-radius:50%;color:#2563EB;font-weight:bold;">18</div><div>19</div><div style="background:#EFF6FF;border-radius:50%;color:#2563EB;">20</div><div>21</div>
+                                <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+                                <div>29</div><div>30</div><div>31</div><div></div><div></div><div></div><div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 枠設定 -->
+                    <div style="flex:1;">
+                        <div class="mk-sub">3月16日（月）の予約枠</div>
+                        <div class="mk-card" style="margin-bottom:0.35rem;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.65rem;">
+                                <span>10:00 〜 12:00</span>
+                                <span class="mk-small-btn red">削除</span>
+                            </div>
+                        </div>
+                        <div class="mk-card" style="margin-bottom:0.35rem;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.65rem;">
+                                <span>14:00 〜 16:00</span>
+                                <span class="mk-small-btn red">削除</span>
+                            </div>
+                        </div>
+                        <div class="mk-divider"></div>
+                        <div class="mk-sub">枠を追加</div>
+                        <div style="display:flex;gap:0.35rem;align-items:center;margin-bottom:0.5rem;">
+                            <div class="mk-input" style="flex:1;">開始時間</div>
+                            <span style="font-size:0.65rem;">〜</span>
+                            <div class="mk-input" style="flex:1;">終了時間</div>
+                        </div>
+                        <div class="mk-btn green">枠を追加</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ カレンダー・予約枠設定画面 — 左のカレンダーで日付を選び、右で時間枠を追加・削除します</p>
 
 <h2>14.4　予約一覧の確認</h2>
 
@@ -120,13 +237,59 @@
 
 <p>一覧から予約を選択すると、予約の詳細情報を確認できます。予約者の情報、予約日時、場所などが表示されます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        予約一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/bookings/reservations/</div>
     </div>
-    <div class="screenshot-desc">予約者・予約タイプ・予約日時・ステータス（予約済み/確定/キャンセル）が表示された予約一覧テーブル画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">📅 予約管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">予約一覧</div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>予約者</th><th>予約タイプ</th><th>予約日時</th><th>ステータス</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>田中 太郎</td>
+                            <td>無料相談会</td>
+                            <td>2026-03-16 10:00</td>
+                            <td><span class="mk-badge blue">予約済み</span></td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                        <tr>
+                            <td>鈴木 花子</td>
+                            <td>無料相談会</td>
+                            <td>2026-03-16 10:30</td>
+                            <td><span class="mk-badge green">確定</span></td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                        <tr>
+                            <td>佐藤 一郎</td>
+                            <td>入門セミナー</td>
+                            <td>2026-03-18 14:00</td>
+                            <td><span class="mk-badge blue">予約済み</span></td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                        <tr>
+                            <td>山田 美咲</td>
+                            <td>無料相談会</td>
+                            <td>2026-03-15 14:00</td>
+                            <td><span class="mk-badge gray">キャンセル</span></td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 予約一覧画面 — ❶予約者 ❷予約タイプ ❸予約日時 ❹ステータス（青=予約済み / 緑=確定 / グレー=キャンセル）</p>
 
 <h2>14.5　ファネルとの連携</h2>
 
@@ -149,12 +312,53 @@
     <li>予約完了後、予約情報が管理画面の予約一覧に反映されます</li>
 </ul>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ファネル上の予約ウィジェット
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/p/consultation/booking/</div>
     </div>
-    <div class="screenshot-desc">ファネルページに埋め込まれた予約ウィジェットの表示例。お客さまが予約可能な日時を選択して予約を完了できるカレンダー形式のウィジェット</div>
+    <div class="mockup-body">
+        <div class="mk-center">
+            <div style="background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;padding:1rem;text-align:center;border-radius:0.5rem 0.5rem 0 0;">
+                <div style="font-size:0.9rem;font-weight:bold;">無料相談会のご予約</div>
+                <div style="font-size:0.6rem;opacity:0.9;margin-top:0.2rem;">所要時間: 30分 | オンライン（Zoom）</div>
+            </div>
+            <div style="background:#fff;border:1px solid #E5E7EB;padding:0.75rem;">
+                <div style="font-size:0.7rem;font-weight:600;margin-bottom:0.35rem;">日時を選択</div>
+                <!-- ミニカレンダー -->
+                <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:0.375rem;padding:0.5rem;margin-bottom:0.5rem;">
+                    <div style="text-align:center;font-size:0.65rem;font-weight:600;margin-bottom:0.25rem;">2026年 3月</div>
+                    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:0.1rem;font-size:0.5rem;text-align:center;">
+                        <div style="font-weight:600;">日</div><div style="font-weight:600;">月</div><div style="font-weight:600;">火</div><div style="font-weight:600;">水</div><div style="font-weight:600;">木</div><div style="font-weight:600;">金</div><div style="font-weight:600;">土</div>
+                        <div style="color:#D1D5DB;">1</div><div style="color:#D1D5DB;">2</div><div style="color:#D1D5DB;">3</div><div style="color:#D1D5DB;">4</div><div style="color:#D1D5DB;">5</div><div style="color:#D1D5DB;">6</div><div style="color:#D1D5DB;">7</div>
+                        <div style="color:#D1D5DB;">8</div><div style="color:#D1D5DB;">9</div><div style="color:#D1D5DB;">10</div><div style="color:#D1D5DB;">11</div><div style="color:#D1D5DB;">12</div><div style="color:#D1D5DB;">13</div><div style="color:#D1D5DB;">14</div>
+                        <div>15</div><div style="background:#2563EB;color:#fff;border-radius:50%;font-weight:bold;">16</div><div>17</div><div style="background:#DBEAFE;border-radius:50%;color:#2563EB;">18</div><div>19</div><div style="background:#DBEAFE;border-radius:50%;color:#2563EB;">20</div><div>21</div>
+                        <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+                        <div>29</div><div>30</div><div>31</div><div></div><div></div><div></div><div></div>
+                    </div>
+                </div>
+                <div style="font-size:0.65rem;font-weight:600;margin-bottom:0.25rem;">3月16日（月）の空き時間</div>
+                <div style="display:flex;flex-wrap:wrap;gap:0.25rem;margin-bottom:0.5rem;">
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">10:00</div>
+                    <div style="background:#2563EB;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#fff;font-weight:bold;">10:30</div>
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">11:00</div>
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">11:30</div>
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">14:00</div>
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">14:30</div>
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">15:00</div>
+                    <div style="background:#EFF6FF;border:1px solid #2563EB;border-radius:0.25rem;padding:0.2rem 0.5rem;font-size:0.55rem;color:#2563EB;cursor:pointer;">15:30</div>
+                </div>
+            </div>
+            <div style="background:#fff;border:1px solid #E5E7EB;border-radius:0 0 0.5rem 0.5rem;padding:0.75rem;">
+                <div class="mk-label req">お名前</div>
+                <div class="mk-input">お名前を入力</div>
+                <div class="mk-label req">メールアドレス</div>
+                <div class="mk-input">メールアドレスを入力</div>
+                <div style="margin-top:0.5rem;"><div class="mk-btn green" style="width:100%;text-align:center;">予約を確定する</div></div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ファネル上の予約ウィジェット — カレンダーで日付を選び、空き時間から希望の枠を選択して予約</p>
 
 <div class="note"><strong>ポイント</strong>: 予約確定後、予約者のメールアドレスにリマインダーを送る場合は、メール配信のシナリオと連携してください。シナリオのトリガーに予約を設定することで、自動的にリマインダーメールを送信できます。</div>

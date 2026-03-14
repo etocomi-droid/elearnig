@@ -58,13 +58,50 @@
 
 <p><strong>A.</strong> 左メニューの <strong>「予約管理」</strong> から利用できます。予約管理では、セミナーや個別相談などの日程を設定し、お客さまがオンラインで予約できる仕組みを作れます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        予約管理画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/bookings/</div>
     </div>
-    <div class="screenshot-desc">予約管理の一覧画面。カレンダー形式で予約状況が表示され、予約枠の追加・編集ができます。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+                <div class="mk-nav-item active">📅 予約管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">予約管理</div>
+                <div style="text-align:right;margin-bottom:0.75rem;"><div class="mk-btn green">新規作成</div></div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>予約タイプ名</th><th>種類</th><th>所要時間</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>無料相談会</td>
+                            <td><span class="mk-badge blue">meeting</span></td>
+                            <td>30分</td>
+                            <td><span class="mk-small-btn blue">編集</span></td>
+                        </tr>
+                        <tr>
+                            <td>入門セミナー</td>
+                            <td><span class="mk-badge purple">schedule</span></td>
+                            <td>90分</td>
+                            <td><span class="mk-small-btn blue">編集</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 予約管理画面 — 予約タイプの一覧と新規作成ボタンが表示されます</p>
 
 <p>主な使い方:</p>
 <ul>
@@ -77,13 +114,45 @@
 
 <p><strong>A.</strong> オペレーター機能は、<strong>管理者以外のスタッフにも一部の操作権限を与える</strong>機能です。たとえば、サポート担当者にコンタクト管理だけを任せたい場合などに使います。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        オペレーター管理画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/operators/</div>
     </div>
-    <div class="screenshot-desc">オペレーターの一覧画面。登録済みのオペレーター名、メールアドレス、権限レベルが表示されます。「新規オペレーター追加」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">オペレーター管理</div>
+                <div style="text-align:right;margin-bottom:0.75rem;"><div class="mk-btn green">招待</div></div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>メールアドレス</th><th>ロール</th><th>権限</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>staff@example.com</td>
+                            <td><span class="mk-badge blue">admin</span></td>
+                            <td>全権限</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td>support@example.com</td>
+                            <td><span class="mk-badge gray">operator</span></td>
+                            <td>コンタクト管理, サポート</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ オペレーター管理画面 — メールアドレス・ロール・権限が一覧で確認できます</p>
 
 <p>設定手順:</p>
 <ol>
@@ -98,13 +167,51 @@
 
 <p><strong>A.</strong> はい、お客さまからの問い合わせを管理する機能があります。左メニューの <strong>「サポート」</strong> から利用できます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        サポート（問い合わせ管理）画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/support/</div>
     </div>
-    <div class="screenshot-desc">サポートの問い合わせ一覧画面。お客さまからの問い合わせがチケット形式で一覧表示されます。各チケットにはステータス（未対応・対応中・解決済み）、件名、お客さま名、受付日時が表示されます。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item active">💬 サポート</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">サポート</div>
+                <div style="text-align:right;margin-bottom:0.75rem;"><div class="mk-btn green">新規スレッド</div></div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>件名</th><th>ステータス</th><th>メッセージ数</th><th>更新日時</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>決済エラーについて</td>
+                            <td><span class="mk-badge blue">オープン</span></td>
+                            <td>3</td>
+                            <td>2026-03-14 10:30</td>
+                        </tr>
+                        <tr>
+                            <td>会員サイトの表示不具合</td>
+                            <td><span class="mk-badge orange">対応待ち</span></td>
+                            <td>5</td>
+                            <td>2026-03-13 15:20</td>
+                        </tr>
+                        <tr>
+                            <td>メール設定の質問</td>
+                            <td><span class="mk-badge gray">クローズ</span></td>
+                            <td>4</td>
+                            <td>2026-03-10 09:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ サポート画面 — スレッドごとにステータス（オープン・対応待ち・クローズ）で管理できます</p>
 
 <p>主な機能:</p>
 <ul>
@@ -131,13 +238,47 @@
 
 <p><strong>A.</strong> コースの編集画面にあるレッスン一覧で、各レッスンの行に表示される<strong>目のアイコン（プレビューボタン）</strong>をクリックしてください。モーダル（ポップアップ画面）が開き、レッスンの内容をすばやく確認できます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        レッスンプレビュー機能
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/membership/courses/1/edit/</div>
     </div>
-    <div class="screenshot-desc">コース編集画面のレッスン一覧。各レッスンの行にある目のアイコン（プレビューボタン）が強調表示されています。クリックするとモーダルでレッスン内容をプレビューできます。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">コース編集 — 動画講座・入門編</div>
+                <div class="mk-sub">レッスン一覧</div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>レッスン名</th><th>種類</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>第1回「はじめに」</td>
+                            <td><span class="mk-badge blue">テキスト</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn white" style="border:2px solid #F59E0B;font-weight:bold;">👁</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td>第2回「基礎知識」</td>
+                            <td><span class="mk-badge purple">動画</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn white">👁</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td>第3回「実践」</td>
+                            <td><span class="mk-badge purple">動画</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn white">👁</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ レッスンプレビュー機能 — 各行の 👁 ボタンを押すとモーダルでレッスン内容を確認できます</p>
 
 <p>プレビューで確認できる内容:</p>
 <ul>

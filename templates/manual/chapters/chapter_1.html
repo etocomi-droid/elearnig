@@ -4,13 +4,64 @@
 
 <p>ログインすると、まずダッシュボード（トップ画面）が表示されます。ここからすべての機能にアクセスできます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ダッシュボード画面の全体像
+<!-- ダッシュボード画面モックアップ -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/</div>
     </div>
-    <div class="screenshot-desc">ログイン後に表示されるダッシュボード。左側にメニュー、中央に統計カードとかんたん操作ボタンが表示されます。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+                <div class="mk-nav-item">📅 予約管理</div>
+                <div class="mk-nav-item" style="margin-top: 0.5rem; border-top: 1px solid #374151; padding-top: 0.5rem;">⚙️ オペレーター管理</div>
+                <div class="mk-nav-item">💬 サポート</div>
+                <div class="mk-nav-item">📩 問い合わせ</div>
+                <div class="mk-nav-item">📖 マニュアル</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">ダッシュボード</div>
+                <div class="mk-stats">
+                    <div class="mk-stat">
+                        <div class="mk-stat-val" style="color: #2563EB;">12</div>
+                        <div class="mk-stat-lbl">コンタクト</div>
+                    </div>
+                    <div class="mk-stat">
+                        <div class="mk-stat-val" style="color: #7C3AED;">3</div>
+                        <div class="mk-stat-lbl">ファネル</div>
+                    </div>
+                    <div class="mk-stat">
+                        <div class="mk-stat-val" style="color: #16A34A;">5</div>
+                        <div class="mk-stat-lbl">注文</div>
+                    </div>
+                    <div class="mk-stat">
+                        <div class="mk-stat-val" style="color: #EA580C;">2</div>
+                        <div class="mk-stat-lbl">シナリオ</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                    <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; padding: 0.625rem; text-align: center;">
+                        <div style="font-size: 0.7rem; font-weight: 600; color: #374151;">👥 顧客を管理する</div>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; padding: 0.625rem; text-align: center;">
+                        <div style="font-size: 0.7rem; font-weight: 600; color: #374151;">📄 ファネルを作る</div>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; padding: 0.625rem; text-align: center;">
+                        <div style="font-size: 0.7rem; font-weight: 600; color: #374151;">✉️ シナリオ管理</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ダッシュボード画面：左側メニューからすべての機能にアクセスできます</p>
 
 <p>たとえるなら、次のようなことが一つの場所でまとめてできます。</p>
 
@@ -25,9 +76,8 @@
         <tr><td>商品を売って代金をもらいたい</td><td>レジ・請求書</td><td><strong>商品・決済</strong></td></tr>
         <tr><td>動画や教材を届けたい</td><td>教室・スクール</td><td><strong>会員サイト</strong></td></tr>
         <tr><td>予約を受け付けたい</td><td>予約台帳・カレンダー</td><td><strong>予約管理</strong></td></tr>
-        <tr><td>対応スタッフを管理したい</td><td>スタッフ名簿・シフト表</td><td><strong>オペレーター管理</strong></td></tr>
-        <tr><td>お客さまの困りごとに対応したい</td><td>相談窓口・ヘルプデスク</td><td><strong>サポート</strong></td></tr>
-        <tr><td>お客さまからの質問を受け付けたい</td><td>お問い合わせ用紙</td><td><strong>問い合わせ</strong></td></tr>
+        <tr><td>対応スタッフを管理したい</td><td>スタッフ名簿</td><td><strong>オペレーター管理</strong></td></tr>
+        <tr><td>お客さまの困りごとに対応したい</td><td>相談窓口</td><td><strong>サポート・問い合わせ</strong></td></tr>
     </tbody>
 </table>
 
@@ -35,72 +85,363 @@
 
 <h2>1.2　使うまでの大まかな流れ</h2>
 
-<p>システムを使い始めるまでの流れを、順番にご案内します。それぞれのステップについては、次の章以降でくわしく説明しますのでご安心ください。</p>
+<p>システムを使い始めるまでの流れを、順番にご案内します。各ステップの実際の画面と一緒に見ていきましょう。</p>
 
-<div class="step-box">
-    <div class="step-num">1</div>
-    <div>
-        <strong>アカウントを作る（ユーザー登録）</strong><br>
-        メールアドレスとパスワードを決めて、あなた専用のアカウントを作ります。
+<!-- ステップ1: アカウント作成 -->
+<h3>ステップ1　アカウントを作る（ユーザー登録）</h3>
+
+<p>メールアドレスとパスワードを決めて、あなた専用のアカウントを作ります。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/signup/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-center">
+            <div class="mk-card">
+                <div class="mk-logo">
+                    <svg fill="none" stroke="white" viewBox="0 0 24 24" style="width:1.5rem;height:1.5rem"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                </div>
+                <div class="mk-title">アカウント作成</div>
+                <div class="mk-sub">必要な情報を入力してください</div>
+                <div class="mk-label">ユーザー名 <span class="req">*</span></div>
+                <div class="mk-input filled">tanaka</div>
+                <div class="mk-label">メールアドレス <span class="req">*</span></div>
+                <div class="mk-input filled">tanaka@example.com</div>
+                <div class="mk-label">パスワード <span class="req">*</span></div>
+                <div class="mk-input filled">••••••••　👁</div>
+                <div class="mk-label">パスワード（確認） <span class="req">*</span></div>
+                <div class="mk-input filled">••••••••　👁</div>
+                <div class="mk-btn">アカウントを作成</div>
+                <div class="mk-link">すでにアカウントをお持ちですか？ ログイン</div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ アカウント作成画面：4つの項目を入力して「アカウントを作成」ボタンを押します</p>
 
-<div class="step-box">
-    <div class="step-num">2</div>
-    <div>
-        <strong>プロジェクトを作る（お店の看板をかける）</strong><br>
-        事業やサービスの名前をつけて、プロジェクトを作ります。
+<table>
+    <thead>
+        <tr><th>入力欄</th><th>何を入れるか</th><th>入力例</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>ユーザー名</td><td>好きな名前（半角英数）</td><td>tanaka</td></tr>
+        <tr><td>メールアドレス</td><td>あなたのメールアドレス</td><td>tanaka@example.com</td></tr>
+        <tr><td>パスワード</td><td>合言葉（8文字以上）</td><td>MyPass1234</td></tr>
+        <tr><td>パスワード（確認）</td><td>上と同じものをもう一度</td><td>MyPass1234</td></tr>
+    </tbody>
+</table>
+
+<div class="note"><strong>ヒント</strong>: パスワード欄の右側にある <strong>👁（目のアイコン）</strong>を押すと、入力した文字を確認できます。</div>
+
+<!-- ステップ2: ログイン -->
+<h3>ステップ2　ログインする</h3>
+
+<p>アカウントを作成すると自動的にログインされます。次回以降はログイン画面からユーザー名とパスワードを入力します。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/login/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-center">
+            <div class="mk-card">
+                <div class="mk-logo">
+                    <svg fill="none" stroke="white" viewBox="0 0 24 24" style="width:1.5rem;height:1.5rem"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                </div>
+                <div class="mk-title">ログイン</div>
+                <div class="mk-sub">ユーザー名とパスワードを入力してください</div>
+                <div class="mk-label">ユーザー名 <span class="req">*</span></div>
+                <div class="mk-input filled">tanaka</div>
+                <div class="mk-label">パスワード <span class="req">*</span></div>
+                <div class="mk-input filled">••••••••　👁</div>
+                <div style="text-align: right; margin-bottom: 0.75rem;">
+                    <span style="font-size: 0.7rem; color: #2563EB;">パスワードを忘れた方はこちら</span>
+                </div>
+                <div class="mk-btn">ログイン</div>
+                <div class="mk-link">アカウントをお持ちでない方はこちら</div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ ログイン画面：ユーザー名とパスワードを入力して「ログイン」ボタンを押します</p>
 
-<div class="step-box">
-    <div class="step-num">3</div>
-    <div>
-        <strong>集客ページを作る（チラシを作る）</strong><br>
-        お客さまに見てもらうための申し込みページ（ファネル）を作ります。
+<!-- ステップ3: プロジェクト作成 -->
+<h3>ステップ3　プロジェクトを作る（お店の看板をかける）</h3>
+
+<p>事業やサービスの名前をつけて、プロジェクトを作ります。1つのプロジェクト＝1つの事業です。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/projects/create/</div>
+    </div>
+    <div class="mockup-body">
+        <div style="max-width: 500px; margin: 2rem auto; padding: 0 1.5rem;">
+            <div style="font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 1.25rem;">新規プロジェクト作成</div>
+            <div class="mk-card">
+                <div class="mk-label">プロジェクト名 <span class="req">*</span></div>
+                <div class="mk-input filled">ライブコマーサー育成講座</div>
+                <div class="mk-label">スラッグ <span class="req">*</span></div>
+                <div class="mk-input filled">live-commercer-course</div>
+                <div style="font-size: 0.65rem; color: #6B7280; margin-top: -0.5rem; margin-bottom: 1rem;">※ 半角英数字とハイフンのみ。URLの一部になります。</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <div class="mk-btn" style="flex: 1;">作成</div>
+                    <div class="mk-btn gray" style="flex: 0 0 auto; width: auto; padding: 0.5rem 1rem;">キャンセル</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ プロジェクト作成画面：プロジェクト名とスラッグを入力して「作成」を押します</p>
 
-<div class="step-box">
-    <div class="step-num">4</div>
-    <div>
-        <strong>メール配信を設定する（お知らせの手紙を準備する）</strong><br>
-        お客さまに自動で届くメールのシナリオを設定します。
+<table>
+    <thead>
+        <tr><th>入力欄</th><th>何を入れるか</th><th>入力例</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>プロジェクト名</td><td>事業やお店の名前</td><td>ライブコマーサー育成講座</td></tr>
+        <tr><td>スラッグ</td><td>URLに使う短い英語名</td><td>live-commercer-course</td></tr>
+    </tbody>
+</table>
+
+<!-- ステップ4: ファネル作成 -->
+<h3>ステップ4　集客ページを作る（チラシを作る）</h3>
+
+<p>お客さまに見てもらうための申し込みページ（ファネル）を作ります。左メニューの「ファネル」から作成できます。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item active">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div class="mk-page-title" style="margin-bottom: 0;">ファネル一覧</div>
+                    <div class="mk-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.7rem !important;">＋ 新規ファネル作成</div>
+                </div>
+                <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; overflow: hidden;">
+                    <table class="mk-table">
+                        <thead>
+                            <tr><th>ファネル名</th><th>ページ数</th><th>公開</th><th>操作</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>無料セミナー申込</strong><br><span style="color:#9CA3AF; font-size:0.6rem !important;">free-seminar</span></td>
+                                <td>2</td>
+                                <td><span class="mk-badge green">公開中</span></td>
+                                <td><span class="mk-small-btn blue">編集</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>商品販売ページ</strong><br><span style="color:#9CA3AF; font-size:0.6rem !important;">product-sales</span></td>
+                                <td>3</td>
+                                <td><span class="mk-badge gray">非公開</span></td>
+                                <td><span class="mk-small-btn blue">編集</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ ファネル一覧画面：「新規ファネル作成」ボタンでページを作成できます</p>
 
-<div class="step-box">
-    <div class="step-num">5</div>
-    <div>
-        <strong>商品を登録する（売り物を棚に並べる）</strong><br>
-        販売したい商品や講座を登録します。
+<!-- ステップ5: メール配信 -->
+<h3>ステップ5　メール配信を設定する（お知らせの手紙を準備する）</h3>
+
+<p>お客さまに自動で届くメールのシナリオを設定します。左メニューの「メール配信」から作成できます。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/emails/scenarios/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <div style="padding: 0.3rem 0.75rem; background: #2563EB; color: #fff; border-radius: 0.375rem; font-size: 0.7rem !important; font-weight: 600;">シナリオ</div>
+                    <div style="padding: 0.3rem 0.75rem; background: #F3F4F6; color: #6B7280; border-radius: 0.375rem; font-size: 0.7rem !important;">一斉配信</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div class="mk-page-title" style="margin-bottom: 0;">シナリオ一覧</div>
+                    <div class="mk-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.7rem !important;">＋ 新規シナリオ作成</div>
+                </div>
+                <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; overflow: hidden;">
+                    <table class="mk-table">
+                        <thead>
+                            <tr><th>シナリオ名</th><th>ステップ</th><th>登録者</th><th>状態</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>申込後フォロー</strong></td>
+                                <td>4ステップ</td>
+                                <td>12名</td>
+                                <td><span class="mk-badge green">有効</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>購入者フォロー</strong></td>
+                                <td>3ステップ</td>
+                                <td>5名</td>
+                                <td><span class="mk-badge green">有効</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ メール配信画面：シナリオ（自動配信）と一斉配信の2種類を管理できます</p>
 
-<div class="step-box">
-    <div class="step-num">6</div>
-    <div>
-        <strong>会員サイトを作る（教室を開く）</strong><br>
-        動画や教材を届けるための学習コーナーを作ります。
+<!-- ステップ6: 商品登録 -->
+<h3>ステップ6　商品を登録する（売り物を棚に並べる）</h3>
+
+<p>販売したい商品や講座を登録します。左メニューの「商品管理」から作成できます。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/products/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item active">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div class="mk-page-title" style="margin-bottom: 0;">商品一覧</div>
+                    <div style="display: flex; gap: 0.375rem;">
+                        <div class="mk-btn gray" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.7rem !important;">注文一覧</div>
+                        <div class="mk-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.7rem !important;">＋ 新規商品作成</div>
+                    </div>
+                </div>
+                <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; overflow: hidden;">
+                    <table class="mk-table">
+                        <thead>
+                            <tr><th>商品名</th><th>タイプ</th><th style="text-align:right;">価格</th><th>状態</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>STAGE1 基礎編</strong></td>
+                                <td><span class="mk-badge blue">単品</span></td>
+                                <td style="text-align:right; font-weight: 600;">¥29,800</td>
+                                <td><span class="mk-badge green">有効</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>全コース一括</strong></td>
+                                <td><span class="mk-badge blue">単品</span></td>
+                                <td style="text-align:right; font-weight: 600;">¥98,000</td>
+                                <td><span class="mk-badge green">有効</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>月額サブスク</strong></td>
+                                <td><span class="mk-badge purple">月額</span></td>
+                                <td style="text-align:right; font-weight: 600;">¥9,800</td>
+                                <td><span class="mk-badge green">有効</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ 商品管理画面：商品の登録・価格設定・注文管理ができます</p>
 
-<div class="step-box">
-    <div class="step-num">7</div>
-    <div>
-        <strong>運用を始める</strong><br>
-        お客さまが来る → 自動でメールが届く → 商品を買う → 教材が見られる、という流れが自動的に回り始めます。
+<!-- ステップ7: 会員サイト -->
+<h3>ステップ7　会員サイトを作る（教室を開く）</h3>
+
+<p>動画や教材を届けるための学習コーナーを作ります。左メニューの「会員サイト」から作成できます。</p>
+
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/members/sites/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item active">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div class="mk-page-title" style="margin-bottom: 0;">会員サイト</div>
+                    <div class="mk-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.7rem !important;">＋ 新規サイト作成</div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                    <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 0.5rem; padding: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <div style="width: 2rem; height: 2rem; background: #4F46E5; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.75rem; font-weight: 700;">L</div>
+                            <div>
+                                <div style="font-size: 0.75rem; font-weight: 600; color: #111827;">ライブコマーサー育成講座</div>
+                                <span class="mk-badge green">有効</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.65rem; color: #6B7280;">📚 3コース　👥 10名</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<p class="mockup-caption">▲ 会員サイト画面：コース・レッスン・テストを管理できます</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        左側メニューに並ぶ機能一覧
-    </div>
-    <div class="screenshot-desc">左メニューには「ダッシュボード」「コンタクト」「ファネル」「メール配信」「商品管理」「会員サイト」「予約管理」「オペレーター管理」「サポート」「問い合わせ」「マニュアル」などの項目が並びます。</div>
-</div>
+<!-- ステップ8: 運用開始 -->
+<h3>ステップ8　運用を始める</h3>
+
+<p>すべての設定が終わったら、あとは自動的に仕組みが回り始めます。</p>
+
+<div class="codeblock">お客さまが集客ページ（ファネル）を見る
+  ↓
+フォームにメール入力して送信
+  ↓
+コンタクト（顧客台帳）に自動登録
+  ↓
+シナリオメールが自動スタート（0日後 → 1日後 → 3日後…）
+  ↓
+お客さまが商品を購入（Stripe決済）
+  ↓
+自動でコースのアクセス権が付与される
+  ↓
+お客さまが会員サイトでレッスンを受講できる</div>
 
 <div class="note"><strong>ポイント</strong>: すべてブラウザ（インターネットを見る画面）だけで操作できます。特別なソフトをインストールする必要はありません。スマートフォンやタブレットからもアクセスできます。</div>
 
-<div class="warning"><strong>はじめて使う方へ</strong>: 一度にすべての機能を覚える必要はありません。まずはアカウント作成とプロジェクト作成（第2章）から始めて、一つずつ慣れていきましょう。</div>
+<div class="warning"><strong>はじめて使う方へ</strong>: 一度にすべての機能を覚える必要はありません。まずはアカウント作成とプロジェクト作成（第2章）から始めて、一つずつ慣れていきましょう。各機能の詳しい使い方は、第2章〜第14章で画面つきで説明しています。</div>

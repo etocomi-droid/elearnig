@@ -26,13 +26,74 @@
     <div>登録されているお客さまの一覧が表示されます。</div>
 </div>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        コンタクト一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/contacts/</div>
     </div>
-    <div class="screenshot-desc">画面上部に検索バーとタグ絞り込み欄があり、その下にお客さまの一覧テーブルが表示されます。テーブルには名前、メールアドレス、タグ、登録日、操作ボタンの列があります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">My Project</div>
+                <div class="mk-nav-item">ダッシュボード</div>
+                <div class="mk-nav-item active">コンタクト</div>
+                <div class="mk-nav-item">ファネル</div>
+                <div class="mk-nav-item">メール配信</div>
+                <div class="mk-nav-item">商品管理</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">コンタクト一覧</div>
+                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                    <div class="mk-input filled" style="flex: 1;">❶ 名前・メールで検索...</div>
+                    <div class="mk-input filled" style="width: 140px;">❷ タグで絞り込み</div>
+                    <span class="mk-btn" style="white-space: nowrap;">検索</span>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr>
+                            <th>名前</th>
+                            <th>メールアドレス</th>
+                            <th>タグ</th>
+                            <th>登録日</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="mk-link">田中 太郎</span></td>
+                            <td>tanaka@example.com</td>
+                            <td><span class="mk-badge green">購入済み</span></td>
+                            <td>2025-12-01</td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mk-link">鈴木 花子</span></td>
+                            <td>suzuki@example.com</td>
+                            <td><span class="mk-badge blue">体験済み</span> <span class="mk-badge purple">VIP</span></td>
+                            <td>2025-11-15</td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mk-link">佐藤 一郎</span></td>
+                            <td>sato@example.com</td>
+                            <td><span class="mk-badge gray">未分類</span></td>
+                            <td>2025-11-03</td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mk-link">山田 美咲</span></td>
+                            <td>yamada@example.com</td>
+                            <td><span class="mk-badge green">購入済み</span> <span class="mk-badge orange">セミナー</span></td>
+                            <td>2025-10-20</td>
+                            <td><span class="mk-small-btn blue">詳細</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ コンタクト一覧画面。❶検索バーと❷タグ絞り込みで素早くお客さまを探せます</p>
 
 <h3>画面の見かた</h3>
 
@@ -72,13 +133,45 @@
     <div>条件に合うお客さまだけが表示されます。</div>
 </div>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        コンタクト検索の実行結果
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/contacts/?q=田中</div>
     </div>
-    <div class="screenshot-desc">検索バーにキーワードを入力した状態。一覧が検索結果に絞り込まれて表示されています。「クリア」ボタンで検索条件をリセットできます。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div class="mk-page-title">コンタクト一覧</div>
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                <div class="mk-input filled" style="flex: 1;">❶ 田中</div>
+                <div class="mk-input" style="width: 140px;">タグで絞り込み</div>
+                <span class="mk-btn" style="white-space: nowrap;">検索</span>
+                <span class="mk-btn gray" style="white-space: nowrap;">❷ クリア</span>
+            </div>
+            <table class="mk-table">
+                <thead>
+                    <tr>
+                        <th>名前</th>
+                        <th>メールアドレス</th>
+                        <th>タグ</th>
+                        <th>登録日</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="mk-link">田中 太郎</span></td>
+                        <td>tanaka@example.com</td>
+                        <td><span class="mk-badge green">購入済み</span></td>
+                        <td>2025-12-01</td>
+                        <td><span class="mk-small-btn blue">詳細</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color: #6b7280; font-size: 13px;">1件のコンタクトが見つかりました</p>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 検索実行結果。❶検索バーに「田中」と入力して検索した状態。❷「クリア」ボタンで元に戻せます</p>
 
 <div class="step-box">
     <div class="step-num">4</div>
@@ -122,13 +215,43 @@
     <div>そのお客さまの詳細画面が表示されます。</div>
 </div>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        コンタクト詳細画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/contacts/1/</div>
     </div>
-    <div class="screenshot-desc">お客さまの詳細画面。上部に名前とメールアドレスが大きく表示され、基本情報（電話番号、メモ）、タグ一覧、行動の記録（タイムライン）が表示されます。右上に「編集」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="mk-page-title">コンタクト詳細</div>
+                <span class="mk-small-btn blue">❶ 編集</span>
+            </div>
+            <div class="mk-card" style="margin-bottom: 16px;">
+                <div style="font-size: 18px; font-weight: bold; margin-bottom: 4px;">田中 太郎</div>
+                <div style="color: #6b7280; margin-bottom: 12px;">tanaka@example.com</div>
+                <div class="mk-divider"></div>
+                <div style="margin-top: 12px;">
+                    <div class="mk-label">電話番号</div>
+                    <div style="margin-bottom: 8px;">090-1234-5678</div>
+                    <div class="mk-label">メモ</div>
+                    <div style="margin-bottom: 8px;">2025年1月の無料セミナーに参加。資料送付済み。</div>
+                    <div class="mk-label">タグ</div>
+                    <div><span class="mk-badge green">購入済み</span> <span class="mk-badge orange">セミナー</span></div>
+                </div>
+            </div>
+            <div class="mk-card">
+                <div class="mk-label">❷ 行動の記録（タイムライン）</div>
+                <div style="font-size: 13px; color: #374151; line-height: 2;">
+                    <div>2025-12-01 10:30 — コンタクト登録（ファネル: 無料セミナー申込）</div>
+                    <div>2025-12-01 10:31 — 自動メール送信（シナリオ: ウェルカムメール）</div>
+                    <div>2025-12-02 09:15 — メール開封</div>
+                    <div>2025-12-05 14:00 — 商品購入（オンライン講座）</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ コンタクト詳細画面。❶「編集」ボタンで情報を変更できます。❷行動の記録でお客さまの履歴を確認できます</p>
 
 <h3>詳細画面で見られること</h3>
 
@@ -173,13 +296,39 @@
     <div>編集画面が表示されます。変更したい項目を書き換えます。</div>
 </div>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        コンタクト編集画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/contacts/1/edit/</div>
     </div>
-    <div class="screenshot-desc">編集フォーム画面。名前、メールアドレス、電話番号、メモの各入力欄とタグのチェックボックスが表示されています。画面下部に「保存」ボタンと「キャンセル」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div class="mk-page-title">コンタクト編集</div>
+            <div class="mk-card">
+                <div class="mk-label">❶ 名前 <span class="req">*</span></div>
+                <div class="mk-input filled">田中 太郎</div>
+                <div class="mk-label">❷ メールアドレス <span class="req">*</span></div>
+                <div class="mk-input filled">tanaka@example.com</div>
+                <div class="mk-label">❸ 電話番号</div>
+                <div class="mk-input filled">090-1234-5678</div>
+                <div class="mk-label">❹ メモ</div>
+                <div class="mk-input filled" style="min-height: 48px;">2025年1月の無料セミナーに参加。資料送付済み。</div>
+                <div class="mk-label">❺ タグ</div>
+                <div style="margin-bottom: 16px; font-size: 13px; color: #374151;">
+                    <label style="display: block; margin-bottom: 4px;"><input type="checkbox" checked disabled> 購入済み</label>
+                    <label style="display: block; margin-bottom: 4px;"><input type="checkbox" disabled> 体験済み</label>
+                    <label style="display: block; margin-bottom: 4px;"><input type="checkbox" disabled> VIP</label>
+                    <label style="display: block; margin-bottom: 4px;"><input type="checkbox" checked disabled> セミナー</label>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <span class="mk-btn green">❻ 保存</span>
+                    <span class="mk-btn gray">キャンセル</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ コンタクト編集画面。❶〜❺の各項目を書き換えて❻「保存」を押すと変更が反映されます</p>
 
 <h3>編集できる項目</h3>
 

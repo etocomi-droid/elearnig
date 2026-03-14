@@ -14,13 +14,65 @@
 
 <p>左メニューの <strong>「メール配信」</strong> を押すと、メール配信のダッシュボード画面が表示されます。ここから「シナリオ」タブと「一斉配信」タブを切り替えて操作します。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        メール配信ダッシュボード
+<!-- メール配信ダッシュボード（シナリオタブ選択時） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/mail/</div>
     </div>
-    <div class="screenshot-desc">左メニューの「メール配信」を押すと表示されるダッシュボード画面です。上部に「シナリオ」タブと「一斉配信」タブがあり、切り替えて操作できます。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">メール配信</div>
+                <div style="display: flex; gap: 0; margin-bottom: 0.75rem;">
+                    <div style="padding: 0.4rem 1rem; background: #2563EB; color: #fff; font-size: 0.7rem; font-weight: 600; border-radius: 0.375rem 0 0 0.375rem; cursor: pointer;">❶ シナリオ</div>
+                    <div style="padding: 0.4rem 1rem; background: #E5E7EB; color: #6B7280; font-size: 0.7rem; font-weight: 600; border-radius: 0 0.375rem 0.375rem 0; cursor: pointer;">❷ 一斉配信</div>
+                </div>
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+                    <div class="mk-btn green" style="font-size: 0.65rem;">＋ 新規シナリオ作成 ❸</div>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>シナリオ名</th><th>ステップ数</th><th>登録者数</th><th>作成日</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="mk-link">無料セミナーフォローアップ</a></td>
+                            <td>4</td>
+                            <td>28</td>
+                            <td>2026-01-15</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">購入者フォローメール</a></td>
+                            <td>3</td>
+                            <td>12</td>
+                            <td>2026-02-03</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">お試し登録リマインド</a></td>
+                            <td>2</td>
+                            <td>45</td>
+                            <td>2026-03-01</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ メール配信ダッシュボード：❶ シナリオタブ ❷ 一斉配信タブを切り替え ❸ 新規シナリオ作成ボタン</p>
 
 <h2>6.2　シナリオ（ステップメール）を作る</h2>
 
@@ -36,21 +88,32 @@
     <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        シナリオ一覧画面
+<!-- シナリオ作成フォーム -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/mail/scenario/create/</div>
     </div>
-    <div class="screenshot-desc">「シナリオ」タブを選んだ状態のメール配信画面です。作成済みのシナリオが一覧で表示され、各シナリオのステップ数や登録者数が確認できます。右上に「新規シナリオ作成」ボタンがあります。</div>
-</div>
-
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        シナリオ作成フォーム
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">新規シナリオ作成</div>
+                <div class="mk-card">
+                    <div class="mk-label req">シナリオ名 ❶</div>
+                    <div class="mk-input filled">無料セミナーフォローアップ</div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="mk-btn green">作成 ❷</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="screenshot-desc">「新規シナリオ作成」ボタンを押すと表示される入力フォームです。シナリオ名を入力する欄があり、下部に「作成」ボタンがあります。</div>
 </div>
+<p class="mockup-caption">▲ シナリオ作成フォーム：❶ シナリオ名を入力 ❷ 作成ボタンで保存</p>
 
 <h3>ステップ（メールの1通1通）を追加する手順</h3>
 
@@ -78,13 +141,146 @@
     <li>2通目、3通目も同じように追加します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ステップ編集画面
+<!-- シナリオ編集画面（ステップタイムライン） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/mail/scenario/1/edit/</div>
     </div>
-    <div class="screenshot-desc">シナリオのステップ編集画面です。ステップ番号、遅延日数、遅延時間、件名、本文（テキスト）、本文（HTML）の入力欄が表示されています。下部に「保存」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">シナリオ編集：無料セミナーフォローアップ</div>
+                <div class="mk-card" style="margin-bottom: 0.5rem;">
+                    <div class="mk-label req">シナリオ名</div>
+                    <div class="mk-input filled">無料セミナーフォローアップ</div>
+                    <div style="margin-top: 0.5rem;">
+                        <span class="mk-btn green">更新</span>
+                    </div>
+                </div>
+                <div class="mk-sub" style="margin-bottom: 0.5rem;">ステップ一覧 ❶</div>
+                <!-- ステップタイムライン -->
+                <div style="border-left: 3px solid #2563EB; padding-left: 0.75rem; margin-left: 0.5rem;">
+                    <div class="mk-card" style="margin-bottom: 0.5rem; border-left: 3px solid #16A34A;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="mk-badge blue">ステップ 1</span>
+                                <span style="font-size: 0.65rem; color: #6B7280; margin-left: 0.25rem;">0日後 0時間後</span>
+                            </div>
+                            <div>
+                                <span class="mk-small-btn blue">編集</span>
+                                <span class="mk-small-btn red">削除</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.7rem; font-weight: 600; margin-top: 0.25rem;">件名：お申込みありがとうございます</div>
+                    </div>
+                    <div class="mk-card" style="margin-bottom: 0.5rem; border-left: 3px solid #16A34A;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="mk-badge blue">ステップ 2</span>
+                                <span style="font-size: 0.65rem; color: #6B7280; margin-left: 0.25rem;">1日後 0時間後</span>
+                            </div>
+                            <div>
+                                <span class="mk-small-btn blue">編集</span>
+                                <span class="mk-small-btn red">削除</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.7rem; font-weight: 600; margin-top: 0.25rem;">件名：明日のセミナーについてのご案内</div>
+                    </div>
+                    <div class="mk-card" style="margin-bottom: 0.5rem; border-left: 3px solid #16A34A;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="mk-badge blue">ステップ 3</span>
+                                <span style="font-size: 0.65rem; color: #6B7280; margin-left: 0.25rem;">3日後 0時間後</span>
+                            </div>
+                            <div>
+                                <span class="mk-small-btn blue">編集</span>
+                                <span class="mk-small-btn red">削除</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.7rem; font-weight: 600; margin-top: 0.25rem;">件名：セミナーはいかがでしたか？</div>
+                    </div>
+                    <div class="mk-card" style="margin-bottom: 0.5rem; border-left: 3px solid #16A34A;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="mk-badge blue">ステップ 4</span>
+                                <span style="font-size: 0.65rem; color: #6B7280; margin-left: 0.25rem;">7日後 0時間後</span>
+                            </div>
+                            <div>
+                                <span class="mk-small-btn blue">編集</span>
+                                <span class="mk-small-btn red">削除</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.7rem; font-weight: 600; margin-top: 0.25rem;">件名：特別なご案内があります</div>
+                    </div>
+                </div>
+                <div style="margin-top: 0.5rem;">
+                    <span class="mk-btn green">＋ ステップ追加 ❷</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ シナリオ編集画面：❶ ステップがタイムライン形式で一覧表示 ❷ ステップ追加ボタンで新しいメールを追加</p>
+
+<!-- ステップ編集フォーム（テスト送信付き） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/mail/scenario/1/step/1/edit/</div>
+    </div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">ステップ編集</div>
+                <div class="mk-card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+                        <div>
+                            <div class="mk-label req">ステップ番号 ❶</div>
+                            <div class="mk-input filled">1</div>
+                        </div>
+                        <div>
+                            <div class="mk-label req">遅延日数 ❷</div>
+                            <div class="mk-input filled">0</div>
+                        </div>
+                        <div>
+                            <div class="mk-label req">遅延時間 ❸</div>
+                            <div class="mk-input filled">0</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label req">件名 ❹</div>
+                        <div class="mk-input filled">お申込みありがとうございます</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label req">本文（テキスト） ❺</div>
+                        <div class="mk-input filled" style="height: 4rem; white-space: pre-line; font-size: 0.6rem;">{{ contact.last_name }}様
+
+この度はお申込みいただき、ありがとうございます。
+明日のセミナーでお会いできることを楽しみにしております。</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">本文（HTML） ❻</div>
+                        <div class="mk-input" style="height: 3rem; color: #9CA3AF; font-size: 0.6rem;">HTMLがわからなければ空でOK</div>
+                    </div>
+                    <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem;">
+                        <span class="mk-btn green">保存 ❼</span>
+                        <span class="mk-btn orange">テスト送信 ❽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p class="mockup-caption">▲ ステップ編集フォーム：❶ ステップ番号 ❷ 遅延日数 ❸ 遅延時間 ❹ 件名 ❺ 本文テキスト ❻ 本文HTML ❼ 保存ボタン ❽ テスト送信ボタン（オレンジ）で自分に試し送りできます</p>
 
 <h3>ステップ設定の例</h3>
 
@@ -152,13 +348,59 @@
     <li><strong>「保存」</strong> ボタンを押します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        一斉配信作成フォーム
+<!-- 一斉配信作成フォーム（サイドバー付き） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/mail/campaign/create/</div>
     </div>
-    <div class="screenshot-desc">「新規一斉配信作成」ボタンを押すと表示される入力フォームです。配信名、件名、本文（テキスト）、本文（HTML）、対象タグなどの入力欄があり、下部に「保存」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">新規一斉配信作成</div>
+                <div class="mk-card">
+                    <div class="mk-label req">配信名 ❶</div>
+                    <div class="mk-input filled">夏のセールお知らせ</div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label req">件名 ❷</div>
+                        <div class="mk-input filled">【期間限定】夏のセールのお知らせ</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label req">本文（テキスト） ❸</div>
+                        <div class="mk-input filled" style="height: 4rem; white-space: pre-line; font-size: 0.6rem;">{{ contact.last_name }}様
+
+いつもご利用いただきありがとうございます。
+この度、期間限定の夏のセールを開催いたします。
+詳しくはこちらをご覧ください。</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">本文（HTML） ❹</div>
+                        <div class="mk-input" style="height: 2.5rem; color: #9CA3AF; font-size: 0.6rem;">HTMLがわからなければ空でOK</div>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <div class="mk-label">対象タグ ❺</div>
+                        <div style="font-size: 0.65rem; color: #374151; padding: 0.25rem 0;">
+                            <label style="display: block; margin-bottom: 0.2rem;"><input type="checkbox" checked disabled style="margin-right: 0.25rem;">購入済み</label>
+                            <label style="display: block; margin-bottom: 0.2rem;"><input type="checkbox" disabled style="margin-right: 0.25rem;">無料登録</label>
+                            <label style="display: block; margin-bottom: 0.2rem;"><input type="checkbox" disabled style="margin-right: 0.25rem;">セミナー参加者</label>
+                            <label style="display: block; margin-bottom: 0.2rem;"><input type="checkbox" disabled style="margin-right: 0.25rem;">VIP会員</label>
+                        </div>
+                    </div>
+                    <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem;">
+                        <span class="mk-btn green">保存 ❻</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 一斉配信作成フォーム：❶ 配信名 ❷ 件名 ❸ 本文テキスト ❹ 本文HTML ❺ 対象タグをチェックボックスで選択 ❻ 保存ボタン</p>
 
 <div class="note"><strong>ヒント</strong>: 一斉配信でもパーソナライズが使えます。本文に <code>{{ contact.last_name }}</code> と入力すると、お客さまの名前が自動的に挿入されます。全員に同じ内容を送る場合でも、名前入りにするだけで開封率が上がります。</div>
 
@@ -189,13 +431,67 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        配信ステータス表示
+<!-- 一斉配信一覧画面（ステータス表示） -->
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/mail/campaign/</div>
     </div>
-    <div class="screenshot-desc">一斉配信の一覧画面に表示されるステータスの例です。各配信の横に「下書き」「予約済み」「送信中」「送信済み」のラベルが色分けで表示されています。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">✉️ メール配信</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">メール配信</div>
+                <div style="display: flex; gap: 0; margin-bottom: 0.75rem;">
+                    <div style="padding: 0.4rem 1rem; background: #E5E7EB; color: #6B7280; font-size: 0.7rem; font-weight: 600; border-radius: 0.375rem 0 0 0.375rem; cursor: pointer;">シナリオ</div>
+                    <div style="padding: 0.4rem 1rem; background: #2563EB; color: #fff; font-size: 0.7rem; font-weight: 600; border-radius: 0 0.375rem 0.375rem 0; cursor: pointer;">一斉配信</div>
+                </div>
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+                    <div class="mk-btn green" style="font-size: 0.65rem;">＋ 新規一斉配信作成</div>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>配信名</th><th>件名</th><th>ステータス</th><th>送信日</th><th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="mk-link">夏のセールお知らせ</a></td>
+                            <td style="font-size: 0.6rem;">【期間限定】夏のセール…</td>
+                            <td><span class="mk-badge green">送信済み ❶</span></td>
+                            <td>2026-03-10</td>
+                            <td><span class="mk-small-btn blue">編集</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">新コース開講のお知らせ</a></td>
+                            <td style="font-size: 0.6rem;">新しいコースが開講し…</td>
+                            <td><span class="mk-badge blue">送信中 ❷</span></td>
+                            <td>2026-03-14</td>
+                            <td><span class="mk-small-btn blue">編集</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">年末キャンペーン</a></td>
+                            <td style="font-size: 0.6rem;">年末特別キャンペーン…</td>
+                            <td><span class="mk-badge gray">下書き ❸</span></td>
+                            <td>—</td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link">月末リマインド</a></td>
+                            <td style="font-size: 0.6rem;">今月も残りわずかで…</td>
+                            <td><span class="mk-badge orange">予約済み ❹</span></td>
+                            <td>2026-03-31</td>
+                            <td><span class="mk-small-btn blue">編集</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 一斉配信一覧画面：ステータスが色分けで表示されます ❶ 送信済み（緑） ❷ 送信中（青） ❸ 下書き（灰） ❹ 予約済み（オレンジ）</p>
 
 <h3>メール配信のコツ</h3>
 

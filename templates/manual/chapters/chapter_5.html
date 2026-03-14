@@ -24,13 +24,65 @@
 
 <p>すると、ファネルの一覧画面が表示されます。すでに作成したファネルがあれば、ここに一覧で表示されます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ファネル一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/</div>
     </div>
-    <div class="screenshot-desc">左メニューの「ファネル」を押すと表示される画面です。作成済みのファネルが一覧で表示され、右上に「新規ファネル作成」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">My Project</div>
+                <div class="mk-nav-item">ダッシュボード</div>
+                <div class="mk-nav-item">コンタクト</div>
+                <div class="mk-nav-item active">ファネル</div>
+                <div class="mk-nav-item">メール配信</div>
+                <div class="mk-nav-item">商品管理</div>
+            </div>
+            <div class="mk-main">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="mk-page-title">ファネル一覧</div>
+                    <span class="mk-btn">❶ 新規ファネル作成</span>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr>
+                            <th>ファネル名</th>
+                            <th>スラッグ</th>
+                            <th>ページ数</th>
+                            <th>状態</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="mk-link">無料セミナー申込</span></td>
+                            <td>free-seminar</td>
+                            <td>2</td>
+                            <td><span class="mk-badge green">公開中</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mk-link">商品紹介ページ</span></td>
+                            <td>product-info</td>
+                            <td>3</td>
+                            <td><span class="mk-badge green">公開中</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mk-link">キャンペーン2025冬</span></td>
+                            <td>campaign-2025w</td>
+                            <td>1</td>
+                            <td><span class="mk-badge gray">下書き</span></td>
+                            <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ファネル一覧画面。作成済みのファネルが表示されています。❶「新規ファネル作成」ボタンで新しいファネルを追加できます</p>
 
 <ol start="2">
     <li>右上の <strong>「新規ファネル作成」</strong> ボタンを押します</li>
@@ -47,13 +99,30 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ファネル作成フォーム
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/create/</div>
     </div>
-    <div class="screenshot-desc">「新規ファネル作成」ボタンを押すと表示される入力フォームです。ファネル名とスラッグを入力する欄があり、下部に「作成」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div class="mk-center">
+                <div class="mk-title">新規ファネル作成</div>
+                <div class="mk-card">
+                    <div class="mk-label">❶ ファネル名 <span class="req">*</span></div>
+                    <div class="mk-input filled">無料セミナー申込</div>
+                    <div class="mk-label">❷ スラッグ <span class="req">*</span></div>
+                    <div class="mk-input filled">free-seminar</div>
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 4px;">URLの一部になります: /p/<strong>free-seminar</strong>/...</p>
+                    <div style="margin-top: 16px;">
+                        <span class="mk-btn">❸ 作成</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ファネル作成フォーム。❶ファネル名と❷スラッグを入力して❸「作成」を押します</p>
 
 <ol start="4">
     <li><strong>「作成」</strong> ボタンを押します</li>
@@ -87,13 +156,51 @@
     <li><strong>「作成」</strong> ボタンを押します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ページ一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/1/pages/</div>
     </div>
-    <div class="screenshot-desc">ファネル編集画面内のページ一覧です。追加済みのページがリストで表示され、各ページの名前・スラッグ・種類が確認できます。右上に「ページ追加」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="mk-page-title">無料セミナー申込 — ページ一覧</div>
+                <span class="mk-btn">❶ ページ追加</span>
+            </div>
+            <table class="mk-table">
+                <thead>
+                    <tr>
+                        <th>ページタイトル</th>
+                        <th>スラッグ</th>
+                        <th>種類</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="mk-link">セミナー紹介ページ</span></td>
+                        <td>intro</td>
+                        <td><span class="mk-badge blue">ランディングページ</span></td>
+                        <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="mk-link">お申込みフォーム</span></td>
+                        <td>form</td>
+                        <td><span class="mk-badge purple">フォームページ</span></td>
+                        <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="mk-link">ありがとうページ</span></td>
+                        <td>thanks</td>
+                        <td><span class="mk-badge green">サンクスページ</span></td>
+                        <td><span class="mk-small-btn blue">編集</span> <span class="mk-small-btn red">削除</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ページ一覧画面。ファネル内のページが一覧表示されます。❶「ページ追加」ボタンで新しいページを追加できます</p>
 
 <h3>ページの種類について</h3>
 
@@ -125,13 +232,53 @@
     <li>ブロックの編集ボタン（鉛筆マーク）を押して、内容を書き換えます</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        セクション追加画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/1/pages/1/edit/</div>
     </div>
-    <div class="screenshot-desc">ページ編集画面で「セクション追加」ボタンを押すと表示されるセクション種類の選択画面です。ヒーロー、テキスト、画像、動画、CTAボタン、フォームなどのブロックが一覧で並んでいます。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div class="mk-page-title">ページ編集: セミナー紹介ページ</div>
+            <div style="display: flex; gap: 16px;">
+                <div style="flex: 1;">
+                    <div class="mk-card" style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div><span class="mk-badge blue">ヒーロー</span> たった3日で料理の腕が上がる！</div>
+                        <div><span class="mk-small-btn white">✏️</span> <span class="mk-small-btn red">🗑</span></div>
+                    </div>
+                    <div class="mk-card" style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div><span class="mk-badge gray">テキスト</span> 初心者でも安心のオンライン講座です...</div>
+                        <div><span class="mk-small-btn white">✏️</span> <span class="mk-small-btn red">🗑</span></div>
+                    </div>
+                    <div class="mk-card" style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div><span class="mk-badge purple">画像</span> course-photo.jpg</div>
+                        <div><span class="mk-small-btn white">✏️</span> <span class="mk-small-btn red">🗑</span></div>
+                    </div>
+                    <div class="mk-card" style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div><span class="mk-badge orange">フォーム</span> お申し込みフォーム</div>
+                        <div><span class="mk-small-btn white">✏️</span> <span class="mk-small-btn red">🗑</span></div>
+                    </div>
+                </div>
+                <div style="width: 140px;">
+                    <div style="font-weight: bold; font-size: 13px; margin-bottom: 8px;">❶ セクション追加</div>
+                    <div style="font-size: 12px; line-height: 2.2;">
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ ヒーロー</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ テキスト</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ 画像</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ 動画</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ CTAボタン</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ フォーム</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ カウントダウン</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ お客様の声</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ FAQ</span></div>
+                        <div><span class="mk-small-btn white" style="display: block; text-align: left;">+ 区切り線</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ セクション追加画面。左側に追加済みのブロック一覧、❶右側にブロック種類の選択パネルが表示されます</p>
 
 <h3>ブロック（セクション）の種類</h3>
 
@@ -264,13 +411,30 @@
 
 <p>区切り線ブロックは、ブロックとブロックの間に横線を引いて見た目を整えるブロックです。特に編集項目はありません。追加するだけで使えます。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        セクション編集画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/1/pages/1/sections/2/edit/</div>
     </div>
-    <div class="screenshot-desc">ブロックの鉛筆マーク（編集ボタン）を押すと表示される編集画面です。各ブロックの種類に応じて、見出し・テキスト・画像URLなどの入力欄が表示されます。下部に「保存」ボタンがあります。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div class="mk-page-title">セクション編集: ヒーロー</div>
+            <div class="mk-card">
+                <div class="mk-label">❶ 見出し <span class="req">*</span></div>
+                <div class="mk-input filled">たった3日で料理の腕が上がる！</div>
+                <div class="mk-label">❷ サブテキスト</div>
+                <div class="mk-input filled">初心者でも安心のオンライン講座</div>
+                <div class="mk-label">❸ 背景色</div>
+                <div class="mk-input filled">#1E40AF</div>
+                <div style="margin-top: 16px; display: flex; gap: 8px;">
+                    <span class="mk-btn green">❹ 保存</span>
+                    <span class="mk-btn gray">キャンセル</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ セクション編集画面（ヒーローブロックの例）。❶見出し、❷サブテキスト、❸背景色を入力して❹「保存」を押します</p>
 
 <h3>ブロックの並び替え</h3>
 
@@ -321,13 +485,32 @@
     <li>設定が終わったら <strong>「保存」</strong> を押します</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        フォームブロックの設定画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/funnels/1/pages/1/sections/4/edit/</div>
     </div>
-    <div class="screenshot-desc">フォームブロックの編集画面です。送信ボタンの文字、シナリオID、リダイレクトURLなどの入力欄が表示されます。シナリオIDを設定すると、フォーム送信時に自動でメール配信が開始されます。</div>
+    <div class="mockup-body">
+        <div class="mk-main">
+            <div class="mk-page-title">セクション編集: フォーム</div>
+            <div class="mk-card">
+                <div class="mk-label">❶ 送信ボタンの文字 <span class="req">*</span></div>
+                <div class="mk-input filled">無料で申し込む</div>
+                <div class="mk-label">❷ シナリオID</div>
+                <div class="mk-input filled">1</div>
+                <p style="font-size: 12px; color: #6b7280; margin-top: 4px;">メール配信のシナリオ番号を入力すると、フォーム送信時に自動でメール配信が開始されます</p>
+                <div class="mk-label">❸ リダイレクトURL <span class="req">*</span></div>
+                <div class="mk-input filled">/p/free-seminar/thanks/</div>
+                <p style="font-size: 12px; color: #6b7280; margin-top: 4px;">フォーム送信後にお客さまが移動するページのURLを入力します</p>
+                <div style="margin-top: 16px; display: flex; gap: 8px;">
+                    <span class="mk-btn green">❹ 保存</span>
+                    <span class="mk-btn gray">キャンセル</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ フォームブロックの設定画面。❶送信ボタンの文字、❷シナリオID、❸リダイレクトURLを設定して❹「保存」を押します</p>
 
 <div class="note"><strong>ポイント</strong>: シナリオIDは、第6章「メール配信」で作成するシナリオの番号です。フォームとシナリオを連携させると、お客さまがフォームに入力した瞬間に自動でメールが届くようになります。とても便利な機能なので、ぜひ活用しましょう。</div>
 
@@ -346,13 +529,31 @@
     <li>このURLにアクセスすると、作ったページが表示されます</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        公開されたページのプレビュー
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/p/free-seminar/intro/</div>
     </div>
-    <div class="screenshot-desc">ページを公開した後、公開URLにアクセスしたときの表示です。設定したヒーロー、テキスト、画像、フォームなどのブロックが順番に表示され、お客さまが閲覧・操作できる状態になっています。</div>
+    <div class="mockup-body">
+        <div style="max-width: 480px; margin: 0 auto;">
+            <div style="background: #1E40AF; color: #fff; padding: 32px 24px; text-align: center;">
+                <div style="font-size: 22px; font-weight: bold; margin-bottom: 8px;">たった3日で料理の腕が上がる！</div>
+                <div style="font-size: 14px; opacity: 0.9;">初心者でも安心のオンライン講座</div>
+            </div>
+            <div style="padding: 24px; background: #fff;">
+                <p style="font-size: 14px; color: #374151; line-height: 1.8; margin-bottom: 16px;">プロの料理人が教える、家庭でできる本格料理テクニック。忙しい方でも1日30分の学習で確実にスキルアップできます。</p>
+                <div style="background: #f3f4f6; border-radius: 4px; height: 120px; display: flex; align-items: center; justify-content: center; color: #9ca3af; margin-bottom: 16px;">[ 講座のイメージ画像 ]</div>
+                <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 20px; margin-bottom: 16px;">
+                    <div style="font-size: 15px; font-weight: bold; text-align: center; margin-bottom: 12px;">無料セミナーに申し込む</div>
+                    <div class="mk-input" style="margin-bottom: 8px;">お名前</div>
+                    <div class="mk-input" style="margin-bottom: 12px;">メールアドレス</div>
+                    <div class="mk-btn green" style="display: block; text-align: center;">無料で申し込む</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 公開されたページのプレビュー。ヒーロー、テキスト、画像、フォームなどのブロックが順に表示され、お客さまが閲覧・入力できる状態です</p>
 
 <div class="note"><strong>ポイント</strong>: 公開をやめたい場合は、チェックを外して「更新」を押せば、ページは非公開になります。非公開にすると、URLにアクセスしてもページは表示されません。</div>
 

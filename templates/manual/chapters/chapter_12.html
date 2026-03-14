@@ -29,13 +29,58 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        サポートスレッド一覧画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/support/</div>
     </div>
-    <div class="screenshot-desc">件名・ステータス（オープン/対応待ち/クローズ）・メッセージ数・更新日時が表示されたスレッド一覧テーブルと、右上の「新規スレッド」ボタンが確認できる画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item">📊 ダッシュボード</div>
+                <div class="mk-nav-item">👥 コンタクト</div>
+                <div class="mk-nav-item">📄 ファネル</div>
+                <div class="mk-nav-item">✉️ メール配信</div>
+                <div class="mk-nav-item">🛒 商品管理</div>
+                <div class="mk-nav-item">🎓 会員サイト</div>
+                <div class="mk-nav-item">📅 予約管理</div>
+                <div class="mk-nav-item" style="margin-top:0.5rem;border-top:1px solid #374151;padding-top:0.5rem;">⚙️ オペレーター管理</div>
+                <div class="mk-nav-item active">💬 サポート</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">サポート</div>
+                <div style="text-align:right;margin-bottom:0.75rem;"><div class="mk-btn green">新規スレッド</div></div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>件名</th><th>ステータス</th><th>メッセージ数</th><th>更新日時</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="mk-link" href="#">決済エラーについて</a></td>
+                            <td><span class="mk-badge blue">オープン</span></td>
+                            <td>3</td>
+                            <td>2026-03-14 10:30</td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link" href="#">会員サイトの表示不具合</a></td>
+                            <td><span class="mk-badge orange">対応待ち</span></td>
+                            <td>5</td>
+                            <td>2026-03-13 15:20</td>
+                        </tr>
+                        <tr>
+                            <td><a class="mk-link" href="#">メール配信設定の質問</a></td>
+                            <td><span class="mk-badge gray">クローズ</span></td>
+                            <td>4</td>
+                            <td>2026-03-10 09:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ サポートスレッド一覧画面 — ❶件名 ❷ステータス（色分け表示）❸メッセージ数 ❹更新日時</p>
 
 <h2>12.3　新しいスレッドの作成</h2>
 
@@ -52,13 +97,31 @@
 
 <p>スレッドが作成されると、自動的にチャット画面に移動します。</p>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        新規スレッド作成フォーム
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/support/create/</div>
     </div>
-    <div class="screenshot-desc">件名入力欄・本文テキストエリア・「送信」ボタンが表示された新規スレッド作成フォーム画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">💬 サポート</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">新規スレッド作成</div>
+                <div class="mk-card">
+                    <div class="mk-label req">件名</div>
+                    <div class="mk-input filled">ファネルのフォームが動作しません</div>
+                    <div class="mk-label req">本文</div>
+                    <div class="mk-input filled" style="min-height:4rem;">お世話になっております。<br>ファネル「無料セミナー」のフォームセクションで送信ボタンを押しても反応がありません。<br>設定を見直しましたが原因がわかりません。ご確認いただけますか？</div>
+                    <div style="margin-top:0.75rem;"><div class="mk-btn green">送信</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ 新規スレッド作成フォーム — 件名と本文を入力して「送信」を押します</p>
 
 <h2>12.4　チャット画面の使い方</h2>
 
@@ -79,13 +142,53 @@
     <li>メッセージが即座に画面に反映されます（HTMXによるリアルタイム更新）</li>
 </ol>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        チャット画面
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/support/1/</div>
     </div>
-    <div class="screenshot-desc">自分のメッセージ（右側・青背景）と管理者のメッセージ（左側・グレー背景）が時系列で表示され、画面下部にテキスト入力欄と「送信」ボタンがあるチャットインターフェース画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">💬 サポート</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">決済エラーについて <span class="mk-badge blue">オープン</span></div>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.75rem;">
+                    <!-- ユーザーメッセージ（右・青） -->
+                    <div style="display:flex;justify-content:flex-end;">
+                        <div style="background:#2563EB;color:#fff;border-radius:0.5rem 0.5rem 0 0.5rem;padding:0.5rem 0.65rem;max-width:75%;font-size:0.65rem;">
+                            <div>Stripe決済で「カードが拒否されました」というエラーが表示されます。テストモードで4242カードを使用しています。</div>
+                            <div style="text-align:right;font-size:0.55rem;opacity:0.7;margin-top:0.2rem;">14:20</div>
+                        </div>
+                    </div>
+                    <!-- 管理者メッセージ（左・グレー） -->
+                    <div style="display:flex;justify-content:flex-start;">
+                        <div style="background:#F3F4F6;color:#374151;border-radius:0.5rem 0.5rem 0.5rem 0;padding:0.5rem 0.65rem;max-width:75%;font-size:0.65rem;">
+                            <div style="font-size:0.55rem;font-weight:600;color:#6B7280;margin-bottom:0.15rem;">管理者</div>
+                            <div>お問い合わせありがとうございます。Stripeの設定を確認しますので、APIキーがテストモードのものか確認していただけますか？</div>
+                            <div style="text-align:right;font-size:0.55rem;opacity:0.7;margin-top:0.2rem;">14:35</div>
+                        </div>
+                    </div>
+                    <!-- ユーザーメッセージ（右・青） -->
+                    <div style="display:flex;justify-content:flex-end;">
+                        <div style="background:#2563EB;color:#fff;border-radius:0.5rem 0.5rem 0 0.5rem;padding:0.5rem 0.65rem;max-width:75%;font-size:0.65rem;">
+                            <div>確認しました。テストモードのAPIキーになっていました。もう一度試してみます。</div>
+                            <div style="text-align:right;font-size:0.55rem;opacity:0.7;margin-top:0.2rem;">14:42</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 入力欄 -->
+                <div style="display:flex;gap:0.35rem;border-top:1px solid #E5E7EB;padding-top:0.5rem;">
+                    <div class="mk-input" style="flex:1;">メッセージを入力...</div>
+                    <div class="mk-btn green">送信</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ チャット画面 — 自分のメッセージ（右・青）と管理者のメッセージ（左・グレー）が時系列で表示されます</p>
 
 <h2>12.5　ステータスの見方</h2>
 
@@ -102,12 +205,59 @@
     </tbody>
 </table>
 
-<div class="screenshot">
-    <div class="screenshot-label">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        ステータス表示の例
+<div class="mockup">
+    <div class="mockup-bar">
+        <div class="mockup-dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div class="mockup-url">https://あなたのドメイン/support/</div>
     </div>
-    <div class="screenshot-desc">スレッド一覧上でオープン（青）・対応待ち（黄）・クローズ（グレー）の各ステータスバッジが色分けされて表示されている画面</div>
+    <div class="mockup-body">
+        <div class="mk-layout">
+            <div class="mk-sidebar">
+                <div class="mk-proj">📁 マイプロジェクト</div>
+                <div class="mk-nav-item active">💬 サポート</div>
+            </div>
+            <div class="mk-main">
+                <div class="mk-page-title">ステータスの表示例</div>
+                <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;">
+                    <div style="text-align:center;">
+                        <span class="mk-badge blue">オープン</span>
+                        <div style="font-size:0.55rem;color:#6B7280;margin-top:0.2rem;">新規 / 返信あり</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <span class="mk-badge orange">対応待ち</span>
+                        <div style="font-size:0.55rem;color:#6B7280;margin-top:0.2rem;">管理者返信済み</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <span class="mk-badge gray">クローズ</span>
+                        <div style="font-size:0.55rem;color:#6B7280;margin-top:0.2rem;">解決済み</div>
+                    </div>
+                </div>
+                <table class="mk-table">
+                    <thead>
+                        <tr><th>件名</th><th>ステータス</th><th>更新日時</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>決済エラーについて</td>
+                            <td><span class="mk-badge blue">オープン</span></td>
+                            <td>2026-03-14 14:42</td>
+                        </tr>
+                        <tr>
+                            <td>会員サイトの表示不具合</td>
+                            <td><span class="mk-badge orange">対応待ち</span></td>
+                            <td>2026-03-13 15:20</td>
+                        </tr>
+                        <tr>
+                            <td>メール配信設定の質問</td>
+                            <td><span class="mk-badge gray">クローズ</span></td>
+                            <td>2026-03-10 09:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<p class="mockup-caption">▲ ステータス表示の例 — オープン（青）・対応待ち（オレンジ）・クローズ（グレー）の3色で状態を識別</p>
 
 <div class="note"><strong>ポイント</strong>: システム管理者からの返信があると、ステータスが「対応待ち」に変わります。返信内容を確認して、追加の質問がある場合はメッセージを送信してください。</div>
