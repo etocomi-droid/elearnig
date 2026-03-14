@@ -117,6 +117,28 @@
                 </a>
             </div>
         </form>
+
+        {% if not is_new %}
+        <!-- テスト配信 -->
+        <div class="mt-6 pt-5 border-t border-gray-100">
+            <form method="post" action="{% url 'emails:step_test_send' scenario_id=scenario.pk pk=step.pk %}">
+                {% csrf_token %}
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700">テスト配信</p>
+                        <p class="text-xs text-gray-500 mt-0.5">ログイン中の管理者（{{ request.user.email }}）宛にテストメールを送信します</p>
+                    </div>
+                    <button type="submit"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-orange-500 hover:bg-orange-600 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                        テスト配信
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

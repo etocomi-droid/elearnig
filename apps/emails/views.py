@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,6 +18,8 @@ from apps.emails.models import (
     Scenario, ScenarioStep, ScenarioSubscription,
     Campaign, EmailLog,
 )
+
+logger = logging.getLogger(__name__)
 
 
 # =============================================================================
@@ -454,3 +458,123 @@ def campaign_send_view(request, pk):
         'campaign': campaign,
         'target_count': target_count,
     })
+
+
+# =============================================================================
+# テスト配信ビュー
+# =============================================================================
+
+def _render_template(text, name, email, sender_name, cta_url):
+    """メール本文内の {{変数}} をテスト用データで置換する"""
+    if not text:
+        return text
+    replacements = {
+        '{{name}}': name,
+        '{{email}}': email,
+        '{{sender_name}}': sender_name,
+        '{{cta_url}}': cta_url,
+        '（お名前）': name,
+        '（運営者名）': sender_name,
+        '（申込リンク）': cta_url,
+        '（リンク）': cta_url,
+        '（相談リンク）': cta_url,
+        '（説明会リンク）': cta_url,
+        '（面談リンク）': cta_url,
+        '（署名）': sender_name,
+    }
+    for key, value in replacements.items():
+        text = text.replace(key, value)
+    return text
+
+
+@login_required
+@project_permission_required('can_manage_emails')
+def step_test_send_view(request, scenario_id, pk):
+    """シナリオステップのテスト配信（管理者宛）"""
+    project = getattr(request, 'current_project', None)
+    if not project:
+        return redirect('accounts:project_list')
+
+    scenario = get_object_or_404(Scenario, pk=scenario_id, project=project)
+    step = get_object_or_404(ScenarioStep, pk=pk, scenario=scenario)
+
+    if request.method == 'POST':
+        admin_email = request.user.email
+        if not admin_email:
+            messages.error(request, 'あなたのアカウントにメールアドレスが設定されていません。')
+            return redirect('emails:step_edit', scenario_id=scenario.pk, pk=step.pk)
+
+        admin_name = request.user.get_full_name() or request.user.username
+        subject = _render_template(
+            step.subject, admin_name, admin_email,
+            scenario.sender_name or '', scenario.cta_url or '',
+        )
+        body_html = _render_template(
+            step.body_html, admin_name, admin_email,
+            scenario.sender_name or '', scenario.cta_url or '',
+        )
+        body_text = _render_template(
+            step.body_text or '', admin_name, admin_email,
+            scenario.sender_name or '', scenario.cta_url or '',
+        )
+
+        try:
+            send_mail(
+                subject=f'[テスト] {subject}',
+                message=body_text,
+                from_email=None,
+                recipient_list=[admin_email],
+                html_message=body_html,
+                fail_silently=False,
+            )
+            messages.success(
+                request,
+                f'テストメールを {admin_email} に送信しました。'
+                f'（ステップ {step.step_number}: {step.subject}）'
+            )
+        except Exception as e:
+            logger.error(f'Test send failed for step {step.pk}: {e}')
+            messages.error(request, f'テスト配信に失敗しました: {e}')
+
+        return redirect('emails:scenario_edit', pk=scenario.pk)
+
+    return redirect('emails:scenario_edit', pk=scenario.pk)
+
+
+@login_required
+@project_permission_required('can_manage_emails')
+def campaign_test_send_view(request, pk):
+    """一斉配信のテスト配信（管理者宛）"""
+    project = getattr(request, 'current_project', None)
+    if not project:
+        return redirect('accounts:project_list')
+
+    campaign = get_object_or_404(Campaign, pk=pk, project=project)
+
+    if request.method == 'POST':
+        admin_email = request.user.email
+        if not admin_email:
+            messages.error(request, 'あなたのアカウントにメールアドレスが設定されていません。')
+            return redirect('emails:campaign_edit', pk=campaign.pk)
+
+        try:
+            send_mail(
+                subject=f'[テスト] {campaign.subject}',
+                message=campaign.body_text or '',
+                from_email=None,
+                recipient_list=[admin_email],
+                html_message=campaign.body_html,
+                fail_silently=False,
+            )
+            messages.success(
+                request,
+                f'テストメールを {admin_email} に送信しました。'
+                f'（キャンペーン: {campaign.name}）'
+            )
+        except Exception as e:
+            logger.error(f'Test send failed for campaign {campaign.pk}: {e}')
+            messages.error(request, f'テスト配信に失敗しました: {e}')
+
+        return redirect('emails:campaign_edit', pk=campaign.pk)
+
+    return redirect('emails:campaign_edit', pk=campaign.pk)

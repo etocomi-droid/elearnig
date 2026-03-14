@@ -159,6 +159,28 @@
             </div>
         </div>
 
+        <!-- テスト配信 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+            <div class="px-6 py-4 border-b border-gray-100">
+                <h3 class="text-sm font-semibold text-gray-900">テスト配信</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-xs text-gray-500 mb-3">
+                    管理者（{{ request.user.email }}）宛にテストメールを送信します。件名に[テスト]が付きます。
+                </p>
+                <form method="post" action="{% url 'emails:campaign_test_send' pk=campaign.pk %}">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-orange-500 hover:bg-orange-600 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                        テスト配信
+                    </button>
+                </form>
+            </div>
+        </div>
+
         <!-- 配信アクション -->
         {% if campaign.status == 'draft' %}
         <div class="bg-white rounded-xl shadow-sm border border-gray-200">
